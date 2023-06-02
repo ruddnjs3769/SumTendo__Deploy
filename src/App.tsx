@@ -4,6 +4,7 @@ import Home from './pages/home'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import CommonLayout from './layouts/CommonLayout'
+import MyPageLayout from './layouts/MypageLayout'
 
 //Main!!!!
 import Search from './pages/search'
@@ -35,9 +36,9 @@ import OrderComplete from './pages/payment/orderComplete'
 function App() {
   return (
     <Routes>
-      <Route path="/user" element={<CommonLayout />}>
+      <Route path="/user" element={<MyPageLayout />}>
         <Route path="/user/:username" element={<MyPage />} />
-        
+
         <Route path="/user/:username/jjimItems" element={<JjimItems />} />
         <Route path="/user/:username/certProfile" element={<CertProfile />} />
         <Route path="/user/:username/certProfile/editProfile" element={<EditProfile />} />
@@ -46,7 +47,6 @@ function App() {
         <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>
       <Route path="/access" element={<CommonLayout />}>
-        
         <Route path="/access" element={<Access />} />
         <Route path="/access/agesignup" element={<AgeSignUp />} />
         <Route path="/access/signupform" element={<SignUpForm />} />
@@ -56,7 +56,6 @@ function App() {
         <Route path="/access/passwordchangeform" element={<PasswordChangeForm />} />
       </Route>
       <Route path="/payment" element={<CommonLayout />}>
-        
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/:username//agreement" element={<Agreement />} />
         <Route path="/payment/:username/checkInfo" element={<CheckInfo />} />
@@ -64,7 +63,7 @@ function App() {
         <Route path="/payment/:username/checkOrder" element={<CheckOrder />} />
         <Route path="/payment/:username/orderComplete" element={<OrderComplete />} />
       </Route>
-      
+
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />

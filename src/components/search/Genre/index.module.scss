@@ -1,0 +1,20 @@
+.container {
+  position: -webkit-sticky; /* 사파리 브라우저 지원 */
+  position: sticky;
+  top: 20px;
+  min-width: 280px;
+
+  height: fit-content;
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .genreList {
+    font-size: 1.2rem;
+    padding-top: 1.5rem;
+    li {
+      padding: 0.5rem;
+    }
+  }
+}

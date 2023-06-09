@@ -1,5 +1,117 @@
+@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+
+* {
+  color: $text-primary-black;
+  border-radius: 20px;
+}
+html {
+  background-color: $bg-primary-grey;
+}
+a {
+  text-decoration: none;
+  text-decoration-line: none;
+  padding: 5px;
+  background-color: transparent;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+/* select box 스타일 초기화 */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 .container {
-  width: 500px;
-  height: 500px;
-  background-color: pink;
+  margin: auto;
+  width: $modal-width;
+  height: 100vh;
+  background-color: $bg-sub-grey;
+  display: flex;
+  position: static;
+  .sidebar {
+    position: relative;
+    margin-top: 0;
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    img {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      margin-bottom: 40px;
+    }
+    h3 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    span {
+      margin-bottom: 90px;
+    }
+    a {
+      text-decoration-line: underline;
+      font-size: 16px;
+    }
+    & .inner {
+      margin: 30% auto;
+    }
+  }
+  .my_page {
+    margin: auto;
+    margin-left: 0;
+    width: 62%;
+    height: 95%;
+    font-size: 24px;
+    font-weight: 800;
+    background-color: $bg-primary-white;
+    .my_page_container {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(224, 224, 224);
+      .my_lists {
+        height: 25%;
+        width: 80%;
+        margin: 30px auto 0;
+        display: flex;
+        justify-content: space-around;
+        .my_list {
+          margin: 40px 0px 30px 40px;
+          width: 140px;
+          height: 50%;
+          mask-origin: auto;
+          position: relative;
+          .lists {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: -10px;
+            a {
+              margin: 5px;
+              font-size: 16px;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+      hr {
+        width: 80%;
+        margin: auto;
+      }
+      .list_getItems {
+        height: 100%;
+        width: 80%;
+        margin: auto;
+        background-color: red;
+      }
+    }
+  }
 }

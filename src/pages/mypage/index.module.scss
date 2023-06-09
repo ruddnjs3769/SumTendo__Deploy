@@ -2,7 +2,6 @@
 
 * {
   color: $text-primary-black;
-  border-radius: 20px;
 }
 html {
   background-color: $bg-primary-grey;
@@ -13,7 +12,6 @@ a {
   padding: 5px;
   background-color: transparent;
 }
-
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -27,8 +25,8 @@ select {
 }
 .container {
   margin: auto;
-  width: $modal-width;
-  height: 100vh;
+  width: $mypage-width;
+  height: $mypage-height;
   background-color: $bg-sub-grey;
   display: flex;
   position: static;
@@ -51,7 +49,6 @@ select {
     h3 {
       font-size: 28px;
       font-weight: 800;
-      margin-bottom: 10px;
     }
     span {
       margin-bottom: 90px;
@@ -61,7 +58,7 @@ select {
       font-size: 16px;
     }
     & .inner {
-      margin: 30% auto;
+      margin: 20% auto;
     }
   }
   .my_page {
@@ -72,21 +69,21 @@ select {
     font-size: 24px;
     font-weight: 800;
     background-color: $bg-primary-white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .my_page_container {
-      width: 100%;
-      height: 100%;
-      background-color: rgb(224, 224, 224);
+      position: absolute;
+      height: 90%;
+      width: 80%;
       .my_lists {
         height: 25%;
-        width: 80%;
-        margin: 30px auto 0;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         .my_list {
-          margin: 40px 0px 30px 40px;
+          margin: 20px 0px 20px 0px;
           width: 140px;
-          height: 50%;
-          mask-origin: auto;
           position: relative;
           .lists {
             margin-top: 10px;
@@ -95,7 +92,7 @@ select {
             position: absolute;
             left: -10px;
             a {
-              margin: 5px;
+              margin: 3px;
               font-size: 16px;
               font-weight: 300;
             }
@@ -103,14 +100,30 @@ select {
         }
       }
       hr {
-        width: 80%;
-        margin: auto;
+        margin: 40px auto;
       }
       .list_getItems {
-        height: 100%;
-        width: 80%;
-        margin: auto;
-        background-color: red;
+        position: relative;
+        width: 100%;
+        height: 60%;
+        // background-color: red;
+        .list_more {
+          position: absolute;
+          right: -10px;
+          margin: 3px;
+          font-size: 16px;
+          font-weight: 300;
+        }
+        .getItem {
+          position: absolute;
+          bottom: 30px;
+          width: 100%;
+          height: 80%;
+          background-color: rgb(216, 117, 117);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
   }

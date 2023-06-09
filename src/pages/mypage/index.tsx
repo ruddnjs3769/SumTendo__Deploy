@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import styles from './index.module.scss'
 import { User } from '@/types/user'
+import { Product } from '@/types/product'
+import GetItem from '@/components/getItem/GetItem'
 
 export default function MyPage() {
-  // const [email, setEmail] = useState('')
-  // const [displayName, setDisplayName] = useState('')
   //(React) 아이콘 사용하기
   //https://eunhee-programming.tistory.com/206
 
@@ -13,6 +13,19 @@ export default function MyPage() {
     email: 'example@example.com', // 사용자 아이디
     displayName: 'John Doe', // 사용자 표시 이름
     profileImg: 'https://placeimg.com/640/480/animals' // 사용자 프로필 이미지 URL
+  }
+
+  const dummyProduct: Product = {
+    // 제품 정보
+    id: 'cFmeC7aY5KjZbBAdJE9y', // 제품 ID
+    title: '삼성전자 스마트모니터 M7 S43AM700', // 제품 이름
+    price: 639000, // 제품 가격
+    description: '107.9cm(43인치) / 와이드(16:9) / 평면 / VA / 3840 x 2160(4K UHD)',
+    // 제품 설명(최대 100자)
+    tags: ['가전', '모니터', '컴퓨터'], // 제품 태그
+    thumbnail: 'https://storage.googleapis.com/heropy-api/vIKMk_jy4Yv195256.png', // 제품 썸네일 이미지(URL)
+    isSoldOut: false, // 제품 매진 여부
+    discountRate: 20 // 제품 할인율
   }
 
   return (
@@ -52,11 +65,13 @@ export default function MyPage() {
             <hr />
             <div className={`${styles.my_list} ${styles.list_getItems}`}>
               <span className={styles.list}>구매내역</span>
-              <span>전체 내역 조회</span>
-              <span className={styles.getItem}>
-                <img className={styles.getItem_img} src="" alt="" />
-                <span>상품명</span>
-              </span>
+              <a className={styles.list_more}> 전체 내역 조회</a>
+              <div className={styles.getItem}>
+                <GetItem />
+                <GetItem />
+                <GetItem />
+                <GetItem />
+              </div>
             </div>
           </div>
         </section>

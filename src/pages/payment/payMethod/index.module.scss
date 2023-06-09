@@ -1,5 +1,88 @@
+@import '@/_variables.scss';
+
 .container {
-  width: 500px;
-  height: 500px;
-  background-color: yellowgreen;
+  width: 70%;
+  background-color: $bg-primary-white;
+  margin: 0 15%;
+  position: relative;
+  .inner {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    .bankSelect {
+      display: block;
+      width: 150%;
+      background-color: $bg-sub-grey;
+      margin-right: 30px;
+      border-radius: 20px;
+    }
+    .payments {
+      width: 100%;
+      .payment {
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 100px;
+        .paymentContainer {
+          font-size: 30px;
+          font-weight: 700;
+          margin-bottom: 15px;
+        }
+        .paymentInfo {
+          display: flex;
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+          padding: 24px 0;
+          justify-content: space-between;
+          .title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+          }
+          .contents {
+            text-align: right;
+            .content {
+              font-size: 14px;
+              margin-left: 20px;
+              margin-bottom: 15px;
+            }
+          }
+        }
+        .totals {
+          display: flex;
+          align-items: center;
+          font-size: 18px;
+          justify-content: flex-end;
+          margin-top: 20px;
+          margin-bottom: 50px;
+          .mark {
+            font-weight: 700;
+          }
+          .price {
+            font-size: 26px;
+            margin-left: 25px;
+          }
+        }
+      }
+      .payMethod {
+        .title {
+          font-size: 30px;
+          font-weight: 700;
+          margin-bottom: 20px;
+        }
+        .payMethodContainer {
+          display: flex;
+          flex-direction: column;
+          .btn {
+            height: 40px;
+            margin-bottom: 10px;
+            color: $text-light-white;
+            border-radius: 4px;
+            border: 1px solid $point-red;
+            background-color: $point-red;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }

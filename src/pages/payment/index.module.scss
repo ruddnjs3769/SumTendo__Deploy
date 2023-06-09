@@ -1,5 +1,18 @@
+@import '@/_variables.scss';
 .container {
-  width: 500px;
-  height: 500px;
-  background-color: green;
+  width: 70%;
+  background-color: $bg-primary-white;
+  margin: 0 15%;
+  .inner {
+    margin-top: 50px;
+    .notice {
+      margin: 50px 0;
+      .noticeP {
+        margin-bottom: 16px;
+        .strong {
+          font-weight: 800;
+        }
+      }
+    }
+  }
 }

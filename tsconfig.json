@@ -105,7 +105,7 @@
       프론트 웹앱을 만든다면 node, 서버를 만든다면 nodeNext || node 16이 좋을 것 같습니다.
       https://www.typescriptlang.org/docs/handbook/module-resolution.html 
     */
-    "moduleResolution": "node16",
+    "moduleResolution": "node",
 
     /*
       Enable importing .json files.

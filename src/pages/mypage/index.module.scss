@@ -29,7 +29,7 @@ select {
   height: $mypage-height;
   background-color: $bg-sub-grey;
   display: flex;
-  position: static;
+  // position: static;
   .sidebar {
     position: relative;
     margin-top: 0;
@@ -119,7 +119,7 @@ select {
           bottom: 30px;
           width: 100%;
           height: 80%;
-          background-color: rgb(216, 117, 117);
+          background-color: rgb(221, 221, 221);
           display: flex;
           justify-content: space-between;
           align-items: center;

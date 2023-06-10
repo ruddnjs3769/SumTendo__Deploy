@@ -14,7 +14,7 @@ import MyPage from './pages/mypage'
 import JjimItems from './pages/mypage/jjimItems'
 import CertProfile from './pages/mypage/certProfile'
 import EditProfile from './pages/mypage/certProfile/editProfile'
-import CheckAccount from './pages/mypage/account'
+import Account from './pages/mypage/account'
 import AddAccount from './pages/mypage/account/addAccount'
 import BankName from './pages/mypage/account/banks'
 //Access!!!!
@@ -38,11 +38,10 @@ function App() {
     <Routes>
       <Route path="/user" element={<MyPageLayout />}>
         <Route path="/user/:username" element={<MyPage />} />
-
         <Route path="/user/:username/jjimItems" element={<JjimItems />} />
         <Route path="/user/:username/certProfile" element={<CertProfile />} />
         <Route path="/user/:username/certProfile/editProfile" element={<EditProfile />} />
-        <Route path="/user/:username/account" element={<CheckAccount />} />
+        <Route path="/user/:username/account" element={<Account />} />
         <Route path="/user/:username/account/addAccount" element={<AddAccount />} />
         <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>

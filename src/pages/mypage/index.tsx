@@ -45,7 +45,7 @@ export default function MyPage() {
               <li className={`${styles.my_list} ${styles.account}`}>
                 계좌
                 <div className={styles.lists}>
-                  <a href={`/user/:username/accoun`}>계좌조회</a>
+                  <a href={`/user/:username/account`}>계좌조회</a>
                   <a href={`/user/:username/account/addAccount`}>계좌추가</a>
                 </div>
               </li>

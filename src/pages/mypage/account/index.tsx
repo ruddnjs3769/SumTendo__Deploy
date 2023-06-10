@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.modules.scss'
 
-export default function CheckAccount() {
+export default function Account() {
   return (
     <>
       <div className={styles.container}>

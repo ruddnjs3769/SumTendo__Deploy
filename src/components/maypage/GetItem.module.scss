@@ -1,0 +1,46 @@
+@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+
+.get_item_container {
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  .get_item_thumbnail {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    border: 1px solid $bg-primary-grey;
+    background-color: $bg-sub-grey;
+    img {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      &:hover {
+        transform: scale(1.2) .3s;
+      }
+    }
+  }
+  span {
+    padding: 10px 5px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    line-height: 1.3;
+    word-wrap: break-word;
+  }
+  .get_item_title {
+    width: 85%;
+    height: 31px;
+    font-weight: 300;
+  }
+  .get_item_price {
+    font-weight: 800;
+    letter-spacing: 0.1px;
+  }
+}

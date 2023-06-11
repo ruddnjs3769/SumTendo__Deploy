@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.scss'
 import { User } from '@/types/user'
 import { Product } from '@/types/product'
-import GetItem from '@/components/getItem/GetItem'
+import Nav from '@/components/maypage/Nav'
+import GetList from '@/components/maypage/GetList'
+import JjimList from '@/components/maypage/JjimList'
 
 export default function MyPage() {
-  //(React) 아이콘 사용하기
-  //https://eunhee-programming.tistory.com/206
+  const [visible, setVisible] = useState(true)
+  const handleVisible = () => {
+    setVisible(!visible)
+  }
 
   const dummyUser: User = {
     email: 'example@example.com', // 사용자 아이디
@@ -30,49 +34,66 @@ export default function MyPage() {
   return (
     <>
       <div className={styles.container}>
-        <nav className={styles.sidebar}>
-          <div className={`${styles.sidebar} ${styles.inner}`}>
-            <img src={dummyUser.profileImg} alt="" />
-            <h3>{dummyUser.displayName}</h3>
-            <span>{dummyUser.email}</span>
-            <a href={`/user/:username/certProfile`}>정보 수정하기</a>
-          </div>
-        </nav>
-        <section className={styles.my_page}>
-          <div className={styles.my_page_container}>
-            <ul className={styles.my_lists}>
-              <li className={`${styles.my_list} ${styles.account}`}>
-                계좌
-                <div className={styles.lists}>
-                  <a href={`/user/:username/account`}>계좌조회</a>
-                  <a href={`/user/:username/account/addAccount`}>계좌추가</a>
-                </div>
-              </li>
-              <li className={`${styles.my_list} ${styles.checkInfo}`}>
-                장바구니
-                <div className={styles.lists}>
-                  <a href={'/payment/:username/checkInfo'}>장바구니</a>
-                </div>
-              </li>
-              <li className={`${styles.my_list} ${styles.jjimItems}`}>
-                찜한 상품
-                <div className={styles.lists}>
-                  <a href={`/user/:username/jjimItems`}>찜한 상품</a>
-                </div>
-              </li>
-            </ul>
-            <hr />
-            <div className={`${styles.my_list} ${styles.list_getItems}`}>
-              <span className={styles.list}>구매내역</span>
-              <a className={styles.list_more}> 전체 내역 조회</a>
-              <div className={styles.getItem}>
-                <GetItem />
-                <GetItem />
-                <GetItem />
-                <GetItem />
-              </div>
+        <Nav />
+        <section className={styles.container__section}>
+          {visible && (
+            <div className={styles.container__section__inner}>
+              <ul className={styles.section__lists}>
+                <li className={`${styles.section__list_title} ${styles.account}`}>
+                  계좌
+                  <div className={styles.section__list_text}>
+                    <a href={`/user/:username/account`}>계좌조회</a>
+                    <a href={`/user/:username/account/addAccount`}>계좌추가</a>
+                  </div>
+                </li>
+                <li className={`${styles.section__list_title} ${styles.checkInfo}`}>
+                  장바구니
+                  <div className={styles.section__list_text}>
+                    <a href={'/payment/:username/checkInfo'}>장바구니</a>
+                  </div>
+                </li>
+                <li className={`${styles.section__list_title} ${styles.jjimItems}`}>
+                  {visible ? '찜한 상품' : '구매 내역'}
+                  <div className={styles.section__list_text}>
+                    <a onClick={handleVisible} href="#">
+                      {visible ? '찜한 상품' : '구매 내역'}
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <hr />
+              <GetList />
             </div>
-          </div>
+          )}
+          {!visible && (
+            <div className={styles.container__section__inner}>
+              <ul className={styles.section__lists}>
+                <li className={`${styles.section__list_title} ${styles.account}`}>
+                  계좌
+                  <div className={styles.section__list_text}>
+                    <a href={`/user/:username/account`}>계좌조회</a>
+                    <a href={`/user/:username/account/addAccount`}>계좌추가</a>
+                  </div>
+                </li>
+                <li className={`${styles.section__list_title} ${styles.checkInfo}`}>
+                  장바구니
+                  <div className={styles.section__list_text}>
+                    <a href={'/payment/:username/checkInfo'}>장바구니</a>
+                  </div>
+                </li>
+                <li className={`${styles.section__list_title} ${styles.jjimItems}`}>
+                  {visible ? '찜한 상품' : '구매 내역'}
+                  <div className={styles.section__list_text}>
+                    <a onClick={handleVisible} href="#">
+                      {visible ? '찜한 상품' : '구매 내역'}
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <hr />
+              <JjimList />
+            </div>
+          )}
         </section>
       </div>
     </>

@@ -11,7 +11,6 @@ import Search from './pages/search'
 import Detail from './pages/detail'
 //MyPage!!!!
 import MyPage from './pages/mypage'
-import JjimItems from './pages/mypage/jjimItems'
 import CertProfile from './pages/mypage/certProfile'
 import EditProfile from './pages/mypage/certProfile/editProfile'
 import Account from './pages/mypage/account'
@@ -38,7 +37,6 @@ function App() {
     <Routes>
       <Route path="/user" element={<MyPageLayout />}>
         <Route path="/user/:username" element={<MyPage />} />
-        <Route path="/user/:username/jjimItems" element={<JjimItems />} />
         <Route path="/user/:username/certProfile" element={<CertProfile />} />
         <Route path="/user/:username/certProfile/editProfile" element={<EditProfile />} />
         <Route path="/user/:username/account" element={<Account />} />

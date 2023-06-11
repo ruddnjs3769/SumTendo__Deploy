@@ -1,0 +1,34 @@
+@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+
+.nav {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  & .nav__container {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .nav_img {
+      top: 0;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+    }
+    .sidebar_text {
+      h3 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+    }
+    .sidebar_edit {
+      margin-top: 100px;
+      font-size: 16px;
+    }
+  }
+}

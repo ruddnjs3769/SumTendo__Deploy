@@ -44,6 +44,7 @@ function App() {
         <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>
       <Route path="/access" element={<CommonLayout />}>
+        
         <Route path="/access" element={<Access />} />
         <Route path="/access/agesignup" element={<AgeSignUp />} />
         <Route path="/access/signupform" element={<SignUpForm />} />
@@ -54,7 +55,7 @@ function App() {
       </Route>
       <Route path="/payment" element={<CommonLayout />}>
         <Route path="/payment" element={<Payment />} />
-        <Route path="/payment/:username//agreement" element={<Agreement />} />
+        <Route path="/payment/:username/agreement" element={<Agreement />} />
         <Route path="/payment/:username/checkInfo" element={<CheckInfo />} />
         <Route path="/payment/:username/payMethod" element={<PayMethod />} />
         <Route path="/payment/:username/checkOrder" element={<CheckOrder />} />

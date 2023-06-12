@@ -1,4 +1,4 @@
-@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+@import '@/_variables.scss';
 
 .header_Logo {
   position: relative;
@@ -13,7 +13,7 @@
   color: $bg-primary-white;
   box-shadow: 10px 5px 5px $bg-sub-grey;
   transform: translate(50px, -20px);
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &:hover {
     transform: translate(50px, 0);
   }

@@ -1,4 +1,4 @@
-@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+@import '@/_variables.scss';
 
 * {
   color: $text-primary-black;
@@ -18,7 +18,7 @@ a {
   text-overflow: ellipsis;
   &:hover {
     text-decoration: underline;
-    text-underline-position:under;
+    text-underline-position: under;
   }
 }
 input {

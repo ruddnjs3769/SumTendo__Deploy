@@ -1,4 +1,4 @@
-@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+@import '@/_variables.scss';
 
 .get_item_container {
   top: 0;
@@ -16,7 +16,7 @@
       height: 150px;
       object-fit: cover;
       &:hover {
-        transform: scale(1.2) .3s;
+        transform: scale(1.2) 0.3s;
       }
     }
   }

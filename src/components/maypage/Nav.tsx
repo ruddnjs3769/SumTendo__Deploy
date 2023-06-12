@@ -4,7 +4,9 @@ import { User } from '@/types/user'
 
 export default function Nav() {
   const [modify, setModify] = useState(true)
-  const modifyProfile = () => { setModify(!modify)}
+  const modifyProfile = () => {
+    setModify(!modify)
+  }
 
   const dummyUser: User = {
     email: 'example@example.com', // 사용자 아이디

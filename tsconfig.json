@@ -40,12 +40,8 @@
       .d.ts 파일은 체크를 안합니다.
       .d.ts 파일이 없지만 default : false라서 일단 넣었습니다.
       "skipLibCheck": true, <= import시 문제가 생기는지 확인
-<<<<<<< HEAD
-    */
-=======
      */
 
->>>>>>> 65bcbd5581b469feafaada354b981488f90ef0a9
     /* 
       Emit additional JavaScript to ease support for importing CommonJS modules.
       This enables 'allowSyntheticDefaultImports' for type compatibility. 
@@ -174,6 +170,6 @@
     */
     "strict": true
   },
-  //컴파일할 파일 경로 목록 
+  //컴파일할 파일 경로 목록
   "include": ["src", "src/custom.d.ts"]
 }

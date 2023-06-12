@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './UserHeader.module.scss'
+import styles from './index.module.scss'
 
 export default function UserHeader() {
   return (

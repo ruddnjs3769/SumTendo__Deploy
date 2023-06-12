@@ -1,5 +1,8 @@
+@import '@/_variables.scss';
+
 .container {
-  width: 500px;
-  height: 500px;
-  background-color: red;
+  width: 70%;
+  background-color: $bg-primary-white;
+  margin: 0 15%;
+  border-radius: 20px;
 }

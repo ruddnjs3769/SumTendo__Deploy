@@ -1,0 +1,38 @@
+@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+
+.header_Logo {
+  position: relative;
+  z-index: 2;
+  width: 180px;
+  height: 105px;
+  border-radius: 0 0 15px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $point-red;
+  color: $bg-primary-white;
+  box-shadow: 10px 5px 5px $bg-sub-grey;
+  transform: translate(50px, -20px);
+  transition: all .3s ease-in-out;
+  &:hover {
+    transform: translate(50px, 0);
+  }
+  .header_Logo_img {
+    top: 50px;
+    color: white;
+  }
+}
+.header {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 57px;
+  background-color: $bg-primary-white;
+  box-shadow: 10px 5px 5px $bg-sub-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-weight: bold;
+  }
+}

@@ -43,8 +43,8 @@ function App() {
         <Route path="/user/:username/account/addAccount" element={<AddAccount />} />
         <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>
+      
       <Route path="/access" element={<CommonLayout />}>
-        
         <Route path="/access" element={<Access />} />
         <Route path="/access/agesignup" element={<AgeSignUp />} />
         <Route path="/access/signupform" element={<SignUpForm />} />
@@ -53,6 +53,7 @@ function App() {
         <Route path="/access/passwordcheck" element={<PasswordCheck />} />
         <Route path="/access/passwordchangeform" element={<PasswordChangeForm />} />
       </Route>
+
       <Route path="/payment" element={<CommonLayout />}>
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/:username/agreement" element={<Agreement />} />

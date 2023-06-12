@@ -1,8 +1,47 @@
 @import '@/_variables.scss';
 
-.container {
-  width: 70%;
-  background-color: $bg-primary-white;
-  margin: 0 15%;
-  border-radius: 20px;
+.orderer {
+  width: 100%;
+  margin-top: 50px;
+  .orderInfo {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  .info {
+    display: flex;
+    border-bottom: 3px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 24px 0;
+    justify-content: space-between;
+    .titleContainer {
+      flex-grow: 1;
+      .title {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .title:last-child {
+        margin-top: 20px;
+      }
+    }
+
+    .contentContainer {
+      flex-grow: 1;
+      .content {
+        font-size: 14px;
+        margin-left: 20px;
+      }
+      .content:last-child {
+        margin-top: 20px;
+      }
+    }
+
+    .btnContainer {
+      flex-grow: 2;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 20px;
+    }
+  }
+  margin-bottom: 100px;
 }

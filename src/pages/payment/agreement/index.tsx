@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.scss'
 import PayProcessFlow from '@/components/payment/PayProcessFlow'
+import { useNavigate } from 'react-router-dom'
 
 export default function Agreement() {
   const [check, setCheck] = useState([false, false, false] as boolean[])
   const [active, setActive] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handleBtnClick = () => {
+    navigate('/payment/:username/checkInfo')
+  }
 
   const handleCheckBoxChange = (index: number) => {
     const updatedCheck = [...check]
@@ -24,7 +31,7 @@ export default function Agreement() {
   }, [check])
 
   return (
-    <div className={styles.container}>
+    <>
       <PayProcessFlow />
       <div className={styles.agreement}>
         <div className={styles.subContainer}>
@@ -249,9 +256,11 @@ export default function Agreement() {
           </div>
         </div>
         <div className={styles.btnWrapper}>
-          <button className={`${styles.btn} ${active ? styles.activeBtn : null}`}>주문 적용</button>
+          <button className={`${styles.btn} ${active ? styles.activeBtn : null}`} onClick={handleBtnClick}>
+            주문 적용
+          </button>
         </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -1,18 +1,13 @@
 @import '@/_variables.scss';
-.container {
-  width: 70%;
-  background-color: $bg-primary-white;
-  margin: 0 15%;
-  border-radius: 20px;
-  .inner {
-    margin-top: 50px;
-    .notice {
-      margin: 50px 0;
-      .noticeP {
-        margin-bottom: 16px;
-        .strong {
-          font-weight: 800;
-        }
+
+.inner {
+  margin-top: 50px;
+  .notice {
+    margin: 50px 0;
+    .noticeP {
+      margin-bottom: 16px;
+      .strong {
+        font-weight: 800;
       }
     }
   }

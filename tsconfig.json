@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     /*
+    모듈 해석에 사용할 기준 경로 지정.
     절대 경로를 현제 경로로 지정합니다.
     */
     "baseUrl": "./",
@@ -39,15 +40,21 @@
       .d.ts 파일은 체크를 안합니다.
       .d.ts 파일이 없지만 default : false라서 일단 넣었습니다.
       "skipLibCheck": true, <= import시 문제가 생기는지 확인
+<<<<<<< HEAD
+    */
+=======
      */
 
+>>>>>>> 65bcbd5581b469feafaada354b981488f90ef0a9
     /* 
       Emit additional JavaScript to ease support for importing CommonJS modules.
       This enables 'allowSyntheticDefaultImports' for type compatibility. 
-      CommonJS방식의 파일과 ESM 방식의 파일을 import export할때 생기는 문제를 해결해줍니다.
+      CommonJS방식의 파일과 ESM 방식의 파일을 import, export 할때 생기는 문제를 해결해줍니다.
+      true로 설정 시 두 가지 방식 모두 사용 가능
       e.g) 
-      module.export는 import * as commonjs from "common" 이렇게 가져와야하는데 
-      import commonjs from "common" 이렇게 할 수 있게 됩니다.
+      module.export는 
+      import * as commonjs from "common" <= [CommonJS방식의 파일] import 예시 
+      import commonjs from "common"      <= [ESM 방식의 파일] import 예시 
       default가 false이니까 true를 지정하는 것을 추천합니다.
     */
     "esModuleInterop": true,
@@ -55,29 +62,33 @@
     /*
       Emit additional JavaScript to ease support for importing CommonJS modules.
       This enables 'allowSyntheticDefaultImports' for type compatibility. 
-      CommonJS방식의 파일과 ESM 방식의 파일을 import export할때 생기는 문제를 해결해줍니다.
+      CommonJS방식의 파일과 ESM 방식의 파일을 import, export 할때 생기는 문제를 해결해줍니다.
+      true로 설정 시 두 가지 방식 모두 사용 가능
       e.g) 
-      module.export는 import * as commonjs from "common" 이렇게 가져와야하는데 
-      import commonjs from "common" 이렇게 할 수 있게 됩니다.
+      module.export는 
+      import * as commonjs from "common"             <= [CommonJS방식의 파일] import 예시 
+      import commonjs from "common"                  <= [ESM 방식의 파일] import 예시 
       default가 false이니까 true를 지정하는 것을 추천합니다.
     */
     "allowSyntheticDefaultImports": true,
+
     /*
       파일명 대소문자 구분을 강제합니다.
       default : false입니다.
       e.g) 
-      ./FileManager.ts 파일을 ./fileManager.ts로 지정해여 가져오려고 하면 TypeScript에서 오류가 발생합니다.
+      ./FileManager.ts 파일을 
+      ./fileManager.ts로 지정해여 가져오려고 하면 TypeScript에서 오류가 발생합니다.
     */
     "forceConsistentCasingInFileNames": true,
 
     // "allowSyntheticDefaultImports": true,
-
     "noFallthroughCasesInSwitch": true,
+
     /*
       모듈 시스템을 지정합니다. import/export를 정하는 방식으로 통합니다.
       "CommonJS", "UMD", "AMD", "NodeNext", "ESNext", "ES2015", "ES2022" 등 을 제공합니다.
       
-      ESNext: import/export 방식을 사용합니다. ECMA Script 최신 버전방식입니다.
+      ✅ ESNext: import/export 방식을 사용합니다. ECMA Script 최신 버전방식입니다.
       CommonJS : require 방식을 사용합니다.
       AMD(Asynchronous Module Definition) : import/export + require을 혼합하여 사용합니다. 
       define같은 기능도 있습니다.
@@ -89,14 +100,14 @@
       모듈의 위치를 찾아가는데의 방식(전략)을 지정합니다.
       ** default : Classic
       module 플래그가 CommonJS인 경우에는 default가 node 입니다.
-
+      -
       node
       CommonJS방식을 사용합니다.
       index.html 생략하는 방식으로 제일 융통성있는 방식입니다. 위 예시의 순서대로 찾습니다.
-
+      -
       classic
       1.6 Ts이전 호환성을 위해 남겨놓은 방식, 최신코드는 사용하지 않습니다.
-
+      -
       node16 (nodeNext)
       SSR 서버를 만들 떄 CJS, EMS를 같이 사용하게 되는데 node16 또는 nodeNext로 설정하면
       type="module"일 경우 EMS, type="commonjs"일 경우
@@ -119,10 +130,9 @@
       Ensure that each file can be safely transpiled without relying on other imports.
       각각의 파일을 다른 모듈로 만듭니다. 
       ** default : false
-      true시 모든 파일을 모듈로 취급하기 떄문에 
+      ✅ true시 모든 파일을 모듈로 컴파일 함. import, export 키워드 필수.
       빈 파일도 export {} 이렇게 작성해줘야합니다.
-      프레임워크를 사용하고 있다면 true로 하고,
-      복합 프로젝트나 nodejs환경에서 사용하고 있다면 false로 하는게 좋을 것 같습니다.
+      프레임워크를 사용하고 있다면 true로 하고, 복합 프로젝트나 nodejs환경에서 사용하고 있다면 false로 하는게 좋을 것 같습니다.
     */
     "isolatedModules": true,
 
@@ -164,5 +174,6 @@
     */
     "strict": true
   },
+  //컴파일할 파일 경로 목록 
   "include": ["src", "src/custom.d.ts"]
 }

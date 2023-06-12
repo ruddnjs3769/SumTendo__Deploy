@@ -4,16 +4,16 @@ import Home from './pages/home'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import CommonLayout from './layouts/CommonLayout'
+import MyPageLayout from './layouts/MypageLayout'
 
 //Main!!!!
 import Search from './pages/search'
 import Detail from './pages/detail'
 //MyPage!!!!
 import MyPage from './pages/mypage'
-import JjimItems from './pages/mypage/jjimItems'
 import CertProfile from './pages/mypage/certProfile'
 import EditProfile from './pages/mypage/certProfile/editProfile'
-import CheckAccount from './pages/mypage/account'
+import Account from './pages/mypage/account'
 import AddAccount from './pages/mypage/account/addAccount'
 import BankName from './pages/mypage/account/banks'
 //Access!!!!
@@ -35,17 +35,16 @@ import OrderComplete from './pages/payment/orderComplete'
 function App() {
   return (
     <Routes>
-      <Route path="/user" element={<CommonLayout />}>
+      <Route path="/user" element={<MyPageLayout />}>
         <Route path="/user/:username" element={<MyPage />} />
-
-        <Route path="/user/:username/jjimItems" element={<JjimItems />} />
         <Route path="/user/:username/certProfile" element={<CertProfile />} />
         <Route path="/user/:username/certProfile/editProfile" element={<EditProfile />} />
-        <Route path="/user/:username/account" element={<CheckAccount />} />
+        <Route path="/user/:username/account" element={<Account />} />
         <Route path="/user/:username/account/addAccount" element={<AddAccount />} />
         <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>
       <Route path="/access" element={<CommonLayout />}>
+        
         <Route path="/access" element={<Access />} />
         <Route path="/access/agesignup" element={<AgeSignUp />} />
         <Route path="/access/signupform" element={<SignUpForm />} />

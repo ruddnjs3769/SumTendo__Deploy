@@ -4,7 +4,7 @@
 // https://github.com/KDT1-FE/KDT5-M5#%EB%AA%A8%EB%93%A0-%EC%A0%9C%ED%92%88-%EC%A1%B0%ED%9A%8C
 export type Products = Product[]
 
-interface Product {
+export interface Product {
   // 제품 정보
   id: string // 제품 ID
   title: string // 제품 이름

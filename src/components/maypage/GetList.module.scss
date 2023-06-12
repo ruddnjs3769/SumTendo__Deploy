@@ -1,0 +1,22 @@
+@import '/Users/kimseong-eun/Desktop/11_Fastcampus/KDT5-M4/SummakJo_TradeAPI/src/_variables.scss';
+
+.section__list_title {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  top: 20px;
+  .get_list_more {
+    position: absolute;
+    right: -10px;
+    margin: 3px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .get_item {
+    width: 102%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}

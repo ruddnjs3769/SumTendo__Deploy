@@ -3,8 +3,9 @@ import './App.scss'
 import Home from './pages/home'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
-import CommonLayout from './layouts/CommonLayout'
+import AccessLayout from './layouts/AccessLayout'
 import MyPageLayout from './layouts/MypageLayout'
+import PaymentLayout from './layouts/PaymentLayout'
 
 //Main!!!!
 import Search from './pages/search'
@@ -43,8 +44,7 @@ function App() {
         <Route path="/user/:username/account/addAccount" element={<AddAccount />} />
         <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>
-      
-      <Route path="/access" element={<CommonLayout />}>
+      <Route path="/access" element={<AccessLayout />}>
         <Route path="/access" element={<Access />} />
         <Route path="/access/agesignup" element={<AgeSignUp />} />
         <Route path="/access/signupform" element={<SignUpForm />} />
@@ -53,8 +53,7 @@ function App() {
         <Route path="/access/passwordcheck" element={<PasswordCheck />} />
         <Route path="/access/passwordchangeform" element={<PasswordChangeForm />} />
       </Route>
-
-      <Route path="/payment" element={<CommonLayout />}>
+      <Route path="/payment" element={<PaymentLayout />}>
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/:username/agreement" element={<Agreement />} />
         <Route path="/payment/:username/checkInfo" element={<CheckInfo />} />

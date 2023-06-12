@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @import 'src/_variables.scss';
+=======
+@import '@/_variables.scss';
+>>>>>>> origin/main
 
 * {
   color: $text-primary-black;
@@ -18,7 +22,7 @@ a {
   text-overflow: ellipsis;
   &:hover {
     text-decoration: underline;
-    text-underline-position:under;
+    text-underline-position: under;
   }
 }
 input {

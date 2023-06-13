@@ -5,12 +5,14 @@ import Bank from '@/components/payment/Bank'
 import dummyAccounts from '@/pages/payment/dummyAccounts.json'
 import { AccountsBalance } from '@/types/account'
 import { useNavigate } from 'react-router-dom'
+import Modal from '@/components/common/Modal'
 
 export default function PayMethod() {
   const { accounts }: AccountsBalance = dummyAccounts
   const [isOpen, setIsOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -18,13 +20,23 @@ export default function PayMethod() {
     setIsClicked(false)
   }, [])
 
+  // 계좌 조회 버튼 핸들러
   const handleOpen = () => {
     setIsOpen(!isOpen)
   }
-
+  // 선택계좌 결제하기 버튼 생성 핸들러
   const handleOnClick = (index: number) => {
     setIsClicked(true)
     setActiveIndex(index)
+  }
+
+  //모달버튼열기 핸들러
+  const handleModalOpen = () => {
+    setIsModalOpen(true)
+  }
+  // 모달 닫기 핸들러
+  const handleModalClose = () => {
+    setIsModalOpen(false)
   }
 
   return (
@@ -104,11 +116,16 @@ export default function PayMethod() {
               <button className={styles.btn} onClick={handleOpen}>
                 계좌조회
               </button>
-              <button className={styles.btn}>간편결제</button>
+              <button className={styles.btn} onClick={handleModalOpen}>
+                간편결제
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <Modal isOpen={isModalOpen} closeModal={handleModalClose}>
+        <div> 안녕하세요 모달입니다.</div>
+      </Modal>
     </>
   )
 }

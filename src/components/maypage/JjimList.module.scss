@@ -7,10 +7,19 @@
   top: 20px;
   .jjim_list_more {
     position: absolute;
-    right: -10px;
+    right: 3px;
     margin: 3px;
+    padding: 5px;
     font-size: 16px;
-    font-weight: 300;
+    color: $text-primary-black;
+    font-weight: 500;
+    text-decoration: none;
+    word-spacing: 3px;
+    letter-spacing: -0.5px;
+    &:hover {
+      text-decoration: underline;
+      text-underline-position: under;
+    }
   }
   .jjim_item {
     width: 102%;

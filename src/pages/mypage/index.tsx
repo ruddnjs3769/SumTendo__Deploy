@@ -42,26 +42,35 @@ export default function MyPage() {
                 <li className={`${styles.section__list_title} ${styles.account}`}>
                   계좌
                   <div className={styles.section__list_text}>
-                    <a href={`/user/:username/account`}>계좌조회</a>
-                    <a href={`/user/:username/account/addAccount`}>계좌추가</a>
+                    <a className={`${styles.aTag} ${styles.section__list_link}`} href={`/user/:username/account`}>
+                      계좌조회
+                    </a>
+                    <a
+                      className={`${styles.aTag} ${styles.section__list_link}`}
+                      href={`/user/:username/account/addAccount`}
+                    >
+                      계좌추가
+                    </a>
                   </div>
                 </li>
                 <li className={`${styles.section__list_title} ${styles.checkInfo}`}>
                   장바구니
                   <div className={styles.section__list_text}>
-                    <a href={'/payment/:username/checkInfo'}>장바구니</a>
+                    <a className={`${styles.aTag} ${styles.section__list_link}`} href={'/payment/:username/checkInfo'}>
+                      장바구니
+                    </a>
                   </div>
                 </li>
                 <li className={`${styles.section__list_title} ${styles.jjimItems}`}>
                   {visible ? '찜한 상품' : '구매 내역'}
                   <div className={styles.section__list_text}>
-                    <a onClick={handleVisible} href="#">
+                    <a className={`${styles.aTag} ${styles.section__list_link}`} onClick={handleVisible} href="#">
                       {visible ? '찜한 상품' : '구매 내역'}
                     </a>
                   </div>
                 </li>
               </ul>
-              <hr />
+              <hr className={styles.section__line} />
               <GetList />
             </div>
           )}
@@ -71,26 +80,35 @@ export default function MyPage() {
                 <li className={`${styles.section__list_title} ${styles.account}`}>
                   계좌
                   <div className={styles.section__list_text}>
-                    <a href={`/user/:username/account`}>계좌조회</a>
-                    <a href={`/user/:username/account/addAccount`}>계좌추가</a>
+                    <a className={`${styles.aTag} ${styles.section__list_link}`} href={`/user/:username/account`}>
+                      계좌조회
+                    </a>
+                    <a
+                      className={`${styles.aTag} ${styles.section__list_link}`}
+                      href={`/user/:username/account/addAccount`}
+                    >
+                      계좌추가
+                    </a>
                   </div>
                 </li>
                 <li className={`${styles.section__list_title} ${styles.checkInfo}`}>
                   장바구니
                   <div className={styles.section__list_text}>
-                    <a href={'/payment/:username/checkInfo'}>장바구니</a>
+                    <a className={`${styles.aTag} ${styles.section__list_link}`} href={'/payment/:username/checkInfo'}>
+                      장바구니
+                    </a>
                   </div>
                 </li>
                 <li className={`${styles.section__list_title} ${styles.jjimItems}`}>
                   {visible ? '찜한 상품' : '구매 내역'}
                   <div className={styles.section__list_text}>
-                    <a onClick={handleVisible} href="#">
+                    <a className={`${styles.aTag} ${styles.section__list_link}`} onClick={handleVisible} href="#">
                       {visible ? '찜한 상품' : '구매 내역'}
                     </a>
                   </div>
                 </li>
               </ul>
-              <hr />
+              <hr className={styles.section__line} />
               <JjimList />
             </div>
           )}

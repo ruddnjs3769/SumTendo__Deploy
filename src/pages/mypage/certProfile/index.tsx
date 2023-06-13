@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './index.module.scss'
 import Nav from '@/components/maypage/Nav'
 
@@ -10,7 +10,7 @@ export default function CertProfile() {
         <Nav />
         <section className={styles.container__section}>
           <h1>개인정보 편집 전 본인확인</h1>
-          <hr />
+          <hr className={styles.section__line} />
           <p>비밀번호 인증</p>
           <div>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요</div>
           <input type="password" placeholder="비밀번호를 입력하세요" />

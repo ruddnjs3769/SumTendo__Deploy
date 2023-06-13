@@ -1,26 +1,20 @@
 @import '@/_variables.scss';
 
-* {
-  color: $text-primary-black;
-  box-sizing: content-box;
-}
-html {
-  background-color: $bg-primary-white;
-}
-a {
-  text-decoration: none;
-  text-decoration-line: none;
-  padding: 5px;
-  background-color: transparent;
-  line-height: 1.2;
-  word-spacing: 3px;
-  letter-spacing: -0.5px;
-  text-overflow: ellipsis;
-  &:hover {
-    text-decoration: underline;
-    text-underline-position: under;
-  }
-}
+
+// a {
+//   text-decoration: none;
+//   text-decoration-line: none;
+//   padding: 5px;
+//   background-color: transparent;
+//   line-height: 1.2;
+//   word-spacing: 3px;
+//   letter-spacing: -0.5px;
+//   text-overflow: ellipsis;
+//   &:hover {
+//     text-decoration: underline;
+//     text-underline-position: under;
+//   }
+// }
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -57,7 +51,7 @@ select {
       }
     }
   }
-}
-hr {
-  margin: 40px auto;
+  .section__line{
+    margin: 40px auto;
+  }
 }

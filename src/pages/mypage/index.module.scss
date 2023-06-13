@@ -1,21 +1,13 @@
 @import '@/_variables.scss';
 
-* {
-  color: $text-primary-black;
-  box-sizing: content-box;
-}
-html {
-  background-color: $bg-primary-white;
-}
-a {
+.aTag {
+  color:$text-primary-black;
+  font-weight: 500;
   text-decoration: none;
-  text-decoration-line: none;
   padding: 5px;
-  background-color: transparent;
   line-height: 1.2;
   word-spacing: 3px;
   letter-spacing: -0.5px;
-  text-overflow: ellipsis;
   &:hover {
     text-decoration: underline;
     text-underline-position: under;
@@ -68,15 +60,14 @@ select {
             flex-direction: column;
             position: absolute;
             left: -10px;
-            a {
+            .section__list_link {
               margin: 3px;
               font-size: 16px;
-              font-weight: 300;
             }
           }
         }
       }
-      hr {
+      .section__line {
         margin: 40px auto;
       }
     }

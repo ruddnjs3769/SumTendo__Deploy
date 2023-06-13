@@ -88,14 +88,15 @@ export default function SignUpForm() {
 
   return (
     <div className={styles.container}>
-      <h1>닌텐도 어카운트 작성</h1>
+      <h1 className={styles['subTitle']}>닌텐도 어카운트 작성</h1>
       <div className={styles['form-signup']}>
-        <p>회원가입을 위해 아래 정보를 입력해 주십시오.</p>
+        <p className={styles['signup-info']}>회원가입을 위해 아래 정보를 입력해 주십시오.</p>
         <form onSubmit={handleSubmit}>
           <div className={styles['signup-input-group']}>
             <div className={styles['input-text']}>닉네임</div>
             <div className={styles['input-form']}>
               <input
+                className={styles['input-info']}
                 type="text"
                 value={displayName}
                 name="displayName"
@@ -112,6 +113,7 @@ export default function SignUpForm() {
             <div className={styles['input-text']}>메일 주소</div>
             <div className={styles['input-form']}>
               <input
+                className={styles['input-info']}
                 type="email"
                 name="email"
                 value={email}
@@ -121,7 +123,7 @@ export default function SignUpForm() {
                 required
               />
               {errorMessages.email && <div className={styles.error}>{errorMessages.email}</div>}
-              <button>중복확인</button>
+              <button className={styles['duplicate-check']}>중복확인</button>
             </div>
           </div>
 
@@ -129,6 +131,7 @@ export default function SignUpForm() {
             <div className={styles['input-text']}>암호</div>
             <div className={styles['input-form']}>
               <input
+                className={styles['input-info']}
                 type="password"
                 name="password"
                 value={password}
@@ -146,6 +149,7 @@ export default function SignUpForm() {
             <div className={styles['input-text']}>암호 재입력</div>
             <div className={styles['input-form']}>
               <input
+                className={styles['input-info']}
                 type="password"
                 name="confirmPassword"
                 value={confirmPassword}
@@ -178,8 +182,8 @@ export default function SignUpForm() {
               <input type="checkbox" />
               <span>닌텐도 어카운트의 이용약관 및 개인정보처리방침에 동의합니다.</span>
             </div>
-            <div className={styles['submit-button']}>
-              <button type="submit" onClick={handleSubmit}>
+            <div className={styles['continue-group']}>
+              <button className={styles['continue-button']} type="submit" onClick={handleSubmit}>
                 계속
               </button>
             </div>
@@ -189,4 +193,3 @@ export default function SignUpForm() {
     </div>
   )
 }
-

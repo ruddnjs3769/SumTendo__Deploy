@@ -30,7 +30,6 @@ import Payment from './pages/payment'
 import Agreement from './pages/payment/agreement'
 import CheckInfo from './pages/payment/checkInfo'
 import PayMethod from './pages/payment/payMethod'
-import CheckOrder from './pages/payment/checkOrder'
 import OrderComplete from './pages/payment/orderComplete'
 
 function App() {
@@ -58,7 +57,6 @@ function App() {
         <Route path="/payment/:username/agreement" element={<Agreement />} />
         <Route path="/payment/:username/checkInfo" element={<CheckInfo />} />
         <Route path="/payment/:username/payMethod" element={<PayMethod />} />
-        <Route path="/payment/:username/checkOrder" element={<CheckOrder />} />
         <Route path="/payment/:username/orderComplete" element={<OrderComplete />} />
       </Route>
 

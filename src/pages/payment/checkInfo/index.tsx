@@ -6,7 +6,7 @@ import Btn from '@/components/payment/Btn'
 
 export default function CheckInfo() {
   return (
-    <div className={styles.container}>
+    <>
       <PayProcessFlow />
       <div className={styles.orderer}>
         <div className={styles.orderInfo}>주문자 정보</div>
@@ -38,7 +38,7 @@ export default function CheckInfo() {
           <span>19,990</span>
         </div>
       </div>
-      <Btn />
-    </div>
+      <Btn text="확인" targetURL="/payment/:username/payMethod" />
+    </>
   )
 }

@@ -9,7 +9,7 @@ export default function PayProcessFlow() {
   const agreementPathRegex = /^\/payment\/[^/]+\/agreement$/
   const checkInfoPathRegex = /^\/payment\/[^/]+\/checkInfo$/
   const payMethodPathRegex = /^\/payment\/[^/]+\/payMethod$/
-  const checkOrderPathRegex = /^\/payment\/[^/]+\/checkOrder$/
+  const orderCompletePathRegex = /^\/payment\/[^/]+\/orderComplete$/
 
   return (
     <div className={styles.container}>
@@ -26,8 +26,8 @@ export default function PayProcessFlow() {
         <li className={`${styles.process} ${payMethodPathRegex.test(path) ? styles.isActive : ''}`}>
           <h3 className={styles.content}>결제</h3>
         </li>
-        <li className={`${styles.process} ${checkOrderPathRegex.test(path) ? styles.isActive : ''}`}>
-          <h3 className={styles.content}>주문 검토</h3>
+        <li className={`${styles.process} ${orderCompletePathRegex.test(path) ? styles.isActive : ''}`}>
+          <h3 className={styles.content}>주문 완료</h3>
         </li>
       </ul>
     </div>

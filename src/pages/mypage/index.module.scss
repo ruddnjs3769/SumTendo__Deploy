@@ -13,35 +13,33 @@
     text-underline-position: under;
   }
 }
-.input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-/* select box 스타일 초기화 */
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
+
+// /* select box 스타일 초기화 */
+// select {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+// }
 .container {
   margin: auto;
   width: $mypage-width;
   height: $mypage-height;
   background-color: $bg-sub-grey;
   display: flex;
+  margin-bottom: 30px;
   .container__section {
+    position: relative;
     margin: auto;
-    margin-left: 0;
     width: 62%;
     height: 95%;
-    font-size: 24px;
-    font-weight: 800;
-    background-color: $bg-primary-white;
-    position: relative;
+    margin-left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.8rem;
+    letter-spacing: -0.5;
+    font-weight: 800;
+    background-color: $bg-primary-white;
     .container__section__inner {
       position: absolute;
       height: 90%;
@@ -51,24 +49,23 @@ select {
         display: flex;
         justify-content: space-between;
         .section__list_title {
-          margin: 20px 0px 20px 0px;
-          width: 140px;
           position: relative;
+          width: 140px;
+          margin: 40px 0px 20px 0px;
           .section__list_text {
-            margin-top: 10px;
+            position: absolute;
+            left: -5px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
-            position: absolute;
-            left: -10px;
             .section__list_link {
-              margin: 3px;
-              font-size: 16px;
+              font-size: 1.3rem;
             }
           }
         }
       }
       .section__line {
-        margin: 40px auto;
+        margin: 50px auto;
       }
     }
   }

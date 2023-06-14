@@ -1,0 +1,56 @@
+@import '@/_variables.scss';
+
+// a {
+//   text-decoration: none;
+//   text-decoration-line: none;
+//   padding: 5px;
+//   background-color: transparent;
+//   line-height: 1.2;
+//   word-spacing: 3px;
+//   letter-spacing: -0.5px;
+//   text-overflow: ellipsis;
+//   &:hover {
+//     text-decoration: underline;
+//     text-underline-position: under;
+//   }
+// }
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+/* select box 스타일 초기화 */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.container {
+  margin: auto;
+  width: $mypage-width;
+  height: $mypage-height;
+  background-color: $bg-sub-grey;
+  display: flex;
+  .container__section {
+    margin: auto;
+    margin-left: 0;
+    width: 62%;
+    height: 95%;
+    font-size: 24px;
+    background-color: $bg-primary-white;
+    position: relative;
+    .container__section__inner {
+      position: absolute;
+      height: 90%;
+      width: 80%;
+      a {
+        margin: 3px;
+        font-size: 16px;
+        font-weight: 300;
+      }
+    }
+  }
+  .section__line{
+    margin: 40px auto;
+  }
+}

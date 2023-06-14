@@ -13,7 +13,7 @@ export default function Payment() {
           <ShoppingCart />
           <div className={styles.notice}>
             <p className={styles.noticeP}>
-              <span className={styles.strong}>구매하신 닌텐도 어카운트</span>로 귀속되며 즉시 다운로드 받으시면 좋겠다.
+              <span className={styles.strong}>구매하신 닌텐도 어카운트</span>로 귀속되며 즉시 다운로드 받으십쇼
             </p>
             <p className={styles.noticeP}>
               다운로드 번호는 전송되지 않으며

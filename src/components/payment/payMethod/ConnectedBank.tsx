@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Bank.module.scss'
+import styles from './ConnectedBank.module.scss'
 
 interface BankProps {
   bankName: string

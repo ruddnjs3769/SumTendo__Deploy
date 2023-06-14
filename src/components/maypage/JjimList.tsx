@@ -6,7 +6,7 @@ export default function JjimList() {
   return (
     <div className={styles.section__list_title}>
       <span className={styles.jjim_list}>찜한 상품</span>
-      <a className={`${styles.aTag} ${styles.jjim_list_more}`} href="#">
+      <a className={`${styles.aTag} ${styles.jjim_list_more}`} href={'/user/:username/jjimItemAll'}>
         전체 내역 조회
       </a>
       <div className={styles.jjim_item}>

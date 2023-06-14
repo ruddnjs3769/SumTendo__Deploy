@@ -4,7 +4,6 @@ import Nav from '@/components/maypage/Nav'
 import { Link } from 'react-router-dom'
 
 export default function CertProfile() {
-
   return (
     <>
       <div className={styles.container}>

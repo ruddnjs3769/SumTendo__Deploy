@@ -1,0 +1,53 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .mainContainer {
+    width: 100%;
+    display: flex;
+    .bankTitle {
+      display: flex;
+      justify-content: left;
+      width: 80%;
+      height: 150px;
+      align-items: end;
+      .bankLogoImage {
+        width: 50px;
+        height: 50px;
+      }
+      .bankName {
+        margin-top: 10px;
+        font-size: 18px;
+        margin-left: 15px;
+      }
+    }
+    .contentContainer {
+      border-top: 3px solid #ddd;
+      width: 80%;
+      margin-top: 20px;
+      .subContainer {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0px;
+        justify-content: center;
+        align-items: center;
+        .subTitle {
+          width: 20%;
+        }
+        .inputContainer {
+          width: 60%;
+          .input {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

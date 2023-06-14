@@ -57,7 +57,7 @@ function App() {
         <Route path="/access/passwordchangeform" element={<PasswordChangeForm />} />
       </Route>
       <Route path="/payment" element={<PaymentLayout />}>
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/:username" element={<Payment />} />
         <Route path="/payment/:username/agreement" element={<Agreement />} />
         <Route path="/payment/:username/checkInfo" element={<CheckInfo />} />
         <Route path="/payment/:username/payMethod" element={<PayMethod />} />

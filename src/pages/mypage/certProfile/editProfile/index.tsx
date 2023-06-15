@@ -59,6 +59,7 @@ export default function EditProfile() {
                       placeholder="password"
                       required
                     />
+                    <div className={`${styles.spanTag} ${styles.input__error}`}>비밀번호가 올바르지 않습니다.</div>
                   </form>
                 </li>
                 <li className={`${styles.content__list} ${styles.uploade}`}>
@@ -73,9 +74,10 @@ export default function EditProfile() {
                       <span className={styles.upload_text}>프로필 이미지</span>
                       <div className={styles.upload_subtext}>
                         - 파일 사이즈 최대 1MB 이하
-                        <br /> - jpg, jpeg, webp, png, gif, svg
+                        <br /> - 사용자 프로필 이미지(Base64) : jpg/ jpeg/ webp/ png/ gif/ svg
+                        <div className={styles.input__error}>비밀번호가 올바르지 않습니다.</div>
                       </div>
-                      <form className={styles.content__form}>
+                      <form className={styles.content__uploade_form}>
                         <input
                           className={`${styles.inputTag} ${styles.uploade__form}`}
                           id="uploade"

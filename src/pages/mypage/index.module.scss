@@ -14,12 +14,6 @@
   }
 }
 
-// /* select box 스타일 초기화 */
-// select {
-//   -webkit-appearance: none;
-//   -moz-appearance: none;
-//   appearance: none;
-// }
 .container {
   margin: auto;
   width: $mypage-width;
@@ -42,30 +36,29 @@
     background-color: $bg-primary-white;
     .container__section__inner {
       position: absolute;
-      height: 90%;
+      height: 70%;
       width: 80%;
       .section__lists {
-        height: 25%;
+        height: 30%;
         display: flex;
         justify-content: space-between;
         .section__list_title {
           position: relative;
           width: 140px;
-          margin: 40px 0px 20px 0px;
           .section__list_text {
             position: absolute;
             left: -5px;
-            margin-top: 20px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             .section__list_link {
-              font-size: 1.2rem;
+              font-size: 1.1rem;
             }
           }
         }
       }
       .section__line {
-        margin: 50px auto;
+        margin: auto;
       }
     }
   }

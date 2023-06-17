@@ -1,0 +1,28 @@
+@import 'src/_variables.scss';
+
+.container {
+  margin: auto;
+  width: $mypage-width;
+  height: $mypage-height;
+  background-color: $bg-sub-grey;
+  display: flex;
+  margin-bottom: 30px;
+  .bankContainer {
+    width: 100%;
+    background-color: green;
+    .totallAccount {
+      margin: 30px auto;
+      width: 90%;
+      height: 35%;
+      background-color: yellow;
+    }
+    .bankAccount {
+      margin: 30px auto;
+      width: 90%;
+      height: 50%;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: yellow;
+    }
+  }
+}

@@ -15,7 +15,6 @@
 .btn {
   border: none;
   border-radius: 5px;
-  font-size: 0.9rem;
 }
 
 .container {
@@ -61,6 +60,9 @@
             flex-direction: column;
             .listLink {
               font-size: 0.9rem;
+            }
+            .visible{
+              padding: 6px;
             }
           }
         }

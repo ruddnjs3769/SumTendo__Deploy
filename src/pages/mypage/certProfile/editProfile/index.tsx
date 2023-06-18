@@ -74,7 +74,7 @@ export default function EditProfile() {
                       <div className={styles.profileSubText}>
                         - 파일 사이즈 최대 1MB 이하
                         <br /> - 사용자 프로필 이미지(Base64) : jpg/ jpeg/ webp/ png/ gif/ svg
-                        <div className={styles.errorMsg}>비밀번호가 올바르지 않습니다.</div>
+                        <div className={styles.errorMsg}>파일 업로드 양식을 확인해 주세요.</div>
                       </div>
                       <form className={styles.uploadeForm}>
                         <input

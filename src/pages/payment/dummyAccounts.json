@@ -21,6 +21,13 @@
       "bankCode": "004",
       "accountNumber": "451-XX-XXXX-XXX",
       "balance": 2812211
+    },
+    {
+      "id": "1qRFC6Ey5VkSu6nyj5Ba",
+      "bankName": "신한은행",
+      "bankCode": "088",
+      "accountNumber": "123-XXX-XXXXXX",
+      "balance": 3000000
     }
   ]
 }

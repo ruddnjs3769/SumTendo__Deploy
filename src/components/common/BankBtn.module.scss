@@ -6,8 +6,11 @@
   background-color: $bg-sub-grey;
   border-radius: 18px;
   padding: 10px;
-  &:active {
-    border: 1px solid $bg-primary-grey;
+  &:hover {
+    box-shadow: 0 0 10px $bg-primary-grey;
+    mix-blend-mode: multiply;
+    transition-duration: 0.3s;
+    background-color: $bg-sub-grey;
   }
   .bank {
     height: 100%;

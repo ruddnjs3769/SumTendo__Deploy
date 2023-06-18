@@ -79,6 +79,12 @@
         border: 3px dashed $bg-sub-grey;
         border-radius: 18px;
         text-decoration: none;
+        &:hover {
+          box-shadow: 0 0 10px $bg-sub-grey;
+
+          transition-duration: 0.3s;
+          background-color: $bg-primary-white;
+        }
         .btn {
           position: sticky;
           display: flex;

@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.scss'
 // import LinkedBank from '@/components/mypage/bank/LinkedBank'
 import Sidebar from '@/components/mypage/nav/SideBar'
 import { Link } from 'react-router-dom'
 import SelectAccount from '@/components/mypage/bank/SelectAccount'
-
 
 export default function Account() {
   return (
@@ -18,10 +17,15 @@ export default function Account() {
             <div className={styles.underLine}>₩</div>
           </div>
           {/* 추가된 계좌 + 계좌 추가 버튼 영역 */}
+          {/* 각 은행은 별 해당 페이지로 랜딩  */}
           <div className={styles.bankAccount}>
             <div className={styles.banks}>
-              <SelectAccount />
-              <SelectAccount />
+              <Link to="/user/:username/account/banks/:bankName">
+                <SelectAccount />
+              </Link>
+              <Link to="/user/:username/account/banks/:bankName">
+                <SelectAccount />
+              </Link>
               <SelectAccount />
               <SelectAccount />
               <SelectAccount />

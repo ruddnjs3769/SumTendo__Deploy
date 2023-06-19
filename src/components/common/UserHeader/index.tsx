@@ -105,7 +105,7 @@ export default function UserHeader() {
                   alt="profileImg"
                 />
               </div>
-              <div className={styles.userName}>이름</div>
+              <div className={styles.userName}>{userName}</div>
               <ul className={styles.userNavList} style={{ display: isUserClicked ? 'block' : 'none' }}>
                 <Link to={`/user/${userName}`} style={{ textDecoration: 'none' }}>
                   <li className={styles.userNav}>

@@ -1,15 +1,61 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.scss'
 import { Link, useLocation } from 'react-router-dom'
+import dummyVerifyedUser from '@/pages/payment/dummyVerifiedUser.json'
 
 export default function UserHeader() {
   const [currentTitle, setCurrentTitle] = useState('')
   const currentLocation = useLocation().pathname
   const [cartItemCount, setCartItemCount] = useState(0)
+  const [isUserClicked, setIsUserClicked] = useState(false)
+  const [isLogined, setIsLogined] = useState(false) // 얘를 recoil로 상태관리해야할까요?
 
+  // 유저 정보 받아오기
+  const accessToken = localStorage.getItem('accessToken')
+  // 1.여기서 accessToken으로 api 호출해서 user정보 확인을 해야할지?
+  // 2.아니면 user정보를 통째로 localStorage에 저장할지?
+
+  // 1.의 경우
+  const fetchUserInfo = () => {
+    // 가상의 api 호출함수 verifyUser(accessToken) 호출
+    // 받아온 userData return
+    // 임시로 dummyVerifyedUser.json 사용하겠음
+    return dummyVerifyedUser.displayName
+  }
+
+  const userName = fetchUserInfo()
+
+  const handleUserClick = () => {
+    setIsUserClicked(!isUserClicked)
+  }
+  // 스토리지에 access토큰이 변경될때 핸들링 이벤트
+  const handleStorageChange = (event: StorageEvent) => {
+    if (event.key === 'accessToken') {
+      setIsLogined(!!localStorage.getItem('accessToken'))
+    }
+  }
+
+  // 랜딩 시
   useEffect(() => {
     setCartItemCount(JSON.parse(localStorage.getItem('cart') || '[]').length)
+    setIsUserClicked(false)
   }, [])
+
+  // fetchUserInfo 는 isLogined 감시해서 true면 호출
+  useEffect(() => {
+    if (isLogined) {
+      fetchUserInfo()
+    }
+  }, [isLogined])
+
+  useEffect(() => {
+    if (accessToken) {
+      setIsLogined(true)
+    } else {
+      setIsLogined(false)
+    }
+  }, [accessToken])
+
   // 숨텐도 옆에 현재 페이지의 타이틀을 대야함 ex) 결제, 마이페이지, 회원가입 || 더 세분화하면 결제 --각페이지 이름 , 마이페이지 --각페이지 이름, 회원가입 -- 각페이지 이름
   // currentLocation이, url 주소에 있는 특정 단어를 포함하고 있으면 currentTitle이 바뀐다.
 
@@ -28,6 +74,15 @@ export default function UserHeader() {
     if (currentLocation.includes('access')) setCurrentTitle('인증')
   }, [currentLocation])
 
+  //로컬 스토리지에 이벤트 리스너 추가.
+  useEffect(() => {
+    window.addEventListener('storage', handleStorageChange)
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+    }
+  }, [])
+
   return (
     <div className={styles.container}>
       <div className={styles.header_Logo}>
@@ -41,19 +96,31 @@ export default function UserHeader() {
         <div className={styles.titles}>
           <div className={styles.mainTitle}>숨텐도</div>
           <div className={styles.subTitle}>{currentTitle}</div>
-          <div className={styles.userInfo}>
-            <div className={styles.userPage}>
+          <div className={styles.userInfo} style={{ display: isLogined ? 'flex' : 'none' }}>
+            <div className={styles.userPage} onClick={handleUserClick}>
               <div className={styles.userImg}>
                 <img
                   className={styles.img}
-                  src="https://store.nintendo.co.kr/static/version1686546216/frontend/Ecomitize/nintendo/ko_KR/images/mii-default.png"
+                  src={`${process.env.PUBLIC_URL}/images/person-circle.svg`}
                   alt="profileImg"
                 />
               </div>
               <div className={styles.userName}>이름</div>
+              <ul className={styles.userNavList} style={{ display: isUserClicked ? 'block' : 'none' }}>
+                <Link to={`/user/${userName}`} style={{ textDecoration: 'none' }}>
+                  <li className={styles.userNav}>
+                    <span className={styles.userNavSpan}>마이페이지</span>
+                  </li>
+                </Link>
+                <Link to={'/access/logout'} style={{ textDecoration: 'none' }}>
+                  <li className={styles.userNav}>
+                    <span className={styles.userNavSpan}>로그아웃</span>
+                  </li>
+                </Link>
+              </ul>
             </div>
             <div className={styles.shoppingCart}>
-              <a className={styles.link} href="#">
+              <Link className={styles.link} to={`/payment/${userName}`}>
                 <span className={styles.icon}>
                   <img
                     className={styles.iconImg}
@@ -62,8 +129,13 @@ export default function UserHeader() {
                   />
                 </span>
                 <span className={styles.count}>{`(${cartItemCount})`}</span>
-              </a>
+              </Link>
             </div>
+          </div>
+          <div style={{ display: !isLogined ? 'block' : 'none' }}>
+            <Link to="/access/login" className={styles.logInLink}>
+              <span>로그인하기</span>
+            </Link>
           </div>
         </div>
       </div>

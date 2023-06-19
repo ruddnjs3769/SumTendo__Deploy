@@ -40,7 +40,7 @@
       background-color: $point-orange;
       color: $text-light-white;
       margin-bottom: 20px;
-      box-shadow: 1px 1px 1px #ddd;
+      box-shadow: 1px 1px 1px $bg-light-grey;
       cursor: pointer;
     }
   }
@@ -57,8 +57,8 @@
       }
       .paymentInfo {
         display: flex;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
+        border-top: 1px solid $bg-light-grey;
+        border-bottom: 1px solid $bg-light-grey;
         padding: 24px 0;
         justify-content: space-between;
         .title {
@@ -153,7 +153,7 @@
     background-color: $point-red;
     color: $text-light-white;
     margin-top: 50px;
-    box-shadow: 1px 1px 1px #ddd;
+    box-shadow: 1px 1px 1px $bg-light-grey;
     cursor: pointer;
   }
 }

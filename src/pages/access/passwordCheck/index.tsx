@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import styles from './index.module.scss'
 import { SignInResponse } from '@/types/auth'
+import { useNavigate } from 'react-router-dom'
 
 export default function PasswordCheck() {
   const [email, setEmail] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [isMatched, setIsMatched] = useState(false)
+  const navigate = useNavigate()
 
   const dummyEmailRequest: SignInResponse = {
     user: {
@@ -21,7 +23,7 @@ export default function PasswordCheck() {
 
     if (email === dummyEmailRequest.user.email && displayName === dummyEmailRequest.user.displayName) {
       setIsMatched(true)
-      window.location.href = '/access/passwordchangeform'
+      navigate('/access/passwordchangeform')
     } else {
       setIsMatched(false)
       console.log('입력한 값이 틀렸습니다.')

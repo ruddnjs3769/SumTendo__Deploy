@@ -1,0 +1,134 @@
+@import '@/_variables.scss';
+
+.btn {
+  position: relative;
+  border: none;
+  background-color: transparent;
+  margin: 5px 0;
+  cursor: pointer;
+}
+.modalContainer {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background-color: $bg-sub-grey;
+  display: flex;
+  flex-direction: column;
+  // margin-bottom: 30px;
+  justify-content: space-evenly;
+  align-items: start;
+  .line {
+    margin: 10px auto;
+    border: 1px solid $bg-sub-grey;
+    mix-blend-mode: multiply;
+  }
+  .textContainer {
+    height: 30%;
+    width: 25%;
+    margin: 20px auto 0 auto;
+    // background-color: green;
+    display: flex;
+    align-items: center;
+    .bankLogo {
+      margin: auto;
+      width: 70px;
+      height: 70px;
+      background-color: $bg-primary-grey;
+      border-radius: 50%;
+    }
+    .bankName {
+      margin: auto;
+      width: 50%;
+      font-size: 1.6rem;
+      letter-spacing: -0.5;
+      font-weight: 800;
+      // background-color: yellowgreen;
+    }
+  }
+  .listsContainer {
+    height: 80%;
+    width: 70%;
+    margin: 0 auto 10px auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    // background-color: greenyellow;
+    .list {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      line-height: 1.3;
+      .label {
+        font-size: 1.1rem;
+        letter-spacing: -0.5;
+        font-weight: 800;
+        margin-right: 10px;
+        width: 100px;
+      }
+      .inputForm {
+        flex-grow: 1;
+        .inputTag {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          outline: none;
+          appearance: none;
+          width: 90%;
+          height: 20px;
+          padding: 15px 20px;
+          border-radius: 5px;
+          border: solid 1px $bg-primary-grey;
+          font-size: 0.9rem;
+          &:focus {
+            border: solid 2px $point-red;
+            caret-color: $point-red;
+          }
+        }
+      }
+    }
+    .errorMsg {
+      // position: absolute;
+      width: 140px;
+      top: 125px;
+      left: 0;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: $point-red;
+    }
+  }
+  .btnContainer {
+    height: 15%;
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 20px auto;
+    padding: 5px;
+    // background-color: greenyellow;
+    .btnTag {
+      width: 30%;
+      padding: 15px 32px;
+      color: $text-light-white;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 800;
+      background-color: $point-red;
+      cursor: pointer;
+      // &,
+      // .enrolled {
+      //   background-color: $bg-sub-grey;
+      //   mix-blend-mode: multiply;
+      // }
+    }
+    .cancel {
+      background-color: $bg-sub-grey;
+      mix-blend-mode: multiply;
+      color: $text-sub-grey;
+    }
+  }
+}

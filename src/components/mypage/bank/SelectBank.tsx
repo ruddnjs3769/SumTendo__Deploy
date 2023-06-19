@@ -36,58 +36,64 @@ export default function SelectBank() {
   // }
 
   return (
-    <div>
+    <>
       <button className={styles.btn} onClick={handleModalOpen}>
         <BankBtn />
       </button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} closeModal={handleModalClose}>
-          <div className={styles.bankContainer}>
-            <div className={styles.inner}>
-              <h1 className={styles.name}>XXX 은행</h1>
-              <hr />
-              <div className={styles.innerBottom}>
-                <ol className={styles.lists}>
-                  <li className={styles.list}>
-                    <label className={styles.label} htmlFor="text">
-                      계좌번호
-                    </label>
-                    <form className={styles.inputForm}>
-                      <input
-                        id="text"
-                        className={`${styles.inputTag} ${styles.displayName}`}
-                        type="text"
-                        name="text"
-                        placeholder="계좌번호"
-                        required
-                      />
-                    </form>
-                  </li>
-                  <li className={styles.list}>
-                    <label className={styles.label} htmlFor="tel">
-                      전화번호
-                    </label>
-                    <form className={styles.inputForm}>
-                      <input
-                        id="tel"
-                        className={`${styles.inputTag} ${styles.email}`}
-                        type="tel"
-                        name="tel"
-                        placeholder="{고객 tel 데이터}"
-                        disabled
-                        required
-                      />
-                    </form>
-                  </li>
-                </ol>
-              </div>
-              <hr />
-              <button type="button">등록</button>
-              <button type="reset">취소</button>
+          <div className={styles.modalContainer}>
+            <div className={styles.textContainer}>
+              <img className={styles.bankLogo} src="" alt="" />
+              <h1 className={styles.bankName}>국민 은행</h1>
+            </div>
+            <hr className={styles.line} />
+            <ol className={styles.listsContainer}>
+              <li className={styles.list}>
+                <label className={styles.label} htmlFor="text">
+                  계좌번호
+                </label>
+                <form className={styles.inputForm}>
+                  <input
+                    id="text"
+                    className={`${styles.inputTag} ${styles.displayName}`}
+                    type="text"
+                    name="text"
+                    placeholder="계좌번호"
+                    required
+                  />
+                </form>
+              </li>
+              <span className={styles.errorMsg}>계좌번호를 확인해 주세요.</span>
+              <li className={styles.list}>
+                <label className={styles.label} htmlFor="tel">
+                  전화번호
+                </label>
+                <form className={styles.inputForm}>
+                  <input
+                    id="tel"
+                    className={`${styles.inputTag} ${styles.tel}`}
+                    type="tel"
+                    name="tel"
+                    placeholder="{고객 tel 데이터}"
+                    required
+                  />
+                </form>
+              </li>
+              <span className={styles.errorMsg}>전화번호를 확인해 주세요.</span>
+            </ol>
+            <hr className={styles.line} />
+            <div className={styles.btnContainer}>
+              <button type="reset" onClick={handleModalClose} className={`${styles.btnTag} ${styles.cancel}`}>
+                취소
+              </button>
+              <button type="button" className={`${styles.btnTag} ${styles.enrolled}`}>
+                등록
+              </button>
             </div>
           </div>
         </Modal>
       )}
-    </div>
+    </>
   )
 }

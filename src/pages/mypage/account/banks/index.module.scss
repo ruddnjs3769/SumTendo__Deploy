@@ -100,4 +100,70 @@
       }
     }
   }
+  .modalContainer {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .textContainer {
+      height: 50%;
+      width: 80%;
+      margin: 20px auto 0 auto;
+      // background-color: green;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      .bankLogo {
+        margin: auto;
+        width: 70px;
+        height: 70px;
+        background-color: $bg-primary-grey;
+        border-radius: 50%;
+      }
+      .bankName {
+        margin: auto;
+        width: 50%;
+        font-size: 1.6rem;
+        letter-spacing: -0.5;
+        font-weight: 800;
+        // background-color: yellowgreen;
+      }
+    }
+    .btnContainer {
+      height: 15%;
+      width: 45%;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto 20px auto;
+      padding: 5px;
+      // background-color: greenyellow;
+      .btnTag {
+        width: 30%;
+        padding: 15px 32px;
+        color: $text-light-white;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 800;
+        background-color: $point-red;
+        cursor: pointer;
+        // &,
+        // .enrolled {
+        //   background-color: $bg-sub-grey;
+        //   mix-blend-mode: multiply;
+        // }
+      }
+      .cancel {
+        background-color: $bg-sub-grey;
+        mix-blend-mode: multiply;
+        color: $text-sub-grey;
+      }
+    }
+  }
 }

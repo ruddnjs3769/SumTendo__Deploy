@@ -5,7 +5,7 @@ import styles from './PayProcessFlow.module.scss'
 export default function PayProcessFlow() {
   const location = useLocation()
   const path = location.pathname
-
+  const paymentPathRegex = /^\/payment\/[^/]/
   const agreementPathRegex = /^\/payment\/[^/]+\/agreement$/
   const checkInfoPathRegex = /^\/payment\/[^/]+\/checkInfo$/
   const payMethodPathRegex = /^\/payment\/[^/]+\/payMethod$/
@@ -14,7 +14,7 @@ export default function PayProcessFlow() {
   return (
     <div className={styles.container}>
       <ul className={styles.lists}>
-        <li className={`${styles.process} ${path === '/payment' ? styles.isActive : ''}`}>
+        <li className={`${styles.process} ${paymentPathRegex.test(path) ? styles.isActive : ''}`}>
           <h3 className={styles.content}>장바구니</h3>
         </li>
         <li className={`${styles.process} ${agreementPathRegex.test(path) ? styles.isActive : ''}`}>

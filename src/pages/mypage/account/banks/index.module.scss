@@ -101,26 +101,30 @@
     }
   }
   .modalContainer {
+    // position: absolute;
+    margin: auto;
     width: 100%;
-    height: 50%;
+    height: 60%;
+    top: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    background-color: yellowgreen;
     flex-wrap: wrap;
     .textContainer {
       height: 50%;
       width: 80%;
       margin: 20px auto 0 auto;
-      // background-color: green;
+      background-color: green;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       .bankLogo {
         margin: auto;
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
         background-color: $bg-primary-grey;
         border-radius: 50%;
       }

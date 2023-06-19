@@ -10,7 +10,7 @@ interface Props {
 export default function Modal({ children, isOpen, closeModal }: Props) {
   return (
     <>
-      <div style={{ display: isOpen ? 'block' : 'none' }}>
+      <div className={styles.container} style={{ display: isOpen ? 'block' : 'none' }}>
         <div className={styles.bg} onClick={() => closeModal()}>
           {''}
         </div>

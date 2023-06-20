@@ -60,13 +60,16 @@
       width: 95%;
       height: 65%;
       border-radius: 15px;
-      // background-color: green;
       .banks {
         width: 100%;
-        flex-wrap: wrap;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        // background-color: green;
+        .linkedBank {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          cursor: pointer;
+        }
       }
       .addBank {
         width: 155px;
@@ -81,7 +84,6 @@
         text-decoration: none;
         &:hover {
           box-shadow: 0 0 10px $bg-sub-grey;
-
           transition-duration: 0.3s;
           background-color: $bg-primary-white;
         }

@@ -1,4 +1,4 @@
-@import '@/_variables.scss';
+@import 'src/_variables.scss';
 
 .container {
   margin: auto;
@@ -6,26 +6,32 @@
   height: $mypage-height;
   background-color: $bg-sub-grey;
   display: flex;
-  .container__section {
-    margin: auto;
-    margin-left: 0;
-    width: 62%;
-    height: 95%;
-    font-size: 24px;
-    background-color: $bg-primary-white;
+  margin-bottom: 30px;
+  .section {
     position: relative;
-    .container__section__inner {
-      position: absolute;
-      height: 90%;
-      width: 80%;
-      a {
-        margin: 3px;
-        font-size: 16px;
-        font-weight: 300;
-      }
+    width: 70%;
+    height: 90%;
+    margin: auto;
+    // background-color: green;
+    
+    .title {
+      font-size: 1.4rem;
+      letter-spacing: -0.5;
+      font-weight: 800;
     }
-  }
-  .section__line {
-    margin: 40px auto;
+    .line {
+      margin: 20px auto 25px;
+    }
+    .jjimItem {
+      position: absolute;
+      height: 88%;
+      width: 96%;
+      left: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      // background-color: greenyellow;
+    }
   }
 }

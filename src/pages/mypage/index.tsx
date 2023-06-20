@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import styles from './index.module.scss'
-// import { User } from '@/types/user'
-// import { Product } from '@/types/product'
 import Nav from '@/components/mypage/nav/Nav'
 import GetList from '@/components/mypage/productList/GetList'
 import JjimList from '@/components/mypage/productList/JjimList'

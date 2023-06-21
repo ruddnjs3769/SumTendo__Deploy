@@ -1,13 +1,5 @@
 import axios from 'axios'
-import {
-  SignUpRequest,
-  SignUpResponse,
-  SignInRequest,
-  SignInResponse,
-  CheckValidUserRequest,
-  CheckValidUserResponse,
-  LogoutResponse
-} from '@/types/auth'
+import { SignUpRequest, SignUpResponse, SignInRequest, SignInResponse, LogoutResponse } from '@/types/auth'
 
 const headers = {
   'content-type': 'application/json',
@@ -39,26 +31,9 @@ export const signIn = async (data: SignInRequest): Promise<boolean> => {
     const json: SignInResponse = await res.data
     localStorage.setItem('token', json.accessToken)
     console.log('로그인 성공:', json)
-    return true
+    return true //setuser추가
   } catch (error) {
     console.error('로그인 실패:', error)
-    return false
-  }
-}
-
-export const authenticate = async (data: CheckValidUserRequest): Promise<boolean> => {
-  try {
-    const res = await instance.post('/me', data, {
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-    const json: CheckValidUserResponse = await res.data
-    console.log('인증성공 : ', json)
-    return true
-  } catch (error) {
-    console.error('인증 실패')
     return false
   }
 }

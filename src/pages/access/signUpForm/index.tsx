@@ -174,7 +174,6 @@ export default function SignUpForm() {
     if (files && files.length > 0) {
       const file = files[0]
       const reader = new FileReader()
-
       reader.onloadend = () => {
         const base64 = reader.result
         if (base64) {
@@ -182,7 +181,6 @@ export default function SignUpForm() {
           uploadImage(base64.toString())
         }
       }
-
       reader.readAsDataURL(file)
     }
   }

@@ -62,9 +62,9 @@ export default function SelectBank() {
                     placeholder="계좌번호"
                     required
                   />
+                  <span className={styles.errorMsg}>계좌번호를 확인해 주세요.</span>
                 </form>
               </li>
-              <span className={styles.errorMsg}>계좌번호를 확인해 주세요.</span>
               <li className={styles.list}>
                 <label className={styles.label} htmlFor="tel">
                   전화번호
@@ -78,9 +78,9 @@ export default function SelectBank() {
                     placeholder="{고객 tel 데이터}"
                     required
                   />
+                  <span className={styles.errorMsg}>전화번호를 확인해 주세요.</span>
                 </form>
               </li>
-              <span className={styles.errorMsg}>전화번호를 확인해 주세요.</span>
             </ol>
             <hr className={styles.line} />
             <div className={styles.btnContainer}>

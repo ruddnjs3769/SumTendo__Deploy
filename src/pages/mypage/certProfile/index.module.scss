@@ -27,8 +27,6 @@
       width: 80%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: start;
       font-size: 20px;
       font-weight: 300;
       text-align: left;
@@ -59,6 +57,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
         .inputTag {
           -webkit-appearance: none;
           -moz-appearance: none;
@@ -67,7 +66,7 @@
           width: 95%;
           height: 20px;
           padding: 15px 20px;
-          border-radius: 5px; 
+          border-radius: 10px; 
           border: solid 1px $bg-primary-grey;
           font-size: 1rem;
           &:focus {
@@ -75,19 +74,20 @@
             caret-color: $point-red;
           }
         }
-        .errorMsg {
+        .error {
           margin: 15px 0 40px;
           font-size: .8rem;
           font-weight: 500;
           color: $point-red;
         }
         .btnTag {
-          width: 92%;
-          padding: 15px 32px;
+          width: 100%;
+          margin-top: 20px;
+          padding: 15px 10px;
           color:$text-light-white;
           text-align: center;
           border: none;
-          border-radius: 5px;
+          border-radius: 10px;
           text-decoration: none;
           font-size: 1.1rem;
           font-weight: 800;

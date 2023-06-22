@@ -1,6 +1,7 @@
-import React, { useState, useCallback, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import styles from './index.module.scss'
-import { signUp, signIn } from '@/apis/access/index'
+import { signUp } from '@/apis/access/signUp/index'
+
 import { displayNameRegex, passwordRegex, emailRegex } from '@/utils/constants'
 import { User, Users } from '@/types/user'
 import { SignUpRequest } from '@/types/auth'
@@ -79,10 +80,10 @@ export default function SignUpForm() {
   }
 
   //체크박스 눌러야 화원가입버튼 활성화
-  const handleCheckboxChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('체크박스 확인')
     setIsChecked(e.target.checked)
-  }, [])
+  }
 
   // 회원가입 폼제출 및 회원가입 요청
 
@@ -161,7 +162,6 @@ export default function SignUpForm() {
     if (files && files.length > 0) {
       const file = files[0]
       const reader = new FileReader()
-
       reader.onloadend = () => {
         const base64 = reader.result
         if (base64) {

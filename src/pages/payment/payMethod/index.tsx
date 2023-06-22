@@ -48,8 +48,8 @@ import { Product } from '@/types/product'
 // 5. api 불러와서 연동
 
 export default function PayMethod() {
-  const { accounts }: AccountsBalance = dummyAccounts
-  const accountsList: Banks = dummyAccountsList
+  const { accounts }: AccountsBalance = dummyAccounts //
+  const accountsList: Banks = dummyAccountsList // api 연결 응답데이터 받기
   const [isOpen, setIsOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -79,23 +79,25 @@ export default function PayMethod() {
     setNextModal(false)
     setBankIndex(0)
   }, [])
-
+  //필요없음
   // 계좌 조회 버튼 핸들러
   const handleAccountsOpen = () => {
     setIsOpen(!isOpen)
     setIsClicked(false)
     setActiveIndex(null)
   }
+  //필요없음
   // 선택계좌 결제하기 버튼 생성 핸들러
   const handleBankOnClick = (index: number) => {
     setIsClicked(true)
     setActiveIndex(index)
   }
-
+  //필요없음
   //모달버튼열기 핸들러
   const handleModalOpen = () => {
     setIsModalOpen(true)
   }
+  //필요없음
   // 모달 닫기 핸들러
   const handleModalClose = () => {
     setIsModalOpen(false)

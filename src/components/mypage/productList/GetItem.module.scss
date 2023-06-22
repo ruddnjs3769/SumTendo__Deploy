@@ -15,6 +15,7 @@
 
 .container {
   top: 0;
+  margin-right: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +29,11 @@
     .itemImg {
       width: 100%;
       height: 100%;
+      transition: transform 0.3s ease;
       object-fit: cover;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
   .spanTag {
@@ -46,13 +51,13 @@
     word-wrap: break-word;
   }
   .itemTitle {
-    width: 85%;
+    width: 125px;
     text-align: left;
     // background-color: greenyellow;
   }
   .itemPrice {
     position: relative;
-    left: -30px;
+    left: -35px;
     font-weight: 800;
   }
 }

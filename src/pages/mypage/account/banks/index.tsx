@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from '@/components/common/Modal'
 import styles from './index.module.scss'
 import Sidebar from '@/components/mypage/nav/SideBar'
 import GetItem from '@/components/mypage/productList/GetItem'
+import dummyGoods1 from '@/pages/payment/dummyGoods1.json'
+import dummyGoods2 from '@/pages/payment/dummyGoods2.json'
+import { Products, Product } from '@/types/product'
 
 export default function BankName() {
+  const [getItem, setGetItem] = useState<Products>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleModalOpen = () => {
@@ -14,6 +18,17 @@ export default function BankName() {
   const handleModalClose = () => {
     setIsModalOpen(false)
   }
+
+  useEffect(() => {
+    const storedJjimItems = localStorage.getItem('getItem')
+    if (storedJjimItems) {
+      setGetItem(JSON.parse(storedJjimItems))
+    } else {
+      localStorage.setItem('getItem', JSON.stringify([dummyGoods1, dummyGoods2]))
+      setGetItem([dummyGoods1, dummyGoods2])
+    }
+  }, [])
+
   return (
     <>
       <div className={styles.container}>
@@ -34,11 +49,9 @@ export default function BankName() {
             <hr className={styles.line} />
             <h1 className={styles.title}>거래 내역</h1>
             <div className={styles.item}>
-              <GetItem />
-              <GetItem />
-              <GetItem />
-              <GetItem />
-              <GetItem />
+              {getItem.map((item: Product, index: number) => (
+                <GetItem key={index} item={item} />
+              ))}
             </div>
           </div>
         </div>
@@ -49,7 +62,6 @@ export default function BankName() {
                 <img className={styles.bankLogo} src="" alt="" />
                 <h1 className={styles.bankName}>국민 은행</h1>
                 <h4 className={styles.modalText}>계좌를 해지하시겠습니까?</h4>
-                <h1 className={styles.bankName}>모달 사이즈 무슨일...?</h1>
               </div>
               <div className={styles.btnContainer}>
                 <button type="reset" onClick={handleModalClose} className={`${styles.btnTag} ${styles.cancel}`}>

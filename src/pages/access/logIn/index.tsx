@@ -19,11 +19,16 @@ export default function SignIn() {
           email,
           password
         }
+
         const response = await signIn(data)
 
         navigate('/')
 
         console.log('로그인 성공:', response)
+
+
+
+
       } catch (error) {
         console.error('로그인 실패:', error)
         setLoginError(true)

@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import styles from './index.module.scss'
 import { SignInRequest } from '@/types/auth'
 import { signIn } from '@/apis/access/signIn'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -17,6 +19,7 @@ export default function SignIn() {
           email,
           password
         }
+
         console.log('로그인 성공:', data)
       } catch (error) {
         console.error('로그인 실패:', error)

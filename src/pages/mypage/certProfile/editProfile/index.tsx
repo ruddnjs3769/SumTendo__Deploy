@@ -90,24 +90,43 @@ export default function EditProfile() {
       return
     } else if (passwordInputValue !== e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호가 동일하지 않습니다.')
-      return (passwordInputCheckValue === null)
+      return passwordInputCheckValue === null
     } else if (passwordInputValue === e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호 확인')
     }
   }
 
-  // 닉네임 & 비밀번호 API에 상태 업데이트
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+  // // 닉네임 & 비밀번호 API에 상태 업데이트
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target
+  //   setUpdatedInfo((prevInfo) => ({
+  //     ...prevInfo,
+  //     [name]: value
+  //   }))
+  // }
+
+  // 이름 입력값 상태 업데이트
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
     setUpdatedInfo((prevInfo) => ({
       ...prevInfo,
-      [name]: value
+      displayname: value
     }))
   }
+
+  // 이메일 입력값 상태 업데이트
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setUpdatedInfo((prevInfo) => ({
+      ...prevInfo,
+      email: value
+    }))
+  }
+
   // 닉네임 함수들 호출
   const handleNameChangeData = (e: ChangeEvent<HTMLInputElement>) => {
     handleNicknameChange(e)
-    handleInputChange(e)
+    handleNameChange(e)
   }
   //  비밀번호 함수들 호출
   const handlePasswordChangeData = (e: ChangeEvent<HTMLInputElement>) => {
@@ -116,7 +135,7 @@ export default function EditProfile() {
       return false
     } else {
       handlePasswordCheckChange(e)
-      handleInputChange(e)
+      handleEmailChange(e)
     }
   }
   //===========================================================================//

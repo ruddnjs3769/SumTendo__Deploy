@@ -19,6 +19,7 @@ export default function EditProfile() {
   })
   const accessToken = localStorage.getItem('token') || ''
   const [disabled, setDisabled] = useState(true)
+  const [InputDisabled, setInputDisabled] = useState(true)
   const [nicknameInputValue, setNicknameInputValue] = useState('')
   const [DisplayNameCheckedMsg, setDisplayNameCheckedMsg] = useState('')
   const [passwordInputValue, setPasswordInputValue] = useState('')
@@ -42,7 +43,7 @@ export default function EditProfile() {
     } else {
       setDisabled(false)
       console.log('닉네임 양식 :', '통과')
-      setDisplayNameCheckedMsg('변경할 닉네임')
+      setDisplayNameCheckedMsg('새로운 닉네임')
     }
   }
 
@@ -70,10 +71,11 @@ export default function EditProfile() {
       return
     } else if (!passwordRegex.test(passwordInputValue)) {
       setPasswordCheckedMsg('비밀번호 양식을 지켜주세요.')
-      return
+      return setInputDisabled(true)
     } else {
       console.log('비밀번호 양식 :', '통과')
-      setPasswordCheckedMsg('변경할 비밀번호')
+      setPasswordCheckedMsg('새로운 비밀번호')
+      return setInputDisabled(false)
     }
   }
 
@@ -88,7 +90,7 @@ export default function EditProfile() {
       return
     } else if (passwordInputValue !== e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호가 동일하지 않습니다.')
-      return
+      return (passwordInputCheckValue === null)
     } else if (passwordInputValue === e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호 확인')
     }
@@ -107,10 +109,15 @@ export default function EditProfile() {
     handleNicknameChange(e)
     handleInputChange(e)
   }
-//  비밀번호 함수들 호출
+  //  비밀번호 함수들 호출
   const handlePasswordChangeData = (e: ChangeEvent<HTMLInputElement>) => {
-    handlePasswordCheckChange(e)
-    handleInputChange(e)
+    if (passwordInputCheckValue === null) {
+      console.log('이건 동작하면 안돼')
+      return false
+    } else {
+      handlePasswordCheckChange(e)
+      handleInputChange(e)
+    }
   }
   //===========================================================================//
 
@@ -188,7 +195,7 @@ export default function EditProfile() {
                   </button>
                 </li>
                 {DisplayNameCheckedMsg && (
-                  <p className={DisplayNameCheckedMsg === '변경할 닉네임' ? styles.msg : styles.error}>
+                  <p className={DisplayNameCheckedMsg === '새로운 닉네임' ? styles.msg : styles.error}>
                     {DisplayNameCheckedMsg}
                   </p>
                 )}
@@ -231,12 +238,13 @@ export default function EditProfile() {
                       value={passwordInputCheckValue}
                       onChange={handlePasswordChangeData}
                       placeholder="새 비밀번호 확인"
+                      disabled={InputDisabled}
                       required
                     />
                   </form>
                 </li>
                 {passwordCheckedMsg && (
-                  <p className={passwordCheckedMsg === '변경할 비밀번호' ? styles.ps_msg : styles.ps_error}>
+                  <p className={passwordCheckedMsg === '새로운 비밀번호' ? styles.ps_msg : styles.ps_error}>
                     {passwordCheckedMsg}
                   </p>
                 )}

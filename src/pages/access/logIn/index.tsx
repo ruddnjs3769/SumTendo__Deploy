@@ -22,12 +22,6 @@ export default function SignIn() {
           password
         }
         const response = await signIn(data)
-
-        navigate('/')
-
-        console.log('로그인 성공:', response)
-        const response = await signIn(data)
-
         navigate('/')
 
         console.log('로그인 성공:', response)

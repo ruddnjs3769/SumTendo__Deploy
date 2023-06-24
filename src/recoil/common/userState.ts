@@ -8,4 +8,4 @@ export const userState = atom<User>({
   key: 'userState' + v1(),
   default: {} as User
 })
-// atom 함수를 활용해서 Atom을 생성할 때는 unique한 ID를 key로 설정해주고, 해당 기본값 default를 설정
+// atom 함수를 활용해서 Atom을 생성할 때는 unique한 ID를 key로 설정해주고, 해당 기본값 default를 설정\

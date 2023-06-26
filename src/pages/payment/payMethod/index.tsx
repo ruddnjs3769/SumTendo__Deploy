@@ -9,12 +9,13 @@ import { Banks, AccountConnectionRequest } from '@/types/account'
 import PossibleBank from '@/components/payment/payMethod/PossibleBank'
 import BankConnect from '@/components/payment/payMethod/BankConnect'
 import { Product } from '@/types/product'
-import { UserCart, UserCartItem } from '@/types/usercart'
+import { UserCart } from '@/types/usercart'
 import { getSelectableAccounts, getConnectedAccounts, postConnectAccount } from '@/apis/payment/account'
 import { postBuyProduct } from '@/apis/payment/product'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/recoil/common/userState'
 import Loading from '@/components/payment/Loading'
+import { matchedUserCartState } from '@/recoil/common/matchedUserCartState'
 
 // todo
 // 1. 총 계산금액 (할인율 포함) - 주문 금액, 할인율, 최종 결제 금액 표기 ✅
@@ -43,12 +44,11 @@ export default function PayMethod() {
     phoneNumber: '',
     signature: true
   })
-
+  const matchedUserCart = useRecoilValue(matchedUserCartState)
   const [isLoading, setIsLoading] = useState(false)
 
   //cartItems 할인 계산
   const userCart: UserCart = JSON.parse(localStorage.getItem('cart') || '[]')
-  const matchedUserCart = userCart.filter((item: UserCartItem) => item.email === user.email)
   const orderPrice = matchedUserCart
     .map((item: Product) => item.price)
     .reduce((acc: number, cur: number) => acc + cur, 0)
@@ -125,11 +125,6 @@ export default function PayMethod() {
     setBankConnectData(data)
   }
 
-  // api 은행 계좌 등록 요청. postConnectAccount(accessToken: string, requestBody: AccountConnectionRequest) ✅
-  // 요청 완료 시 api 거래 신청 요청.  postBuyProduct(accessToken: string, requestBody: TransactionReservationRequest) ✅
-  // 반복문 사용해서 productId만큼 요청보내기? -- 반복문에 비동기처리는 권장되지않음 == Promise.all() 로 처리하기 ✅
-  // 예외처리 - BankConnectData가 양식에 맞지 않을 경우, 올바른 계좌번호를 or 전화번호를 입력해주세요! alert보내기 ✅
-  // 완료 시 navigate('/payment/:username/orderComplete') ✅
   const handleBankConnectOrder = async () => {
     const accountNumLength = selectedAccount.digits.reduce((acc, val) => acc + val, 0)
     if (BankConnectData.accountNumber.length !== accountNumLength) {
@@ -143,10 +138,6 @@ export default function PayMethod() {
         const bankConnectRes = await postConnectAccount(accessToken, BankConnectData)
         alert('계좌 등록이 완료되었습니다!')
         const bankConnectId = bankConnectRes.id
-        // for (let i = 0; i < userCart.length; i++) {
-        //   const buyRes = await postBuyProduct(accessToken, { productId: userCart[i].id, accountId: bankConnectId })
-        // }
-        // Promise.all() 사용
         const buyPromises = userCart.map((item) =>
           postBuyProduct(accessToken, { productId: item.id, accountId: bankConnectId })
         )

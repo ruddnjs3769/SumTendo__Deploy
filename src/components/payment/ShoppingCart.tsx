@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './ShoppingCart.module.scss'
 import CartItem from './CartItem'
 import { useLocation } from 'react-router-dom'
 import { User } from '@/types/user'
-import { UserCart, UserCartItem } from '@/types/usercart'
+import { UserCartItem } from '@/types/usercart'
 import { matchedUserCartState } from '@/recoil/common/matchedUserCartState'
 import { useRecoilState } from 'recoil'
 
 interface Props {
   getTotalValue?: (value: number) => void
-  user?: User
+  user: User
 }
 // localStorage에
 // 'cart' : [{},{}, {}, {}]' 이런 형태로 들어간다.
@@ -18,7 +18,7 @@ interface Props {
 // 이 객체 타입을 지정해야함.
 export default function ShoppingCart({ getTotalValue, user }: Props) {
   const currentLocation = useLocation()
-  const userName = user?.displayName
+  const userName = user.displayName
   const [matchedUserCart, setMatchedUserCart] = useRecoilState(matchedUserCartState)
   const cart = JSON.parse(localStorage.getItem('cart') || '[]')
 
@@ -27,15 +27,18 @@ export default function ShoppingCart({ getTotalValue, user }: Props) {
     const updatedCart = [...cart]
     updatedCart.splice(index, 1)
     localStorage.setItem('cart', JSON.stringify(updatedCart))
-    setMatchedUserCart(updatedCart.filter((item: UserCartItem) => item.displayName === userName))
+    setMatchedUserCart(updatedCart.filter((item: UserCartItem) => item.email === user.email))
   }
 
   useEffect(() => {
-    if (getTotalValue && currentLocation.pathname === `/payment/${userName}/checkInfo`) {
+    const encodedUserName = encodeURIComponent(userName)
+    const targetPathname = `/payment/${encodedUserName}/checkInfo`
+
+    if (getTotalValue && currentLocation.pathname === targetPathname) {
       const total = matchedUserCart.reduce((acc: number, item: UserCartItem) => acc + item.price, 0)
       getTotalValue(total)
     }
-  }, [matchedUserCart, currentLocation.pathname, getTotalValue])
+  }, [matchedUserCart, currentLocation.pathname, userName])
 
   return (
     <div className={styles.container}>

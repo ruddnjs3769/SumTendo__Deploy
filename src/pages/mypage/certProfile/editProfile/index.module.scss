@@ -42,7 +42,7 @@
           font-weight: 800;
         }
         .line {
-          margin: 25px auto;
+          margin: 24px auto;
         }
       }
       .innerBottom {
@@ -80,7 +80,7 @@
                 outline: none;
                 appearance: none;
                 width: 90%;
-                height: 15px;
+                height: 10px;
                 padding: 15px 20px;
                 border-radius: 5px;
                 border: solid 1px $bg-primary-grey;
@@ -91,21 +91,21 @@
                   caret-color: $point-red;
                 }
                 .passwordCheck {
-                  margin-top: 200px;
+                  margin-top: 100px;
                 }
               }
             }
             .inputTag.passwordCheck {
-              margin-top: 25px;
+              margin-bottom: 25px;
             }
             .btnTag {
-              padding: 13px 15px;
+              padding: 11px 15px;
               margin-top: 5px;
               margin-left: 15px;
-              border: 1px solid $bg-primary-grey;
+              border: none;
               border-radius: 5px;
               cursor: pointer;
-              background-color: $bg-primary-grey;
+              background-color: $text-primary-black-50;
               &:hover {
                 background-color: $point-red;
                 color: $text-light-white;
@@ -142,15 +142,12 @@
                   color: $text-sub-grey;
                 }
                 .inputTag.uploadForm::file-selector-button {
-                  padding: 15px 20px;
-                  border: 1px solid $bg-primary-grey;
+                  padding: 11px 20px;
+                  border: none;
                   border-radius: 5px;
                   cursor: pointer;
-                  background-color: $bg-primary-grey;
-                  &:hover {
-                    background-color: $point-red;
-                    color: $text-light-white;
-                  }
+                  background-color: $point-red;
+                  color: $text-light-white;
                 }
               }
             }
@@ -158,8 +155,8 @@
         }
         .submitBtn {
           width: 100%;
-          margin-top: 30px;
-          padding: 15px 10px;
+          margin-top: 25px;
+          padding: 13px 10px;
           color: $text-light-white;
           text-align: center;
           border: none;
@@ -169,20 +166,24 @@
           font-weight: 800;
           background-color: $point-red;
           cursor: pointer;
+          &.btnError {
+            color: $bg-primary-grey;
+            background-color: $text-primary-black-50;
+          }
         }
       }
     }
   }
   .error {
     position: absolute;
-    margin-top: 60px;
+    margin-top: 50px;
     font-size: 0.9rem;
     font-weight: 500;
     color: $point-red;
   }
   .msg {
     position: absolute;
-    margin-top: 60px;
+    margin-top: 50px;
     font-size: 0.9rem;
     font-weight: 500;
     color: $text-sub-grey;
@@ -190,28 +191,32 @@
 }
 .ps_error {
   position: absolute;
-  margin-top: 215px;
+  margin-top: 235px;
+  margin-right: 90px;
   font-size: 0.9rem;
   font-weight: 500;
   color: $point-red;
 }
 .ps_msg {
   position: absolute;
-  margin-top: 215px;
+  margin-top: 235px;
+  margin-right: 90px;
   font-size: 0.9rem;
   font-weight: 500;
   color: $text-sub-grey;
 }
 .psCheck_error {
   position: absolute;
-  margin-top: 285px;
+  margin-top: 235px;
+  margin-left: 300px;
   font-size: 0.9rem;
   font-weight: 500;
   color: $point-red;
 }
 .psCheck_msg {
   position: absolute;
-  margin-top: 285px;
+  margin-top: 235px;
+  margin-left: 250px;
   font-size: 0.9rem;
   font-weight: 500;
   color: $text-sub-grey;

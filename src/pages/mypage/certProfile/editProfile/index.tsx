@@ -20,6 +20,7 @@ export default function EditProfile() {
   const accessToken = localStorage.getItem('token') || ''
   const [disabled, setDisabled] = useState(true)
   const [InputDisabled, setInputDisabled] = useState(true)
+  const [submitDisabled, setSubmitDisabled] = useState(true)
   const [nicknameInputValue, setNicknameInputValue] = useState('')
   const [DisplayNameCheckedMsg, setDisplayNameCheckedMsg] = useState('')
   const [passwordInputValue, setPasswordInputValue] = useState('')
@@ -74,7 +75,7 @@ export default function EditProfile() {
       return setInputDisabled(true)
     } else {
       console.log('비밀번호 양식 :', '통과')
-      setPasswordCheckedMsg('새로운 비밀번호')
+      setPasswordCheckedMsg('비밀번호를 한 번더 입력해 주세요.')
       return setInputDisabled(false)
     }
   }
@@ -90,9 +91,13 @@ export default function EditProfile() {
       return
     } else if (passwordInputValue !== e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호가 동일하지 않습니다.')
+      setSubmitDisabled(true)
+
+
       return passwordInputCheckValue === null
     } else if (passwordInputValue === e.target.value) {
-      setPasswordDoubleCheckedMsg('비밀번호 확인')
+      setPasswordDoubleCheckedMsg('비밀번호 확인 완료 ✅')
+      setSubmitDisabled(false)
     }
   }
 
@@ -263,16 +268,22 @@ export default function EditProfile() {
                   </form>
                 </li>
                 {passwordCheckedMsg && (
-                  <p className={passwordCheckedMsg === '새로운 비밀번호' ? styles.ps_msg : styles.ps_error}>
+                  <span
+                    className={
+                      passwordCheckedMsg === '비밀번호를 한 번더 입력해 주세요.' ? styles.ps_msg : styles.ps_error
+                    }
+                  >
                     {passwordCheckedMsg}
-                  </p>
+                  </span>
                 )}
                 {passwordDoubleCheckedMsg && (
-                  <p
-                    className={passwordDoubleCheckedMsg === '비밀번호 확인' ? styles.psCheck_msg : styles.psCheck_error}
+                  <span
+                    className={
+                      passwordDoubleCheckedMsg === '비밀번호 확인 완료 ✅' ? styles.psCheck_msg : styles.psCheck_error
+                    }
                   >
                     {passwordDoubleCheckedMsg}
-                  </p>
+                  </span>
                 )}
                 <li className={`${styles.list} ${styles.uploade}`}>
                   <label className={styles.label} htmlFor="uploade">
@@ -311,7 +322,15 @@ export default function EditProfile() {
                   </div>
                 </li>
               </ol>
-              <button className={styles.submitBtn} onClick={handleSubmit}>
+              <button
+                className={
+                  submitDisabled === true
+                    ? `${styles.submitBtn} ${styles.btnError}`
+                    : `${styles.submitBtn} ${styles.submitBtn}`
+                }
+                onClick={handleSubmit}
+                disabled={submitDisabled}
+              >
                 완료
               </button>
             </div>

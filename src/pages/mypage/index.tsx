@@ -38,7 +38,7 @@ export default function MyPage() {
                 <li className={`${styles.listTitle} ${styles.checkInfo}`}>
                   장바구니
                   <button className={`${styles.btn} ${styles.listText}`}>
-                    <Link className={`${styles.aTag} ${styles.listLink}`} to={'/payment/:username/checkInfo'}>
+                    <Link className={`${styles.aTag} ${styles.listLink}`} to={'/payment/:username'}>
                       🛒 장바구니
                     </Link>
                   </button>
@@ -76,7 +76,7 @@ export default function MyPage() {
                 <li className={`${styles.listTitle} ${styles.checkInfo}`}>
                   장바구니
                   <button className={`${styles.btn} ${styles.listText}`}>
-                    <Link className={`${styles.aTag} ${styles.listLink}`} to={'/payment/:username/checkInfo'}>
+                    <Link className={`${styles.aTag} ${styles.listLink}`} to={'/payment/:username'}>
                       🛒 장바구니
                     </Link>
                   </button>

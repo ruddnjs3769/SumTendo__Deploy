@@ -9,6 +9,7 @@ import Genre from '@/components/search/Genre'
 import SearchBar from '@/components/search/SearchBar'
 import Banner from '@/components/search/Banner'
 import ProductList from '@/components/search/ProductList'
+import PaymentLoading from '@/components/payment/Loading'
 import styles from './index.module.scss'
 
 export default function Search() {
@@ -39,7 +40,7 @@ export default function Search() {
               <Banner key={banner.id} banner={banner} />
             ))}
             <SearchBar />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<PaymentLoading color="#828282" />}>
               <ProductList />
             </Suspense>
           </div>

@@ -1,5 +1,5 @@
 import api from '@/apis'
-import { AccountConnectionRequest } from '@/types/account'
+import { AccountConnectionRequest, AccountsBalance } from '@/types/account'
 
 // 선택가능한 계좌목록 조회(계좌연결 전에)
 export const getSelectableAccounts = async (accessToken: string) => {
@@ -14,7 +14,7 @@ export const getSelectableAccounts = async (accessToken: string) => {
 }
 
 // 연결된 계좌 조회
-export const getConnectedAccounts = async (accessToken: string) => {
+export const getConnectedAccounts = async (accessToken: string ) => {
   const response = await api({
     method: 'GET',
     url: '/api/account',
@@ -37,3 +37,17 @@ export const postConnectAccount = async (accessToken: string, requestBody: Accou
   })
   return response.data
 }
+
+// 연결된 계좌 잔액 총합
+// export const totalBalanceAccount = async (accessToken: string, requestBody: AccountsBalance) => {
+//   const response = await api({
+//     method: 'POST',
+//     url: '/api/account',
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`
+//     },
+//     data: requestBody
+//   })
+//   return response.data
+// }
+

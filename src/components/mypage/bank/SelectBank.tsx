@@ -1,32 +1,26 @@
+// import BankBtn from '@/components/common/BankBtn'
 import React, { useState } from 'react'
 import styles from './SelectBank.module.scss'
-// import { Banks, AccountsBalance } from '@/types/account'
-import BankBtn from '@/components/common/BankBtn'
 import Modal from '@/components/common/Modal'
-// 이 파일에 버튼 클릭 이벤트 사용 + 모달창 띄우기
+import { getBankLogo } from '@/components/payment/payMethod/PossibleBank'
 
-export default function SelectBank() {
+interface EnabledBank {
+  name: string // 은행 이름
+  code: string // 은행 코드
+  digits?: number[] // 은행 계좌 자릿수
+  disabled: boolean // 사용자가 추가한 계좌 여부
+}
+
+export default function SelectBank({ name, code, disabled }: EnabledBank) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-
+  //bankLogo 가져오기
+  const bankLogo = getBankLogo(name)
   const handleModalOpen = () => {
     setIsModalOpen(true)
   }
-
   const handleModalClose = () => {
     setIsModalOpen(false)
   }
-  // const dummyAccounts: AccountsBalance = {
-  //   totalBalance: 12341234, // 사용자 계좌 잔액 총합
-  //   accounts: []
-  // }
-  // const Banks : Banks{
-  // // 사용자 계좌 정보
-  // id: '1', // 계좌 ID
-  // bankName: '-은행', // 은행 이름
-  // bankCode: 12341234, // 은행 코드
-  // accountNumber: "", // 계좌 번호
-  // balance: 3333333, // 계좌 잔액
-  // }
 
   // interface EnabledBank {
   //   name: string // 은행 이름
@@ -37,15 +31,25 @@ export default function SelectBank() {
 
   return (
     <>
-      <button className={styles.btn} onClick={handleModalOpen}>
-        <BankBtn />
+      <button className={styles.btn} onClick={handleModalOpen} disabled={disabled}>
+        <div className={styles.container}>
+          <div className={styles.bank}>
+            <div className={styles.bankLogo}>
+              <img src={bankLogo} alt="logo" />
+            </div>
+            <div className={styles.bankInfo}>
+              <span className={styles.bankName}>{name}</span>
+              <span className={styles.bankId}>{code}</span>
+            </div>
+          </div>
+        </div>
       </button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} closeModal={handleModalClose}>
           <div className={styles.modalContainer}>
             <div className={styles.textContainer}>
-              <img className={styles.bankLogo} src="" alt="" />
-              <h1 className={styles.bankName}>국민 은행</h1>
+              <img className={styles.bankLogo} src={bankLogo} alt="" />
+              <h1 className={styles.bankName}>{name}</h1>
             </div>
             <hr className={styles.line} />
             <ol className={styles.listsContainer}>

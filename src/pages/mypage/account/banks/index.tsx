@@ -3,13 +3,20 @@ import Modal from '@/components/common/Modal'
 import styles from './index.module.scss'
 import Sidebar from '@/components/mypage/nav/SideBar'
 import GetItem from '@/components/mypage/productList/GetItem'
-import dummyGoods1 from '@/pages/payment/dummyGoods1.json'
-import dummyGoods2 from '@/pages/payment/dummyGoods2.json'
+// import dummyGoods1 from '@/pages/payment/dummyGoods1.json'
+// import dummyGoods2 from '@/pages/payment/dummyGoods2.json'
 import { Products, Product } from '@/types/product'
+import ConnectedAccount from '@/components/mypage/bank/ConnectedAccount'
+import { AccountsBalance, Bank } from '@/types/account'
+import { getConnectedAccounts } from '@/apis/payment/account'
 
 export default function BankName() {
-  const [getItem, setGetItem] = useState<Products>([])
+  // const [getItem, setGetItem] = useState<Products>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [accounts, setAccounts] = useState<Bank[]>([])
+  const [totalBalance, setTotalBalance] = useState(0)
+  //accessToken 가져오기
+  const accessToken = localStorage.getItem('token') || ''
 
   const handleModalOpen = () => {
     setIsModalOpen(true)
@@ -19,15 +26,15 @@ export default function BankName() {
     setIsModalOpen(false)
   }
 
-  useEffect(() => {
-    const storedJjimItems = localStorage.getItem('getItem')
-    if (storedJjimItems) {
-      setGetItem(JSON.parse(storedJjimItems))
-    } else {
-      localStorage.setItem('getItem', JSON.stringify([dummyGoods1, dummyGoods2]))
-      setGetItem([dummyGoods1, dummyGoods2])
-    }
-  }, [])
+  // useEffect(() => {
+  //   const storedJjimItems = localStorage.getItem('getItem')
+  //   if (storedJjimItems) {
+  //     setGetItem(JSON.parse(storedJjimItems))
+  //   } else {
+  //     localStorage.setItem('getItem', JSON.stringify([dummyGoods1, dummyGoods2]))
+  //     setGetItem([dummyGoods1, dummyGoods2])
+  //   }
+  // }, [])
 
   return (
     <>
@@ -49,9 +56,9 @@ export default function BankName() {
             <hr className={styles.line} />
             <h1 className={styles.title}>거래 내역</h1>
             <div className={styles.item}>
-              {getItem.map((item: Product, index: number) => (
+              {/* {getItem.map((item: Product, index: number) => (
                 <GetItem key={index} item={item} />
-              ))}
+              ))} */}
             </div>
           </div>
         </div>

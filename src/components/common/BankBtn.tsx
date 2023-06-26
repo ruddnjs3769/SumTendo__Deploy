@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './BankBtn.module.scss'
-// 이 파일로 '은행별' 계좌 잔액 조회 API 연동
+// 이 파일은 삭제
 // 은행 / 잔액
 export default function Bank() {
   const banks = ['국민', '신한', 'NH농협', '케이', '하나', '우리', '카카오']
@@ -17,6 +17,5 @@ export default function Bank() {
         </div>
       </div>
     </div>
-    
   )
 }

@@ -12,7 +12,6 @@
     width: 70%;
     height: 90%;
     margin: auto;
-    mix-blend-mode: multiply;
     // background-color: green;
     .totallAccount {
       position: relative;
@@ -22,6 +21,7 @@
       height: 30%;
       border-radius: 15px;
       background-color: $bg-sub-grey;
+      mix-blend-mode: multiply;
       .totale {
         position: absolute;
         top: 30px;
@@ -57,7 +57,7 @@
       bottom: 0;
       left: 2.5%;
       margin: auto;
-      width: 95%;
+      width: 100%;
       height: 65%;
       border-radius: 15px;
       .banks {
@@ -65,10 +65,11 @@
         // background-color: green;
         .linkedBank {
           display: flex;
-          justify-content: space-between;
+          justify-content: start;
           align-items: center;
           flex-wrap: wrap;
           cursor: pointer;
+          mix-blend-mode: multiply;
         }
       }
       .addBank {
@@ -79,13 +80,13 @@
         margin: 10px 5px 0 3px;
         justify-content: center;
         align-items: center;
-        border: 3px dashed $bg-sub-grey;
+        border: 2.5px dashed $bg-primary-grey-50;
         border-radius: 18px;
         text-decoration: none;
         &:hover {
-          box-shadow: 0 0 10px $bg-sub-grey;
           transition-duration: 0.3s;
           background-color: $bg-primary-white;
+          box-shadow: 0 0 10px $bg-primary-grey-50;
         }
         .btn {
           position: sticky;
@@ -95,7 +96,7 @@
           align-items: center;
           font-size: 7rem;
           font-weight: 100;
-          color: $bg-primary-grey;
+          color: $bg-primary-grey-50;
           margin-bottom: 20px;
           .add {
             font-size: 0.9rem;

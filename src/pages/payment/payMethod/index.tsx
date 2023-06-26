@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.scss'
-import PayProcessFlow from '@/components/payment/PayProcessFlow'
-import ConnectedBank from '@/components/payment/payMethod/ConnectedBank'
+import PayProcessFlow from '@/components/payment/PayProcessFlow' // X
+import ConnectedBank from '@/components/payment/payMethod/ConnectedBank' // X
 import { AccountsBalance } from '@/types/account'
 import { useNavigate } from 'react-router-dom'
 import Modal from '@/components/common/Modal'
@@ -11,7 +11,7 @@ import BankConnect from '@/components/payment/payMethod/BankConnect'
 import { Product } from '@/types/product'
 import { UserCart, UserCartItem } from '@/types/usercart'
 import { getSelectableAccounts, getConnectedAccounts, postConnectAccount } from '@/apis/payment/account'
-import { postBuyProduct } from '@/apis/payment/product'
+import { postBuyProduct } from '@/apis/payment/product' // X
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/recoil/common/userState'
 import Loading from '@/components/payment/Loading'

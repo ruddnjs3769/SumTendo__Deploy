@@ -100,14 +100,6 @@ export default function EditProfile() {
     }
   }
 
-  // // 닉네임 & 비밀번호 API에 상태 업데이트
-  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   setUpdatedInfo((prevInfo) => ({
-  //     ...prevInfo,
-  //     [name]: value
-  //   }))
-  // }
 
   // 이름 입력값 상태 업데이트
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -129,8 +129,8 @@ export default function Validate(props: ValidateProps) {
   const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const curConfirmPassword = e.target.value
     setConfirmPassword(curConfirmPassword)
-
     onChangeConfirmPassword(e)
+
     if (password !== curConfirmPassword) {
       setConfirmPwdMsg('비밀번호가 일치하지 않습니다.')
     } else {
@@ -201,7 +201,7 @@ export default function Validate(props: ValidateProps) {
             name="password"
             autoComplete="off"
             onChange={handlePasswordChange}
-            placeholder="영문, 숫자, 특수문자 포함 8자 이상"
+            placeholder="영문과 숫자를 포함한 8자 이상 20자 미만"
             required
           />
           {pwdMsg && <div className={pwdMsg === '안전한 비밀번호입니다.' ? styles.msg : styles.error}>{pwdMsg}</div>}
@@ -217,7 +217,7 @@ export default function Validate(props: ValidateProps) {
             name="confirmPassword"
             autoComplete="off"
             onChange={handleConfirmPasswordChange}
-            placeholder="영문, 숫자, 특수문자 포함 8자 이상"
+            placeholder="영문과 숫자를 포함한 8자 이상 20자 미만"
             required
           />
           {confirmPwdMsg && (

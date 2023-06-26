@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.scss'
 import Nav from '@/components/mypage/nav/Nav'
 import { useNavigate } from 'react-router-dom'
@@ -8,8 +8,8 @@ import { emailRegex } from '@/utils/constants'
 
 export default function CertProfile() {
   // 이메일 주소가 일치하는지 여부를 추적하는 상태값
-  const [confirmMsg, setConfirmMsg] = useState('')
   const [email, setEmail] = useState('')
+  const [confirmMsg, setConfirmMsg] = useState('')
   const navigate = useNavigate()
   const user = useRecoilValue(userState)
 

@@ -31,9 +31,6 @@ const MyPage = loadable(() => import('./pages/mypage'), {
 const GetItemAll = loadable(() => import('./pages/mypage/getItemAll'), {
   fallback: <div>loading...</div>
 })
-const JjimItemAll = loadable(() => import('./pages/mypage/jjimItemAll'), {
-  fallback: <div>loading...</div>
-})
 const CertProfile = loadable(() => import('./pages/mypage/certProfile'), {
   fallback: <div>loading...</div>
 })
@@ -44,9 +41,6 @@ const Account = loadable(() => import('./pages/mypage/account'), {
   fallback: <div>loading...</div>
 })
 const AddAccount = loadable(() => import('./pages/mypage/account/addAccount'), {
-  fallback: <div>loading...</div>
-})
-const BankName = loadable(() => import('./pages/mypage/account/banks'), {
   fallback: <div>loading...</div>
 })
 //Access!!!!
@@ -94,12 +88,10 @@ function App() {
       <Route path="/user" element={<MyPageLayout />}>
         <Route path="/user/:username" element={<MyPage />} />
         <Route path="/user/:username/getItemAll" element={<GetItemAll />} />
-        <Route path="/user/:username/jjimItemAll" element={<JjimItemAll />} />
         <Route path="/user/:username/certProfile" element={<CertProfile />} />
         <Route path="/user/:username/certProfile/editProfile" element={<EditProfile />} />
         <Route path="/user/:username/account" element={<Account />} />
         <Route path="/user/:username/account/addAccount" element={<AddAccount />} />
-        <Route path="/user/:username/account/banks/:bankName" element={<BankName />} />
       </Route>
       <Route path="/access" element={<AccessLayout />}>
         <Route path="/access" element={<Access />} />

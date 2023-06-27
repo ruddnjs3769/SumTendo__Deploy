@@ -51,7 +51,7 @@ export default function MainHeader() {
                 <p>로그 아웃</p>
               </div>
             ) : (
-              <Link to="/access/login">
+              <Link to="/access">
                 <div className={styles.item}>
                   <img src="/images/home/hardware.svg" alt="hardware icon" />
                   <p>로그인</p>

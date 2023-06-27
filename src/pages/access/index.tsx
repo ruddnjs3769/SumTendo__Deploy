@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './index.module.scss'
+import { Link } from 'react-router-dom'
 
 export default function Access() {
   return (
@@ -13,15 +14,15 @@ export default function Access() {
         <div className={styles['accountform']}>
           <div className={styles['has-account']}>
             <h3 className={styles['account-info']}>어카운트가 있는 분</h3>
-            <a href="/access/login">
+            <Link to="/access/login">
               <button className={styles['account-btn']}>로그인</button>
-            </a>
+            </Link>
           </div>
           <div className={styles['non-account']}>
             <h3 className={styles['account-info']}>어카운트가 없는 분</h3>
-            <a href="/access/agesignup">
+            <Link to="/access/agesignup">
               <button className={styles['account-btn']}>신규작성</button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

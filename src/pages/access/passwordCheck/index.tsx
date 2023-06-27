@@ -25,7 +25,7 @@ export default function SignIn() {
 
         navigate('/access/passwordchangeform')
 
-        console.log('패스워드체크 성공:', response)
+        console.log('패스워드체크 성공:')
       } catch (error) {
         console.error('로그인 실패:', error)
         setEmailMsg('입력값이 틀렸습니다. 다시 확인해주세요.')

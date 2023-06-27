@@ -1,20 +1,22 @@
 import React from 'react'
 import styles from './index.module.scss'
-import { signOut } from '@/apis/access/signOut'
+
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import useUserInfo from '@/hooks/useUserInfo'
 
 export default function LogOut() {
   const navigate = useNavigate()
-  const handleLogout = async () => {
-    const accessToken = localStorage.getItem('token')
+  const [userInfo, isLoggedIn, logout] = useUserInfo()
 
-    if (!accessToken) {
-      console.log('로그아웃 실패: 로그인상태가 아닙니다.')
+  const handleLogout = () => {
+    if (!isLoggedIn) {
+      console.log('로그아웃 실패: 로그인 상태가 아닙니다.')
       return
     }
 
-    await signOut(accessToken)
+    logout()
+    console.log('로그아웃 성공')
     navigate('/')
   }
 

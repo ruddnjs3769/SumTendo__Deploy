@@ -1,66 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.scss'
 import { Link, useLocation } from 'react-router-dom'
-import { getAuthenticatedUser } from '@/apis/payment/access'
-import { useRecoilState } from 'recoil'
-import { userState } from '@/recoil/common/userState'
-import { matchedUserCartState } from '@/recoil/common/matchedUserCartState'
-import { UserCartItem, UserCart } from '@/types/usercart'
+import useUserInfo from '@/hooks/useUserInfo'
+import useCartItems from '@/hooks/useCartItems'
 
 export default function UserHeader() {
   const [currentTitle, setCurrentTitle] = useState('')
   const currentLocation = useLocation().pathname
   const [cartItemCount, setCartItemCount] = useState(0)
   const [isUserClicked, setIsUserClicked] = useState(false)
-  const [isLoggedIn, setisLoggedIn] = useState(false)
-  const [userInfo, setUserInfo] = useRecoilState(userState)
-  const [matchedUserCart, setMatchedUserCart] = useRecoilState(matchedUserCartState)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userInfo, isLoggedIn, _logout] = useUserInfo()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cartItems, _addcartItems, _removeCartItemsByUser, _removeOneCartItemByUser] = useCartItems(userInfo)
 
-  // 1. localStorage에서 token 받아오기
-  const accessToken = localStorage.getItem('token') || ''
-
-  const userCart: UserCart = JSON.parse(localStorage.getItem('cart') || '[]')
-
-  useEffect(() => {
-    if (accessToken) {
-      setisLoggedIn(true)
-    } else {
-      setisLoggedIn(false)
-    }
-  }, [accessToken])
-
-  useEffect(() => {
-    const filteredUserCart = userCart.filter((item: UserCartItem) => item.email === userInfo.email)
-
-    if (JSON.stringify(filteredUserCart) !== JSON.stringify(matchedUserCart)) {
-      setMatchedUserCart(filteredUserCart)
-    }
-  }, [userInfo, userCart])
-
-  const fetchUserInfo = async () => {
-    if (!isLoggedIn) return
-    // api 호출함수 authenticate(accessToken) 호출
-    if (isLoggedIn) {
-      try {
-        const userData = await getAuthenticatedUser(accessToken)
-        return setUserInfo(userData)
-      } catch (error) {
-        console.error(error, 'fetchUserInfo 오류1')
-      }
-    }
-  }
-
-  // currentLocation == 라우터 주소. 변경 시 마다 발생할 일들
   useEffect(() => {
     if (currentLocation.includes('payment')) setCurrentTitle('결제')
     if (currentLocation.includes('user')) setCurrentTitle('마이페이지')
     if (currentLocation.includes('access')) setCurrentTitle('인증')
-    setCartItemCount(matchedUserCart.length)
+    setCartItemCount(cartItems.length)
     setIsUserClicked(false)
-    if (isLoggedIn) {
-      fetchUserInfo()
-    }
-  }, [isLoggedIn, currentLocation, matchedUserCart])
+  }, [isLoggedIn, currentLocation, cartItems])
 
   const handleUserClick = () => {
     setIsUserClicked(!isUserClicked)

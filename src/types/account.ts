@@ -19,7 +19,7 @@ export interface AccountsBalance {
   totalBalance: number // 사용자 계좌 잔액 총합
   accounts: Bank[]
 }
-// interface Bank
+// interface Bank (요건 위의 Bank배열 타입 설명임)
 export interface Bank {
   // 사용자 계좌 정보
   id: string // 계좌 ID

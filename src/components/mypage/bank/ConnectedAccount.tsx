@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './ConnectedAccount.module.scss'
 import getBankLogo from '@/utils/getBankLogo'
 
-
 interface BankProps {
   bankName: string
   accountNumber: string
@@ -28,7 +27,7 @@ export default function ConnectedAccount({ bankName, accountNumber, balance }: B
           </div>
           <div className={styles.changes}>
             <div className={styles.text}>잔액</div>
-            <div className={styles.change}>{balance}</div>
+            <div className={styles.change}>{balance.toLocaleString()}</div>
           </div>
           <div className={styles.accountNumber}>{accountNumber}</div>
         </div>

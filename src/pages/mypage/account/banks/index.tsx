@@ -2,38 +2,39 @@ import React, { useState, useEffect } from 'react'
 import Modal from '@/components/common/Modal'
 import styles from './index.module.scss'
 import Sidebar from '@/components/mypage/nav/SideBar'
-import GetItem from '@/components/mypage/productList/GetItem'
 
-import { Products, Product } from '@/types/product'
-import ConnectedAccount from '@/components/mypage/bank/ConnectedAccount'
 import { AccountsBalance, Bank } from '@/types/account'
 import { getConnectedAccounts } from '@/apis/payment/account'
 
 export default function BankName() {
   // const [getItem, setGetItem] = useState<Products>([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [accounts, setAccounts] = useState<Bank[]>([])
-  const [totalBalance, setTotalBalance] = useState(0)
   //accessToken 가져오기
   const accessToken = localStorage.getItem('token') || ''
 
-  const handleModalOpen = () => {
-    setIsModalOpen(true)
+
+  const handleDeleteModalOpen = () => {
+    setIsDeleteModalOpen(true)
   }
 
-  const handleModalClose = () => {
-    setIsModalOpen(false)
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false)
   }
 
-  // useEffect(() => {
-  //   const storedJjimItems = localStorage.getItem('getItem')
-  //   if (storedJjimItems) {
-  //     setGetItem(JSON.parse(storedJjimItems))
-  //   } else {
-  //     localStorage.setItem('getItem', JSON.stringify([dummyGoods1, dummyGoods2]))
-  //     setGetItem([dummyGoods1, dummyGoods2])
-  //   }
-  // }, [])
+  // 연결된 계좌 정보 조회
+  useEffect(() => {
+    const fetchConnectedAccounts = async () => {
+      try {
+        const res = await getConnectedAccounts(accessToken)
+        setAccounts(res.accounts)
+      } catch (error) {
+        console.error('등록된 계좌 조회 API 호출 중 오류가 발생했습니다:', error)
+      }
+    }
+    fetchConnectedAccounts()
+  }, [])
+
 
   return (
     <>
@@ -42,13 +43,13 @@ export default function BankName() {
         <div className={styles.bankContainer}>
           <div className={styles.inner}>
             <div className={styles.innerText}>
-              <h1 className={styles.title}>XXX 은행</h1>
-              <button onClick={handleModalOpen}>계좌 해지</button>
+              <h1 className={styles.title}>{}은행</h1>
+              <button onClick={handleDeleteModalOpen}>계좌 해지</button>
             </div>
             <div className={styles.bankAccount}>
-              <div className={styles.number}>계좌 | XXX-XXXX-XXX</div>
-              <div className={styles.totaleAmount}>3,000,000 원</div>
-              <div className={styles.underLine}>₩</div>
+              <div className={styles.bankNumber}>계좌 | {}은행</div>
+              <div className={styles.bankAmount}>{}원</div>
+              <div className={styles.bankUnderLine}>₩</div>
             </div>
           </div>
           <div className={styles.getList}>
@@ -61,8 +62,8 @@ export default function BankName() {
             </div>
           </div>
         </div>
-        {isModalOpen && (
-          <Modal isOpen={isModalOpen} closeModal={handleModalClose}>
+        {isDeleteModalOpen && (
+          <Modal isOpen={isDeleteModalOpen} closeModal={handleDeleteModalClose}>
             <div className={styles.modalContainer}>
               <div className={styles.textContainer}>
                 <img className={styles.bankLogo} src="" alt="" />
@@ -70,7 +71,7 @@ export default function BankName() {
                 <h4 className={styles.modalText}>계좌를 해지하시겠습니까?</h4>
               </div>
               <div className={styles.btnContainer}>
-                <button type="reset" onClick={handleModalClose} className={`${styles.btnTag} ${styles.cancel}`}>
+                <button type="reset" onClick={handleDeleteModalClose} className={`${styles.btnTag} ${styles.cancel}`}>
                   아니오
                 </button>
                 <button type="button" className={`${styles.btnTag} ${styles.enrolled}`}>

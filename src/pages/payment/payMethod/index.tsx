@@ -9,13 +9,11 @@ import { Banks, AccountConnectionRequest } from '@/types/account'
 import PossibleBank from '@/components/payment/payMethod/PossibleBank'
 import BankConnect from '@/components/payment/payMethod/BankConnect'
 import { Product } from '@/types/product'
-import { UserCart } from '@/types/usercart'
 import { getSelectableAccounts, getConnectedAccounts, postConnectAccount } from '@/apis/payment/account'
 import { postBuyProduct } from '@/apis/payment/product'
-import { useRecoilValue } from 'recoil'
-import { userState } from '@/recoil/common/userState'
 import Loading from '@/components/payment/Loading'
-import { matchedUserCartState } from '@/recoil/common/matchedUserCartState'
+import useUserInfo from '@/hooks/useUserInfo'
+import useCartItems from '@/hooks/useCartItems'
 
 export default function PayMethod() {
   const [connectedAccounts, setConnectedAccounts] = useState<AccountsBalance>({
@@ -23,7 +21,6 @@ export default function PayMethod() {
     accounts: []
   })
   const [possibleAccounts, setPossibleAccounts] = useState<Banks>([])
-  const user = useRecoilValue(userState)
   const [isOpen, setIsOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -37,15 +34,14 @@ export default function PayMethod() {
     phoneNumber: '',
     signature: true
   })
-  const matchedUserCart = useRecoilValue(matchedUserCartState)
   const [isLoading, setIsLoading] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userInfo, _isLoggedIn, _logout] = useUserInfo()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cartItems, _addcartItems, _removeCartItemsByUser, _removeOneCartItemByUser] = useCartItems(userInfo)
 
-  //cartItems 할인 계산
-  const userCart: UserCart = JSON.parse(localStorage.getItem('cart') || '[]')
-  const orderPrice = matchedUserCart
-    .map((item: Product) => item.price)
-    .reduce((acc: number, cur: number) => acc + cur, 0)
-  const orderFinalPrice = matchedUserCart
+  const orderPrice = cartItems.map((item: Product) => item.price).reduce((acc: number, cur: number) => acc + cur, 0)
+  const orderFinalPrice = cartItems
     .map((item: Product) => item.price - (item.price * item.discountRate) / 100)
     .reduce((acc: number, cur: number) => acc + cur, 0)
   const discountPrice = orderPrice - orderFinalPrice
@@ -53,7 +49,7 @@ export default function PayMethod() {
   //accessToken 가져오기
   const accessToken = localStorage.getItem('token') || ''
   // 연결가능한 계좌에서 선택된 계좌
-  const selectedAccount = possibleAccounts[bankIndex]
+  const selectedAccount = possibleAccounts.filter((account) => !account.disabled)[bankIndex]
 
   useEffect(() => {
     setIsOpen(false)
@@ -131,13 +127,13 @@ export default function PayMethod() {
         const bankConnectRes = await postConnectAccount(accessToken, BankConnectData)
         alert('계좌 등록이 완료되었습니다!')
         const bankConnectId = bankConnectRes.id
-        const buyPromises = userCart.map((item) =>
+        const buyPromises = cartItems.map((item) =>
           postBuyProduct(accessToken, { productId: item.id, accountId: bankConnectId })
         )
         await Promise.all(buyPromises)
         alert('결제 완료되었습니다! 결제 완료 페이지로 이동합니다.')
         setIsLoading(false)
-        navigate(`/payment/${user.displayName}/orderComplete`)
+        navigate(`/payment/${userInfo.displayName}/orderComplete`)
       } catch (error) {
         console.error(error)
       }
@@ -148,7 +144,7 @@ export default function PayMethod() {
     // api 거래 신청 요청.
     try {
       setIsLoading(true)
-      const buyPromises = userCart.map((item) => {
+      const buyPromises = cartItems.map((item) => {
         if (activeIndex) {
           postBuyProduct(accessToken, {
             productId: item.id,
@@ -159,7 +155,7 @@ export default function PayMethod() {
       await Promise.all(buyPromises)
       alert('결제 완료되었습니다! 결제 완료 페이지로 이동합니다.')
       setIsLoading(false)
-      navigate(`/payment/${user.displayName}/orderComplete`)
+      navigate(`/payment/${userInfo.displayName}/orderComplete`)
     } catch (error) {
       console.error(error)
     }

@@ -1,5 +1,5 @@
 import api from '@/apis'
-import { AccountConnectionRequest, AccountsBalance } from '@/types/account'
+import { AccountConnectionRequest, AccountClouserRequest } from '@/types/account'
 
 // 선택가능한 계좌목록 조회(계좌연결 전에)
 export const getSelectableAccounts = async (accessToken: string) => {
@@ -38,16 +38,15 @@ export const postConnectAccount = async (accessToken: string, requestBody: Accou
   return response.data
 }
 
-// 연결된 계좌 잔액 총합
-// export const totalBalanceAccount = async (accessToken: string, requestBody: AccountsBalance) => {
-//   const response = await api({
-//     method: 'POST',
-//     url: '/api/account',
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`
-//     },
-//     data: requestBody
-//   })
-//   return response.data
-// }
-
+// 계좌 해지하기
+export const deleteAccount = async (accessToken: string, requestBody: AccountClouserRequest) => {
+  const response = await api({
+    method: 'DELETE',
+    url: '/api/account',
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    },
+    data: requestBody
+  })
+  return response.data
+}

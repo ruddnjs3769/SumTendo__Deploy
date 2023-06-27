@@ -1,9 +1,16 @@
 // import BankBtn from '@/components/common/BankBtn'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './BankSelect.module.scss'
 import Modal from '@/components/common/Modal'
 import getBankLogo from '@/utils/getBankLogo'
 import { ACCOUNT_NUMBER_REGEX, PHONE_NUMBER_REGEX, PHONE_NUMBER_FORMAT_REGEX } from '@/utils/constants'
+import { postConnectAccount } from '@/apis/payment/account'
+import { AccountConnectionRequest } from '@/types/account'
+
+//계좌 연결
+// curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account
+//   \ -X 'POST'
+//   \ -H 'Authorization: Bearer <accessToken>'
 
 interface EnabledBank {
   name: string // 은행 이름
@@ -14,19 +21,27 @@ interface EnabledBank {
 
 export default function BankSelect({ name, code, digits, disabled }: EnabledBank) {
   const bankLogo = getBankLogo(name)
-
+  const accessToken = localStorage.getItem('token') || ''
   const [isModalOpen, setIsModalOpen] = useState(false)
-
+  const [disabledBtn, setDisabledBtn] = useState(true)
   const [accountNum, setAccountNum] = useState('')
   const [phoneNum, setPhoneNum] = useState('')
+  const [inputErrorMsg, setInputErrorMsg] = useState('')
+  const [inputNumErrorMsg, setInputNumErrorMsg] = useState('')
 
+  const [BankConnectData, setBankConnectData] = useState<AccountConnectionRequest>({
+    bankCode: '',
+    accountNumber: '',
+    phoneNumber: '',
+    signature: true
+  })
   const handleModalOpen = () => {
     setIsModalOpen(true)
   }
   const handleModalClose = () => {
     setIsModalOpen(false)
   }
-
+  // 전화번호 양식 설정
   const inputHandlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const phoneNumber = e.target.value
@@ -39,7 +54,7 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
     const formateDigitsNum = inputDigitsNum.slice(0, 11).replace(PHONE_NUMBER_FORMAT_REGEX, '$1-$2-$3')
     setPhoneNum(formateDigitsNum)
   }
-
+  // 계좌번호 양식 설정
   const inputHandleAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const accountNum = e.target.value
@@ -48,13 +63,13 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
     let currentIndex = 0
 
     for (let i = 0; i < digits.length; i++) {
-      // digits[]의 인덱싱 변수로 설정
+      // digits 배열의 인덱스를 변수로 설정
       // 'currentIndex'부터 'currentIndex+digitCount'범위까지의 부분 문자열 추출
       const digitCount = digits[i]
       const indexDigit = inputAccountNum.slice(currentIndex, currentIndex + digitCount)
       if (indexDigit.length > 0) {
         formateDigitsNum += indexDigit
-
+        // 현재 인덱스(i)가 bankDigits 배열의 마지막 인덱스가 아닌 경우, -를 추가하여 포맷팅합니다.
         if (i < digits.length - 1) {
           formateDigitsNum += '-'
         }
@@ -62,6 +77,31 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
       }
     }
     setAccountNum(formateDigitsNum)
+  }
+
+  // postConnectAccount API의 요청 데이터 requestbody 데이터 타입
+  const connectAccountData = (data: AccountConnectionRequest) => {
+    setBankConnectData(data)
+  }
+  // postConnectAccount API 사용에 필요한 requestbody 데이터
+  useEffect(() => {
+    connectAccountData({
+      bankCode: code, // 연결할 은행 코드 (필수!)
+      accountNumber: accountNum.replace(/-/g, ''), // 연결할 계좌번호 (필수!)
+      phoneNumber: phoneNum.replace(/-/g, ''), // 사용자 전화번호 (필수!)
+      signature: true // 사용자 서명 (필수!)
+    })
+  }, [phoneNum, accountNum])
+
+  // 계좌 등록 이벤트 핸들러
+  const connetAccountHandler = async () => {
+    try {
+      await postConnectAccount(accessToken, BankConnectData)
+      setIsModalOpen(false)
+      alert('계좌가 정상적으로 등록되었습니다!')
+    } catch (error) {
+      console.error('API POST 호출 실패 : ', error)
+    }
   }
 
   return (
@@ -103,7 +143,7 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
                     placeholder="계좌번호를 입력해주세요."
                     required
                   />
-                  <span className={styles.errorMsg}>계좌번호를 확인해 주세요.</span>
+                  <span className={styles.errorMsg}>{inputNumErrorMsg}</span>
                 </form>
               </li>
               <li className={styles.list}>
@@ -121,7 +161,7 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
                     placeholder="전화번호를 입력해주세요."
                     required
                   />
-                  <span className={styles.errorMsg}>전화번호를 확인해 주세요.</span>
+                  <span className={styles.errorMsg}>{inputErrorMsg}</span>
                 </form>
               </li>
             </ol>
@@ -130,7 +170,12 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
               <button type="reset" onClick={handleModalClose} className={`${styles.btnTag} ${styles.cancel}`}>
                 취소
               </button>
-              <button type="button" className={`${styles.btnTag} ${styles.enrolled}`}>
+              <button
+                type="button"
+                onClick={connetAccountHandler}
+                className={`${styles.btnTag} ${styles.enrolled}`}
+                disabled={disabledBtn}
+              >
                 등록
               </button>
             </div>

@@ -7,9 +7,9 @@
   margin: 5px 0;
   cursor: pointer;
   &:disabled {
-    opacity: .3;
-    mix-blend-mode:hue;
-    cursor:default;
+    opacity: 0.3;
+    mix-blend-mode: hue;
+    cursor: default;
   }
 }
 .container {
@@ -37,7 +37,7 @@
       left: 10px;
       width: 70px;
       height: 70px;
-      background-color: $bg-sub-grey;
+      background-color: $bg-primary-white;
       mix-blend-mode: multiply;
       z-index: 1;
       border-radius: 50%;
@@ -74,7 +74,7 @@
   .line {
     margin: 20px auto;
     width: 80%;
-    border: .5px solid $bg-primary-grey;
+    border: 0.5px solid $bg-primary-grey;
     // mix-blend-mode: multiply;
   }
   .textContainer {
@@ -177,11 +177,10 @@
       font-weight: 800;
       background-color: $point-red;
       cursor: pointer;
-      // &,
-      // .enrolled {
-      //   background-color: $bg-sub-grey;
-      //   mix-blend-mode: multiply;
-      // }
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
     }
     .cancel {
       background-color: $bg-sub-grey;

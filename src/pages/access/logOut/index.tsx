@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './index.module.scss'
 import { signOut } from '@/apis/access/signOut'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function LogOut() {
   const navigate = useNavigate()
@@ -29,15 +30,15 @@ export default function LogOut() {
         </span>
         <br />
         <div className={styles['passwordChange']}>
-          <a className={styles['passwordChangeLink']} href="/access/passwordcheck">
+          <Link to="/access/passwordcheck" className={styles['passwordChangeLink']}>
             비밀번호 변경
-          </a>
+          </Link>
         </div>
 
         <div className={styles['btn-group']}>
-          <a href="/">
+          <Link to="/">
             <button className={styles['cancel-btn']}>취소</button>
-          </a>
+          </Link>
           <button onClick={handleLogout} className={styles['logout-btn']}>
             로그아웃
           </button>

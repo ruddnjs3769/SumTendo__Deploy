@@ -124,7 +124,7 @@ export default function UserHeader() {
           )}
           {!isLoggedIn && (
             <div>
-              <Link to="/access/login" className={styles.logInLink}>
+              <Link to="/access" className={styles.logInLink}>
                 <span>로그인하기</span>
               </Link>
             </div>

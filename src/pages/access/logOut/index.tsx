@@ -7,7 +7,7 @@ import useUserInfo from '@/hooks/useUserInfo'
 
 export default function LogOut() {
   const navigate = useNavigate()
-  const [userInfo, isLoggedIn, logout] = useUserInfo()
+  const [_, isLoggedIn, logout] = useUserInfo()
 
   const handleLogout = async () => {
     if (!isLoggedIn) {

@@ -22,10 +22,9 @@ export default function SignIn() {
           email,
           password
         }
-        const response = await signIn(data)
+        await signIn(data)
         navigate('/')
-
-        console.log('로그인 성공:', response)
+        console.log('로그인 성공')
       } catch (error) {
         console.error('로그인 실패:', error)
         setEmailMsg('로그인에 실패하였습니다. 다시 확인해주세요.')

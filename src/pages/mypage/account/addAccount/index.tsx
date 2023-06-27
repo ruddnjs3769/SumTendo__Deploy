@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.scss'
-import SelectBank from '@/components/mypage/bank/SelectBank'
+import BankSelect from '@/components/mypage/bank/BankSelect'
 import Sidebar from '@/components/mypage/nav/SideBar'
 import { EnabledBank } from '@/types/account'
 import { getSelectableAccounts } from '@/apis/payment/account'
@@ -33,10 +33,22 @@ export default function AddAccount() {
           <div className={styles.text}>추가할 계좌의 은행을 선택하세요.</div>
           <div className={styles.banks}>
             {usedAccounts.map((aacount, index) => (
-              <SelectBank key={index} name={aacount.name} code={aacount.code} disabled={aacount.disabled} />
+              <BankSelect
+                key={index}
+                name={aacount.name}
+                code={aacount.code}
+                digits={aacount.digits}
+                disabled={aacount.disabled}
+              />
             ))}
             {unUsedAccounts.map((aacount, index) => (
-              <SelectBank key={index} name={aacount.name} code={aacount.code} disabled={aacount.disabled}/>
+              <BankSelect
+                key={index}
+                name={aacount.name}
+                code={aacount.code}
+                digits={aacount.digits}
+                disabled={aacount.disabled}
+              />
             ))}
           </div>
         </section>

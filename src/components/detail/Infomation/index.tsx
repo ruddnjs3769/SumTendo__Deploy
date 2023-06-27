@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import styles from './index.module.scss'
-import { ProductDetail } from '@/types/product'
+import { Product, ProductDetail } from '@/types/product'
 import { useNavigate } from 'react-router-dom'
-import { User } from '@/types/user'
-import { getAuthenticatedUser } from '@/apis/payment/access'
+
+import useUserInfo from '@/hooks/useUserInfo'
+import useCartItems from '@/hooks/useCartItems'
 
 type Props = {
   product: ProductDetail
@@ -11,6 +12,8 @@ type Props = {
 export default function Infomation({ product }: Props) {
   const navigate = useNavigate()
   const [checked, setChecked] = useState(false)
+  const [userInfo, isLoggedIn] = useUserInfo()
+  const [_cartItems, addCartItems, _remoteCartItemsByUser] = useCartItems(userInfo)
   const price = product.price?.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })
 
   function setCheckBox() {
@@ -18,31 +21,26 @@ export default function Infomation({ product }: Props) {
   }
 
   async function buyProduct() {
-    const accessToken = localStorage.getItem('token')
-    if (!accessToken) {
+    if (!isLoggedIn) {
       alert('로그인이 필요합니다.')
-      return
-    }
-    const user: User = await getAuthenticatedUser(accessToken)
-
-    if (!user) {
-      alert('유저 정보를 찾을 수 없습니다.')
+      navigate('/login')
       return
     }
 
-    const userCart = {
-      ...user,
-      ...product
+    if (!userInfo) {
+      alert('잘못된 접근입니다.')
+      navigate('/')
+      return
     }
-    // todo : getLocalItem, setLocalItem으로 빼기
-    const cartItems = localStorage.getItem('cart')
-    const prevUserCart = cartItems ? JSON.parse(cartItems) : null
-    if (!prevUserCart) {
-      localStorage.setItem('cart', JSON.stringify([userCart]))
-    } else {
-      localStorage.setItem('cart', JSON.stringify([userCart, ...prevUserCart]))
-    }
-    navigate(`/payment/${encodeURIComponent(user.displayName)}`)
+
+    const { reservations, ...restPropduct } = product
+    addCartItems([
+      {
+        ...userInfo,
+        ...restPropduct
+      }
+    ])
+    navigate(`/payment/${encodeURIComponent(userInfo.displayName)}`)
   }
 
   return (
@@ -51,7 +49,7 @@ export default function Infomation({ product }: Props) {
         <div className={styles.price}>{price}</div>
       </div>
       <div className={styles.contactCover}>
-        <input className={styles.checkbox} type="checkbox" defaultChecked={checked} onChange={setCheckBox} />
+        <input className={styles.checkbox} type="checkbox" checked={checked} onChange={setCheckBox} />
         <ul onClick={setCheckBox}>
           <li>
             <span>

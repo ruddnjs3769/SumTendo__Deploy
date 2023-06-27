@@ -93,6 +93,7 @@ export default function EditProfile() {
     } else if (passwordInputValue !== e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호가 동일하지 않습니다.')
       setSubmitDisabled(true)
+
       return passwordInputCheckValue === null
     } else if (passwordInputValue === e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호 확인 완료 ✅')

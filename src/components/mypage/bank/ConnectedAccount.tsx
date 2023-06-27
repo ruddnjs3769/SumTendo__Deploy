@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ConnectedAccount.module.scss'
-import { getBankLogo } from '@/components/payment/payMethod/PossibleBank'
+import getBankLogo from '@/utils/getBankLogo'
 
 
 interface BankProps {

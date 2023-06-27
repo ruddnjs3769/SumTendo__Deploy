@@ -35,18 +35,20 @@ export default function SignUpForm() {
       return false
     }
 
-    if (!isEmailValid || !isDisplayNameValid) {
-      alert('중복 체크를 수행해주세요.')
-      return false
-    }
-
     // 비밀번호 유효성 검사
     if (!passwordRegex.test(password)) {
+      alert('비밀번호를 확인해주세요.')
       return false
     }
 
     // 비밀번호 일치 여부 검사
     if (password !== confirmPassword) {
+      alert('비밀번호를 확인해주세요.')
+      return false
+    }
+
+    if (!isEmailValid || !isDisplayNameValid) {
+      alert('중복 체크를 수행해주세요.')
       return false
     }
 
@@ -91,6 +93,7 @@ export default function SignUpForm() {
         displayName,
         profileImgBase64: profileImage
       })
+      alert('회원가입에 실패했습니다.')
     }
   }
 
@@ -136,7 +139,7 @@ export default function SignUpForm() {
       <h1 className={styles['subTitle']}>닌텐도 어카운트 작성</h1>
       <div className={styles['form-signup']}>
         <p className={styles['signup-info']}>회원가입을 위해 아래 정보를 입력해 주십시오.</p>
-        <form onSubmit={handleSubmit}>
+        <form className={styles['form-main']} onSubmit={handleSubmit}>
           <Validate
             onChangeEmail={handleEmailChange}
             onChangeDisplayName={handleDisplayNameChange}

@@ -9,7 +9,7 @@ export default function LogOut() {
     const accessToken = localStorage.getItem('token')
 
     if (!accessToken) {
-      console.log('로그아웃 실패: 토큰이 없습니다.')
+      console.log('로그아웃 실패: 로그인상태가 아닙니다.')
       return
     }
 

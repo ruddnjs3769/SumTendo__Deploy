@@ -10,6 +10,6 @@ export async function signIn(query: SignInRequest): Promise<SignInResponse> {
   const accessToken = response.data.accessToken
   localStorage.setItem('token', accessToken)
 
-  console.log('로그인 성공:', response.data)
+  console.log('로그인 성공')
   return response.data
 }

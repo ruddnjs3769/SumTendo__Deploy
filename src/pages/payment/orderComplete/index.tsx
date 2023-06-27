@@ -2,22 +2,27 @@ import React, { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import PayProcessFlow from '@/components/payment/PayProcessFlow'
 import Btn from '@/components/payment/Btn'
-import { Product, UserTransactionDetails } from '@/types/product'
+import { UserTransactionDetails } from '@/types/product'
 import { getTransactionDetails } from '@/apis/payment/product'
 import Loading from '@/components/payment/Loading'
+import useUserInfo from '@/hooks/useUserInfo'
+import useCartItems from '@/hooks/useCartItems'
 
 export default function OrderComplete() {
   const [transactionDetails, setTransactionDetails] = useState<UserTransactionDetails>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const cartItems: Product[] = JSON.parse(localStorage.getItem('cart') || '[]')
   const accessToken = localStorage.getItem('token') || ''
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userInfo, _isLoggedIn, _logout] = useUserInfo()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cartItems, _addcartItems, removeCartItemsByUser, _removeOneCartItemByUser] = useCartItems(userInfo)
 
   useEffect(() => {
     // 랜딩 시 details 저장
     matchedTransactionDetails()
     // 장바구니에 담겨있던 제품들을 삭제
-    localStorage.removeItem('cart')
+    removeCartItemsByUser(userInfo)
   }, [])
 
   const matchedTransactionDetails = async (): Promise<void> => {

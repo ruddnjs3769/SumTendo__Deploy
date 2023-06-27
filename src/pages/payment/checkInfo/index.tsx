@@ -3,21 +3,23 @@ import styles from './index.module.scss'
 import PayProcessFlow from '@/components/payment/PayProcessFlow'
 import ShoppingCart from '@/components/payment/ShoppingCart'
 import Btn from '@/components/payment/Btn'
-import { useRecoilValue } from 'recoil'
-import { userState } from '@/recoil/common/userState'
-import { matchedUserCartState } from '@/recoil/common/matchedUserCartState'
+import useUserInfo from '@/hooks/useUserInfo'
+import useCartItems from '@/hooks/useCartItems'
 
 export default function CheckInfo() {
   const [btnActive, setBtnActive] = useState(false)
   const [totalValue, setTotalValue] = useState(0)
-  const user = useRecoilValue(userState)
-  const matchedUserCart = useRecoilValue(matchedUserCartState)
+  const [userInfo, _isLoggedIn, _logout] = useUserInfo()
+  const [cartItems, _addcartItems, _removeCartItemsByUser, _removeOneCartItemByUser] = useCartItems(userInfo)
 
   useEffect(() => {
-    if (matchedUserCart.length === 0) {
+    if (cartItems.length === 0) {
+      console.log(cartItems)
       setBtnActive(true)
+    } else {
+      setBtnActive(false)
     }
-  }, [matchedUserCart])
+  }, [cartItems])
 
   const getTotalValue = (value: number) => {
     setTotalValue(value)
@@ -39,15 +41,15 @@ export default function CheckInfo() {
           </div>
           <div>
             <div className={styles.content}>
-              <span>{user.displayName}</span>
+              <span>{userInfo.displayName}</span>
             </div>
             <div className={styles.content}>
-              <span>{user.email}</span>
+              <span>{userInfo.email}</span>
             </div>
           </div>
         </div>
       </div>
-      <ShoppingCart getTotalValue={getTotalValue} user={user} />
+      <ShoppingCart getTotalValue={getTotalValue} />
       <div className={styles.totals}>
         <div className={styles.mark}>
           <span>합계</span>
@@ -56,7 +58,7 @@ export default function CheckInfo() {
           <span>{`₩ ${totalValue.toLocaleString()}`}</span>
         </div>
       </div>
-      <Btn text="확인" targetURL={`/payment/${user.displayName}/payMethod`} active={btnActive} />
+      <Btn text="확인" targetURL={`/payment/${userInfo.displayName}/payMethod`} active={btnActive} />
     </>
   )
 }

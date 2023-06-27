@@ -2,11 +2,13 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import styles from './index.module.scss'
 import { editedUserInfo } from '@/apis/user/editedUserInfo'
 import { passwordRegex } from '@/utils/constants'
+import { useNavigate } from 'react-router-dom'
 
 export default function PasswordChangeForm() {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [accessToken, setAccessToken] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     const AccessToken = localStorage.getItem('token')
@@ -30,13 +32,11 @@ export default function PasswordChangeForm() {
       // API 호출
       await editedUserInfo({ oldPassword, newPassword }, accessToken)
 
-      // 비밀번호 변경 성공 시 처리
-      setOldPassword('')
-      setNewPassword('')
       alert('비밀번호가 변경되었습니다.')
+      navigate('/')
     } catch (error) {
       // 비밀번호 변경 실패 시 처리
-      alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.')
+      alert('비밀번호 변경에 실패했습니다. 확인 후 다시 시도해주세요.')
     }
   }
 

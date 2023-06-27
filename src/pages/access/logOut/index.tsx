@@ -1,19 +1,26 @@
 import React from 'react'
 import styles from './index.module.scss'
-import { signOut } from '@/apis/access/signOut'
+
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import useUserInfo from '@/hooks/useUserInfo'
 
 export default function LogOut() {
   const navigate = useNavigate()
-  const handleLogout = async () => {
-    const accessToken = localStorage.getItem('token')
+  const [_, isLoggedIn, logout] = useUserInfo()
 
-    if (!accessToken) {
-      console.log('로그아웃 실패: 로그인상태가 아닙니다.')
+  const handleLogout = async () => {
+    if (!isLoggedIn) {
+      console.log('로그아웃 실패: 로그인 상태가 아닙니다.')
       return
     }
 
-    await signOut(accessToken)
+    const isLoggedOut = await logout()
+    if (isLoggedOut) {
+      console.log('로그아웃 성공')
+    } else {
+      console.log('로그아웃 실패')
+    }
     navigate('/')
   }
 
@@ -29,15 +36,15 @@ export default function LogOut() {
         </span>
         <br />
         <div className={styles['passwordChange']}>
-          <a className={styles['passwordChangeLink']} href="/access/passwordcheck">
+          <Link to="/access/passwordcheck" className={styles['passwordChangeLink']}>
             비밀번호 변경
-          </a>
+          </Link>
         </div>
 
         <div className={styles['btn-group']}>
-          <a href="/">
+          <Link to="/">
             <button className={styles['cancel-btn']}>취소</button>
-          </a>
+          </Link>
           <button onClick={handleLogout} className={styles['logout-btn']}>
             로그아웃
           </button>

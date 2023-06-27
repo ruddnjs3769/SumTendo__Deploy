@@ -77,17 +77,16 @@ export default function SignUpForm() {
         profileImgBase64: profileImage
       }
 
-      console.log('폼 제출 성공:', data)
-
       try {
         await signUp(data)
+        alert('회원가입 성공')
         navigate('/')
       } catch (error) {
-        console.log('폼 제출 실패:')
+        console.log('폼 제출 실패')
         alert('회원가입에 실패했습니다.')
       }
     } else {
-      console.log('폼 제출 실패:', {
+      console.log('폼 제출 실패', {
         email,
         password,
         displayName,

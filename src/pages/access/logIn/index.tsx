@@ -4,6 +4,7 @@ import { SignInRequest } from '@/types/auth'
 import { signIn } from '@/apis/access/signIn'
 import { useNavigate } from 'react-router-dom'
 import { emailRegex, passwordRegex } from '@/utils/constants'
+import { Link } from 'react-router-dom'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -21,10 +22,9 @@ export default function SignIn() {
           email,
           password
         }
-        const response = await signIn(data)
+        await signIn(data)
         navigate('/')
-
-        console.log('로그인 성공:', response)
+        console.log('로그인 성공')
       } catch (error) {
         console.error('로그인 실패:', error)
         setEmailMsg('로그인에 실패하였습니다. 다시 확인해주세요.')
@@ -75,9 +75,9 @@ export default function SignIn() {
 
           <div className={styles['submit-group']}>
             <p className={styles['forgetLink']}>
-              <a className={styles['loginLink']} href="/access/passwordcheck">
+              <Link to="/access/passwordcheck" className={styles['loginLink']}>
                 <span>비밀번호 변경</span>
-              </a>
+              </Link>
             </p>
             <div className={styles['login-btn-group']}>
               <button
@@ -93,9 +93,9 @@ export default function SignIn() {
         </form>
         <div className={styles['signup']}>
           <p className={styles['noneLink']}>어카운트가 없는 분은</p>
-          <a className={styles['loginLink']} href="/access/agesignup">
+          <Link to="/access/agesignup" className={styles['loginLink']}>
             <button className={styles['signup-btn']}>신규 작성</button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -21,11 +21,9 @@ export default function SignIn() {
           email,
           password
         }
-        const response = await signIn(data)
-
+        await signIn(data)
+        alert('비밀번호 변경페이지로 이동합니다.')
         navigate('/access/passwordchangeform')
-
-        console.log('패스워드체크 성공:', response)
       } catch (error) {
         console.error('로그인 실패:', error)
         setEmailMsg('입력값이 틀렸습니다. 다시 확인해주세요.')

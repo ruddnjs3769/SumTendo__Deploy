@@ -20,8 +20,9 @@ export default function AddAccount() {
       })
   }, [])
 
-  const usedAccounts = accounts.filter((account) => !account.disabled)
-  const unUsedAccounts = accounts.filter((account) => account.disabled)
+  const sortAccount = accounts.sort((a) => {
+    return a.disabled ? 1 : -1
+  })
 
   return (
     <>
@@ -32,16 +33,7 @@ export default function AddAccount() {
           <hr className={styles.line} />
           <div className={styles.text}>추가할 계좌의 은행을 선택하세요.</div>
           <div className={styles.banks}>
-            {usedAccounts.map((aacount, index) => (
-              <BankSelect
-                key={index}
-                name={aacount.name}
-                code={aacount.code}
-                digits={aacount.digits}
-                disabled={aacount.disabled}
-              />
-            ))}
-            {unUsedAccounts.map((aacount, index) => (
+            {sortAccount.map((aacount, index) => (
               <BankSelect
                 key={index}
                 name={aacount.name}

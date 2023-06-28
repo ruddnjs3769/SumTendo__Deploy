@@ -39,6 +39,12 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
     setIsModalOpen(true)
   }
   const handleModalClose = () => {
+    setBankConnectData(() => ({
+      bankCode: '',
+      accountNumber: '',
+      phoneNumber: '',
+      signature: true
+    }))
     setIsModalOpen(false)
   }
   // 전화번호 양식 설정
@@ -85,6 +91,16 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
   }
   // postConnectAccount API 사용에 필요한 requestbody 데이터
   useEffect(() => {
+    // 전화번호, 계좌번호 검사
+    const accountLen = digits.reduce((acc, cur) => acc + cur, 0)
+    const phoneNumLen = phoneNum.replace(PHONE_NUMBER_REGEX, '').length
+    const inputAccountLen = accountNum.split('-').join('').length
+    if (inputAccountLen === accountLen && phoneNumLen === 11) {
+      setDisabledBtn(false)
+    } else {
+      setDisabledBtn(true)
+    }
+
     connectAccountData({
       bankCode: code, // 연결할 은행 코드 (필수!)
       accountNumber: accountNum.replace(/-/g, ''), // 연결할 계좌번호 (필수!)

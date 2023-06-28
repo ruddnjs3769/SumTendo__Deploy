@@ -7,9 +7,9 @@ interface Props {
 }
 
 export default function GetItem({ item }: Props) {
-  const { detailId, product } = item
+  const { product } = item
   return (
-    <a className={`${styles.aTag} ${styles.container}`} href={`/detail/${detailId}`}>
+    <a className={`${styles.aTag} ${styles.container}`} href={`/detail/${product.productId}`}>
       <div className={styles.itemThumbnail}>
         <img
           className={styles.itemImg}

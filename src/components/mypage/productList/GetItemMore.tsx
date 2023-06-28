@@ -9,7 +9,7 @@ export default function GetItemMore({ item }: Props) {
   const { product } = item
   return (
     <li className={styles.container}>
-      <a className={`${styles.aTag} ${styles.itemList}`} href={'/detail/:productId'}>
+      <a className={`${styles.aTag} ${styles.itemList}`} href={`/detail/${product.productId}`}>
         <div className={styles.itemThumbnail}>
           <img className={styles.itemImg} src={product.thumbnail || 'https://example.com/no-image.jpg'} alt="" />
         </div>

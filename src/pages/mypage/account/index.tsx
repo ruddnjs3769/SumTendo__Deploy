@@ -6,6 +6,7 @@ import ConnectedAccount from '@/components/mypage/bank/ConnectedAccount'
 import { AccountsBalance, Bank } from '@/types/account'
 import { getConnectedAccounts, deleteAccount } from '@/apis/payment/account'
 import Modal from '@/components/common/Modal'
+import useUserInfo from '@/hooks/useUserInfo'
 
 export default function Account() {
   const [accounts, setAccounts] = useState<Bank[]>([])
@@ -18,7 +19,7 @@ export default function Account() {
     accountNumber: '', // 계좌 번호
     balance: 0 // 계좌 잔액
   })
-
+  const [userInfo] = useUserInfo()
   //accessToken 가져오기
   const accessToken = localStorage.getItem('token') || ''
 
@@ -76,7 +77,7 @@ export default function Account() {
                   />
                 </button>
               ))}
-              <Link className={styles.addBank} to="/user/:username/account/addAccount">
+              <Link className={styles.addBank} to={`/user/${userInfo.displayName}/account/addAccount`}>
                 <div className={styles.btn}>
                   <span className={styles.plus}>+</span>
                   <span className={styles.add}>계좌 추가</span>

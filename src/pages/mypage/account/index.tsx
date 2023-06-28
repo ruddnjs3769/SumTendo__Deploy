@@ -3,33 +3,9 @@ import styles from './index.module.scss'
 import Sidebar from '@/components/mypage/nav/SideBar'
 import { Link } from 'react-router-dom'
 import ConnectedAccount from '@/components/mypage/bank/ConnectedAccount'
-import { AccountsBalance, Bank, AccountClouserRequest, AccountColuserResponse } from '@/types/account'
+import { AccountsBalance, Bank } from '@/types/account'
 import { getConnectedAccounts, deleteAccount } from '@/apis/payment/account'
 import Modal from '@/components/common/Modal'
-import getBankLogo from '@/utils/getBankLogo'
-
-//사용되는 api 계좌 목록 및 잔액 조회
-// curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account
-//  \ -X 'GET'
-//  \ -H 'Authorization: Bearer <accessToken>'
-
-// 계좌 조회 페이지에서 첫 화면에 연결된 계좌가 조회 되어야 함. [ ]
-// 연결된 계좌의 목록 및 잔액 조회                       [ ]
-// interface AccountsBalance {
-//   totalBalance: number // 사용자 계좌 잔액 총합
-//   accounts: Bank[] // 사용자 계좌 정보 목록
-// }
-
-// 계좌 해지
-// https://github.com/KDT1-FE/KDT5-M5#%EA%B3%84%EC%A2%8C-%ED%95%B4%EC%A7%80
-// 요청 interface RequestBody
-// account closure
-// export interface AccountClouserRequest {
-//   accountId: string // 계좌 ID (필수!)
-//   signature: boolean // 사용자 서명 (필수!)
-// }
-// 응답 type ResponseValue = true  // 계좌 해지 처리 상태
-// export type AccountColuserResponse = boolean
 
 export default function Account() {
   const [accounts, setAccounts] = useState<Bank[]>([])
@@ -42,12 +18,6 @@ export default function Account() {
     accountNumber: '', // 계좌 번호
     balance: 0 // 계좌 잔액
   })
-  const bankLogo = getBankLogo(selectedAccount.bankName)
-
-  const [accountId, setAccountId] = useState<AccountClouserRequest>({
-    accountId: '',
-    signature: true
-  })
 
   //accessToken 가져오기
   const accessToken = localStorage.getItem('token') || ''
@@ -55,11 +25,8 @@ export default function Account() {
   const handleModalOpen: MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
     const accountIndex = Number(event.currentTarget.dataset.index)
     const account = accounts[accountIndex]
-    console.log(account)
     setSelectedAccount(account)
-    console.log(selectedAccount)
     setIsModalOpen(true)
-    console.log('연결된 계좌 모달 오픈')
   }
   const handleModalClose = () => {
     setIsModalOpen(false)
@@ -67,30 +34,22 @@ export default function Account() {
 
   // 잔액 조회 목록 호출
   useEffect(() => {
-    getConnectedAccounts(accessToken)
-      .then((response: AccountsBalance) => {
-        const { totalBalance, accounts } = response
-        setTotalBalance(totalBalance)
-        setAccounts(accounts)
-      })
-      .catch((error: Error) => {
-        console.error('등록된 계좌 조회 API 호출 중 오류가 발생했습니다:', error)
-      })
+    getConnectedAccounts(accessToken).then((response: AccountsBalance) => {
+      const { totalBalance, accounts } = response
+      setTotalBalance(totalBalance)
+      setAccounts(accounts)
+    })
   }, [])
 
   // 계좌 해지 함수 호출
   const handleAccountDeletion = async () => {
-    try {
-      if (selectedAccount.id !== '') {
-        setAccountId({ accountId: selectedAccount.id, signature: true })
-        await deleteAccount(accessToken, { accountId: selectedAccount.id, signature: true })
-      }
-      console.log('계좌가 정상적으로 해지되었습니다!')
+    const res = await deleteAccount(accessToken, { accountId: selectedAccount.id, signature: true })
+    if (res) {
       alert('계좌가 정상적으로 해지되었습니다!')
-      setIsModalOpen(false)
-    } catch (error) {
-      console.error('계좌 해지 요청 중 오류가 발생했습니다:', error)
+    } else {
+      alert('계좌 해지에 실패했습니다.\n 자세한 사항은 고객센터에 문의해주세요.')
     }
+    window.location.reload()
   }
 
   return (
@@ -114,8 +73,6 @@ export default function Account() {
                     bankName={account.bankName}
                     accountNumber={account.accountNumber}
                     balance={account.balance}
-                    // handleOnClick={someFunction} // 적절한 함수로 대체해야 합니다.
-                    // isActive={someCondition} // 적절한 조건으로 대체해야 합니다.
                   />
                 </button>
               ))}

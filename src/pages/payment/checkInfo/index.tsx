@@ -14,7 +14,6 @@ export default function CheckInfo() {
 
   useEffect(() => {
     if (cartItems.length === 0) {
-      console.log(cartItems)
       setBtnActive(true)
     } else {
       setBtnActive(false)

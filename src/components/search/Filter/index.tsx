@@ -30,8 +30,10 @@ export default function Filter() {
           {query.genre && (
             <>
               <span>선택된 장르 : </span>
-              <span>{query.genre}</span>
-              <button onClick={movePageWithoutGenre}>취소하기</button>
+              <span className={styles.genre}>{query.genre}</span>
+              <button className={styles.generCancleBtn} onClick={movePageWithoutGenre}>
+                취소하기
+              </button>
             </>
           )}
         </div>

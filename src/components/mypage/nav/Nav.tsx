@@ -3,15 +3,15 @@ import styles from './Nav.module.scss'
 // import { User } from '@/types/user'
 import { Link } from 'react-router-dom'
 import { getAuthenticatedUser } from '@/apis/payment/access'
-import { useRecoilState } from 'recoil'
+
 import { userState } from '@/recoil/common/userState'
+import useUserInfo from '@/hooks/useUserInfo'
 
 export default function Nav() {
   // const [isLogined, setIsLogined] = useState(false)
-  const [userInfo, setUserInfo] = useRecoilState(userState)
+  const [userInfo] = useUserInfo()
   const [modify, setModify] = useState(true)
 
-  
   const navConvert = () => {
     setModify((prevModify) => !prevModify)
   }
@@ -26,7 +26,7 @@ export default function Nav() {
         </div>
         <Link
           className={styles.aTag}
-          to={modify ? '/user/:username/certProfile' : '/user/:username'}
+          to={modify ? `/user/${userInfo.displayName}/certProfile` : `/user/${userInfo.displayName}`}
           onClick={navConvert}
         >
           {modify ? '정보 수정' : '수정 완료'}

@@ -7,7 +7,7 @@ import useUserInfo from '@/hooks/useUserInfo'
 export default function MainHeader() {
   const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
-  const [_, isLoggedIn] = useUserInfo()
+  const [userInfo, isLoggedIn] = useUserInfo()
 
   function handleSearchBtn() {
     setIsOpen(!isOpen)
@@ -39,7 +39,7 @@ export default function MainHeader() {
         <ul className={styles.userMenu}>
           {isLoggedIn && (
             <li className={styles.mypage}>
-              <Link to="/user/test/">
+              <Link to={`/user/${userInfo.displayName}`}>
                 <div className={styles.item}>
                   <img src="/images/home/mypage_icon.svg" alt="mypage icon" />
                   <p>마이 페이지</p>

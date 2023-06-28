@@ -11,17 +11,17 @@ export default function AddAccount() {
   const [accounts, setAccounts] = useState<EnabledBank[]>([])
 
   useEffect(() => {
-    getSelectableAccounts(accessToken)
-      .then((response: EnabledBank[]) => {
-        setAccounts(response)
-      })
-      .catch((error: Error) => {
-        console.error('전체 계좌 조회 API 호출 중 오류가 발생했습니다:', error)
-      })
+    getSelectableAccounts(accessToken).then((response: EnabledBank[]) => {
+      setAccounts(response)
+    })
   }, [])
 
-  const sortAccount = accounts.sort((a) => {
-    return a.disabled ? 1 : -1
+  const sortAccount = accounts.sort((a, b) => {
+    if (a.disabled) return 1
+    else if (b.disabled) return -1
+
+    if (a.name > b.name) return 1
+    return -1
   })
 
   return (

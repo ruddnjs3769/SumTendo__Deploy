@@ -5,7 +5,7 @@ import Modal from '@/components/common/Modal'
 import getBankLogo from '@/utils/getBankLogo'
 import { ACCOUNT_NUMBER_REGEX, PHONE_NUMBER_REGEX, PHONE_NUMBER_FORMAT_REGEX } from '@/utils/constants'
 import { postConnectAccount } from '@/apis/payment/account'
-import { AccountConnectionRequest } from '@/types/account'
+import { AccountColuserResponse, AccountConnectionRequest, AccountConnectionResponse } from '@/types/account'
 
 //계좌 연결
 // curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account
@@ -26,8 +26,6 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
   const [disabledBtn, setDisabledBtn] = useState(false)
   const [accountNum, setAccountNum] = useState('')
   const [phoneNum, setPhoneNum] = useState('')
-  const [inputErrorMsg, setInputErrorMsg] = useState('')
-  const [inputNumErrorMsg, setInputNumErrorMsg] = useState('')
 
   const [BankConnectData, setBankConnectData] = useState<AccountConnectionRequest>({
     bankCode: '',
@@ -85,7 +83,6 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
     setAccountNum(formateDigitsNum)
   }
 
-
   // postConnectAccount API의 요청 데이터 requestbody 데이터 타입
   const connectAccountData = (data: AccountConnectionRequest) => {
     setBankConnectData(data)
@@ -112,13 +109,13 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
 
   // 계좌 등록 이벤트 핸들러
   const connetAccountHandler = async () => {
-    try {
-      await postConnectAccount(accessToken, BankConnectData)
-      setIsModalOpen(false)
+    const response: AccountConnectionResponse = await postConnectAccount(accessToken, BankConnectData)
+    if (response.id) {
       alert('계좌가 정상적으로 등록되었습니다!')
-    } catch (error) {
-      console.error('API POST 호출 실패 : ', error)
+    } else {
+      alert('계좌등록에 실패했습니다.\n 자세한 사항은 관리자에게 문의하세요.')
     }
+    window.location.reload()
   }
 
   return (
@@ -160,7 +157,6 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
                     placeholder="계좌번호를 입력해주세요."
                     required
                   />
-                  <span className={styles.errorMsg}>{inputNumErrorMsg}</span>
                 </form>
               </li>
               <li className={styles.list}>
@@ -178,7 +174,6 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
                     placeholder="전화번호를 입력해주세요."
                     required
                   />
-                  <span className={styles.errorMsg}>{inputErrorMsg}</span>
                 </form>
               </li>
             </ol>

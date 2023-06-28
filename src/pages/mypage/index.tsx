@@ -38,11 +38,11 @@ export default function MyPage() {
                 </button>
               </li>
               <li className={`${styles.listTitle} ${styles.Items}`}>
-                주문 상품
+                구매 내역
                 <div className={styles.listText}>
                   <button className={`${styles.aTag} ${styles.btn} ${styles.listLink} ${styles.visible}`}>
                     <Link className={`${styles.aTag} ${styles.listLink}`} to={'/user/:username/getItemAll'}>
-                      💰 주문 상품
+                      💰 구매 내역
                     </Link>
                   </button>
                 </div>

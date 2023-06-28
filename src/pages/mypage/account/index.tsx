@@ -1,11 +1,10 @@
-// import dummyAccounts from '@/pages/payment/dummyAccounts.json'
 import React, { useState, useEffect, MouseEventHandler } from 'react'
 import styles from './index.module.scss'
 import Sidebar from '@/components/mypage/nav/SideBar'
 import { Link } from 'react-router-dom'
 import ConnectedAccount from '@/components/mypage/bank/ConnectedAccount'
-import { AccountsBalance, Bank } from '@/types/account'
-import { getConnectedAccounts } from '@/apis/payment/account'
+import { AccountsBalance, Bank, AccountClouserRequest, AccountColuserResponse } from '@/types/account'
+import { getConnectedAccounts, deleteAccount } from '@/apis/payment/account'
 import Modal from '@/components/common/Modal'
 import getBankLogo from '@/utils/getBankLogo'
 
@@ -21,11 +20,31 @@ import getBankLogo from '@/utils/getBankLogo'
 //   accounts: Bank[] // 사용자 계좌 정보 목록
 // }
 
+
+// 계좌 해지
+// https://github.com/KDT1-FE/KDT5-M5#%EA%B3%84%EC%A2%8C-%ED%95%B4%EC%A7%80
+// 요청 interface RequestBody 
+// account closure
+// export interface AccountClouserRequest {
+//   accountId: string // 계좌 ID (필수!)
+//   signature: boolean // 사용자 서명 (필수!)
+// }
+// 응답 type ResponseValue = true  // 계좌 해지 처리 상태
+// export type AccountColuserResponse = boolean
+
+
+
 export default function Account() {
   const [accounts, setAccounts] = useState<Bank[]>([])
   const [totalBalance, setTotalBalance] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedAccount, setSelectedAccount] = useState<Bank | null>(null)
+
+  const [accountId, setAccountId] = useState<AccountClouserRequest>({
+    accountId: '',
+    signature: true
+  })
+
 
   //accessToken 가져오기
   const accessToken = localStorage.getItem('token') || ''
@@ -33,15 +52,17 @@ export default function Account() {
   const handleModalOpen: MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
     const accountIndex = Number(event.currentTarget.dataset.index)
     const account = accounts[accountIndex]
+    console.log(account)
     setSelectedAccount(account)
+    console.log(selectedAccount)
     setIsModalOpen(true)
-    console.log('연결된 계좌 API 조회')
+    console.log('연결된 계좌 모달 오픈')
   }
   const handleModalClose = () => {
     setIsModalOpen(false)
   }
 
-  // 잔액 조회 목록
+  // 잔액 조회 목록 호출
   useEffect(() => {
     getConnectedAccounts(accessToken)
       .then((response: AccountsBalance) => {
@@ -53,6 +74,21 @@ export default function Account() {
         console.error('등록된 계좌 조회 API 호출 중 오류가 발생했습니다:', error)
       })
   }, [])
+
+  // 계좌 해지 함수 호출
+  const handleAccountDeletion = async () => {
+    try {
+          if (selectedAccount?.id) {
+            setAccountId({ accountId: selectedAccount.id, signature: true })
+            await deleteAccount(accessToken, accountId)
+          }
+      
+      console.log('되긴 됨')
+      alert('계좌가 정상적으로 해지되었습니다!')
+    } catch (error) {
+      console.error('계좌 해지 요청 중 오류가 발생했습니다:', error)
+    }
+  }
 
   return (
     <>
@@ -95,7 +131,7 @@ export default function Account() {
           <div className={styles.modalContainer}>
             <div className={styles.inner}>
               <h1 className={styles.title}>{selectedAccount.bankName}</h1>
-              <h4 className={styles.subtitle}>{selectedAccount.bankName} 계좌를 해지하시겠습니까?</h4>
+              <h4 className={styles.subtitle}>계좌를 해지하시겠습니까?</h4>
               <div className={styles.bankAccount}>
                 <div className={styles.bankName}>은행 : {selectedAccount.bankName}</div>
                 <div className={styles.bankNumber}>계좌번호 : {selectedAccount.accountNumber}</div>
@@ -103,16 +139,13 @@ export default function Account() {
                 <div className={styles.bankUnderLine}>₩</div>
               </div>
               <div className={styles.btnContainer}>
-                <button type="button" className={`${styles.btnTag} ${styles.enrolled}`}>
+                <button type="button" className={`${styles.btnTag} ${styles.enrolled}`} onClick={handleAccountDeletion}>
                   예
                 </button>
                 <button type="reset" onClick={handleModalClose} className={`${styles.btnTag} ${styles.cancel}`}>
                   아니오
                 </button>
               </div>
-              {/* <button className={styles.btnTag} onClick={handleDeleteModalOpen}>
-                계좌 해지
-              </button> */}
             </div>
           </div>
         </Modal>

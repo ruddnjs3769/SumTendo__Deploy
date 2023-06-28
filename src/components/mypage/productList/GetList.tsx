@@ -25,7 +25,7 @@ export default function GetList() {
       <button className={`${styles.btn} ${styles.getMore}`}>
         {/* 내일 Navigate으로 바꾸기 */}
         <Link className={styles.aTag} to={'/user/:username/getItemAll'}>
-          주문 내역 조회
+          구매 내역 조회
         </Link>
       </button>
       <ul className={styles.getItem}>

@@ -4,6 +4,7 @@ import GetItem from '@/components/mypage/productList/GetItem'
 import dummyGoods1 from '@/pages/payment/dummyGoods1.json'
 import dummyGoods2 from '@/pages/payment/dummyGoods2.json'
 import { Products, Product } from '@/types/product'
+import { Link } from 'react-router-dom'
 
 export default function GetList() {
   const [getItem, setGetItem] = useState<Products>([])
@@ -21,9 +22,12 @@ export default function GetList() {
   return (
     <div className={styles.section}>
       <span className={styles.getList}>구매 내역</span>
-      <a className={`${styles.aTag} ${styles.getMore}`} href={'/user/:username/getItemAll'}>
-        전체 내역 조회
-      </a>
+      <button className={`${styles.btn} ${styles.getMore}`}>
+        {/* 내일 Navigate으로 바꾸기 */}
+        <Link className={styles.aTag} to={'/user/:username/getItemAll'}>
+          구매 내역 조회
+        </Link>
+      </button>
       <ul className={styles.getItem}>
         {getItem.map((item: Product, index: number) => (
           <GetItem key={index} item={item} />

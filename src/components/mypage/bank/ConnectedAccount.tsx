@@ -1,16 +1,19 @@
 import React from 'react'
-import styles from './SelectAccount.module.scss'
+import styles from './ConnectedAccount.module.scss'
 import getBankLogo from '@/utils/getBankLogo'
-// import AccountBtn from '@/components/common/AccountBtn'
 
-// 이 파일에 버튼 클릭 이벤트 사용 + 모달창 띄우기
 interface BankProps {
   bankName: string
   accountNumber: string
   balance: number
+  handleOnClick?: () => void
+  isActive?: boolean
 }
-export default function SelectAccount({ bankName, accountNumber, balance }: BankProps) {
+
+export default function ConnectedAccount({ bankName, accountNumber, balance }: BankProps) {
+  //bankLogo 가져오기
   const bankLogo = getBankLogo(bankName)
+
   return (
     <div className={styles.container}>
       <div className={styles.bank}>
@@ -22,11 +25,11 @@ export default function SelectAccount({ bankName, accountNumber, balance }: Bank
             <span className={styles.bankName}>{bankName}</span>
             <hr className={styles.line} />
           </div>
-          <div className={styles.accountNumber}>{accountNumber}</div>
           <div className={styles.changes}>
-            <div className={styles.title}>잔액</div>
-            <div className={styles.change}>{balance}</div>
+            <div className={styles.text}>잔액</div>
+            <div className={styles.change}>{balance.toLocaleString()}</div>
           </div>
+          <div className={styles.accountNumber}>{accountNumber}</div>
         </div>
       </div>
     </div>

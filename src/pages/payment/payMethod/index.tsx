@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.scss'
-import PayProcessFlow from '@/components/payment/PayProcessFlow'
-import ConnectedBank from '@/components/payment/payMethod/ConnectedBank'
+import PayProcessFlow from '@/components/payment/PayProcessFlow' // X
+import ConnectedBank from '@/components/payment/payMethod/ConnectedBank' // X
 import { AccountsBalance } from '@/types/account'
 import { useNavigate } from 'react-router-dom'
 import Modal from '@/components/common/Modal'

@@ -36,15 +36,16 @@ export default function EditProfile() {
 
     if (nicknameInputValue == null) {
       console.log('닉네임 재설정 중')
-      return
+      return setDisplayNameCheckedMsg('')
     } else if (!displayNameRegex.test(nicknameInputValue)) {
       setDisplayNameCheckedMsg('닉네임 양식을 지켜주세요.')
       setDisabled(true)
+      setSubmitDisabled(true)
       return
     } else {
       setDisabled(false)
       console.log('닉네임 양식 :', '통과')
-      setDisplayNameCheckedMsg('새로운 닉네임')
+      setDisplayNameCheckedMsg('...')
     }
   }
 
@@ -93,7 +94,6 @@ export default function EditProfile() {
       setPasswordDoubleCheckedMsg('비밀번호가 동일하지 않습니다.')
       setSubmitDisabled(true)
 
-
       return passwordInputCheckValue === null
     } else if (passwordInputValue === e.target.value) {
       setPasswordDoubleCheckedMsg('비밀번호 확인 완료 ✅')
@@ -101,14 +101,6 @@ export default function EditProfile() {
     }
   }
 
-  // // 닉네임 & 비밀번호 API에 상태 업데이트
-  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   setUpdatedInfo((prevInfo) => ({
-  //     ...prevInfo,
-  //     [name]: value
-  //   }))
-  // }
 
   // 이름 입력값 상태 업데이트
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -219,7 +211,7 @@ export default function EditProfile() {
                   </button>
                 </li>
                 {DisplayNameCheckedMsg && (
-                  <p className={DisplayNameCheckedMsg === '새로운 닉네임' ? styles.msg : styles.error}>
+                  <p className={DisplayNameCheckedMsg === '...' ? styles.msg : styles.error}>
                     {DisplayNameCheckedMsg}
                   </p>
                 )}

@@ -104,11 +104,12 @@
               margin-left: 15px;
               border: none;
               border-radius: 5px;
-              cursor: pointer;
-              background-color: $text-primary-black-50;
+              cursor: default;
+              color: $text-light-white;
+              background-color: $point-red-50;
               &:hover {
                 background-color: $point-red;
-                color: $text-light-white;
+                cursor: pointer;
               }
             }
           }
@@ -146,8 +147,11 @@
                   border: none;
                   border-radius: 5px;
                   cursor: pointer;
-                  background-color: $point-red;
+                  background-color: $point-red-50;
                   color: $text-light-white;
+                  &:hover {
+                    background-color: $point-red;
+                  }
                 }
               }
             }
@@ -167,8 +171,9 @@
           background-color: $point-red;
           cursor: pointer;
           &.btnError {
-            color: $bg-primary-grey;
-            background-color: $text-primary-black-50;
+            color: $text-light-white;
+            background-color: $point-red-50;
+            cursor: default;
           }
         }
       }

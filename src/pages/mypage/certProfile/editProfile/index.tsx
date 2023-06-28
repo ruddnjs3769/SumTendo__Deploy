@@ -5,11 +5,13 @@ import { editedUserInfo } from '@/apis/user/editedUserInfo'
 import { useRecoilState } from 'recoil'
 import { userState } from '@/recoil/common/userState'
 import { useNavigate } from 'react-router-dom'
-import { EditedUserInfoRequest, EditedUserInfoResponse } from '@/types/user'
+import { EditedUserInfoRequest } from '@/types/user'
 import { displayNameRegex, passwordRegex } from '@/utils/constants'
+import useUserInfo from '@/hooks/useUserInfo'
 
 export default function EditProfile() {
   const [curUser, setCurUser] = useRecoilState(userState)
+  const [userInfo] = useUserInfo()
   // API에 등록할 수정용 요청 데이터 (request body의 data)   <이건 타입 지정>
   const [updatedInfo, setUpdatedInfo] = useState<EditedUserInfoRequest>({
     displayName: '',
@@ -34,7 +36,7 @@ export default function EditProfile() {
     e.preventDefault()
     setNicknameInputValue(e.target.value)
 
-    if (nicknameInputValue == null) {
+    if (nicknameInputValue === null) {
       console.log('닉네임 재설정 중')
       return setDisplayNameCheckedMsg('')
     } else if (!displayNameRegex.test(nicknameInputValue)) {
@@ -101,22 +103,21 @@ export default function EditProfile() {
     }
   }
 
-
   // 이름 입력값 상태 업데이트
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setUpdatedInfo((prevInfo) => ({
       ...prevInfo,
-      displayname: value
+      displayName: value
     }))
   }
 
-  // 이메일 입력값 상태 업데이트
+  // 비밀번호 입력값 상태 업데이트
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setUpdatedInfo((prevInfo) => ({
       ...prevInfo,
-      email: value
+      newPassword: value
     }))
   }
 
@@ -136,7 +137,6 @@ export default function EditProfile() {
     }
   }
   //===========================================================================//
-
   // 프로필 이미지 [미리보기]상태값
   const [profileImage, setProfileImage] = useState('')
 
@@ -172,7 +172,7 @@ export default function EditProfile() {
       await editedUserInfo(updatedInfo, accessToken)
       console.log('PUT 실행 성공')
       alert('정상적으로 변경 되었습니다.')
-      navigate('/user/${user.username}')
+      navigate(`/user/${userInfo.displayName}`)
     } catch (error) {
       console.error('API 호출 실패 또는 오류:', error)
     }
@@ -211,9 +211,7 @@ export default function EditProfile() {
                   </button>
                 </li>
                 {DisplayNameCheckedMsg && (
-                  <p className={DisplayNameCheckedMsg === '...' ? styles.msg : styles.error}>
-                    {DisplayNameCheckedMsg}
-                  </p>
+                  <p className={DisplayNameCheckedMsg === '...' ? styles.msg : styles.error}>{DisplayNameCheckedMsg}</p>
                 )}
                 <li className={styles.list}>
                   <label className={styles.label} htmlFor="email">
@@ -247,7 +245,7 @@ export default function EditProfile() {
                       required
                     />
                     <input
-                      id="password"
+                      id="newPassword"
                       className={`${styles.inputTag} ${styles.passwordCheck}`}
                       type="password"
                       name="newPassword"

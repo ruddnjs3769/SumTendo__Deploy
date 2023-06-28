@@ -1,4 +1,5 @@
 // 사용자 정보 수정
+//요청 데이터
 // https://github.com/KDT1-FE/KDT5-M5#%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95
 export interface EditedUserInfoRequest {
   displayName?: string // 새로운 표시 이름
@@ -6,7 +7,7 @@ export interface EditedUserInfoRequest {
   oldPassword?: string // 기존 비밀번호
   newPassword?: string // 새로운 비밀번호
 }
-
+//응답데이터
 export interface EditedUserInfoResponse {
   email: string // 사용자 아이디
   displayName: string // 사용자 표시 이름

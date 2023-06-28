@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import styles from './index.module.scss'
 import { signUp } from '@/apis/access/signUp'
-import Validate, { ValidateProps } from '@/components/access/validate'
+import Validate from '@/components/access/validate'
 import { displayNameRegex, passwordRegex, emailRegex } from '@/utils/constants'
 import { SignUpRequest } from '@/types/auth'
 import { useNavigate } from 'react-router-dom'

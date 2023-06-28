@@ -136,7 +136,7 @@ export default function SignUpForm() {
   return (
     <div className={styles.container}>
       <h1 className={styles['subTitle']}>닌텐도 어카운트 작성</h1>
-      <div className={styles['form-signup']}>
+      <div className={styles['form-signup-page']}>
         <p className={styles['signup-info']}>회원가입을 위해 아래 정보를 입력해 주십시오.</p>
         <form className={styles['form-main']} onSubmit={handleSubmit}>
           <Validate

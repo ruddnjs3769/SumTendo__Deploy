@@ -23,7 +23,7 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
   const bankLogo = getBankLogo(name)
   const accessToken = localStorage.getItem('token') || ''
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [disabledBtn, setDisabledBtn] = useState(true)
+  const [disabledBtn, setDisabledBtn] = useState(false)
   const [accountNum, setAccountNum] = useState('')
   const [phoneNum, setPhoneNum] = useState('')
   const [inputErrorMsg, setInputErrorMsg] = useState('')
@@ -78,6 +78,7 @@ export default function BankSelect({ name, code, digits, disabled }: EnabledBank
     }
     setAccountNum(formateDigitsNum)
   }
+
 
   // postConnectAccount API의 요청 데이터 requestbody 데이터 타입
   const connectAccountData = (data: AccountConnectionRequest) => {

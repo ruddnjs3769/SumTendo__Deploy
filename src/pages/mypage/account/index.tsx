@@ -8,6 +8,9 @@ import { getConnectedAccounts, deleteAccount } from '@/apis/payment/account'
 import Modal from '@/components/common/Modal'
 import getBankLogo from '@/utils/getBankLogo'
 
+
+
+
 //사용되는 api 계좌 목록 및 잔액 조회
 // curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account
 //  \ -X 'GET'
@@ -20,10 +23,9 @@ import getBankLogo from '@/utils/getBankLogo'
 //   accounts: Bank[] // 사용자 계좌 정보 목록
 // }
 
-
 // 계좌 해지
 // https://github.com/KDT1-FE/KDT5-M5#%EA%B3%84%EC%A2%8C-%ED%95%B4%EC%A7%80
-// 요청 interface RequestBody 
+// 요청 interface RequestBody
 // account closure
 // export interface AccountClouserRequest {
 //   accountId: string // 계좌 ID (필수!)
@@ -32,19 +34,23 @@ import getBankLogo from '@/utils/getBankLogo'
 // 응답 type ResponseValue = true  // 계좌 해지 처리 상태
 // export type AccountColuserResponse = boolean
 
-
-
 export default function Account() {
   const [accounts, setAccounts] = useState<Bank[]>([])
   const [totalBalance, setTotalBalance] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedAccount, setSelectedAccount] = useState<Bank | null>(null)
+    const [selectedAccount, setSelectedAccount] = useState<Bank>({
+      id: '', // 계좌 ID
+      bankName: '', // 은행 이름
+      bankCode: '', // 은행 코드
+      accountNumber: '', // 계좌 번호
+      balance: 0 // 계좌 잔액
+    })
+  const bankLogo = getBankLogo(selectedAccount.bankName)
 
   const [accountId, setAccountId] = useState<AccountClouserRequest>({
     accountId: '',
     signature: true
   })
-
 
   //accessToken 가져오기
   const accessToken = localStorage.getItem('token') || ''
@@ -78,13 +84,13 @@ export default function Account() {
   // 계좌 해지 함수 호출
   const handleAccountDeletion = async () => {
     try {
-          if (selectedAccount?.id) {
-            setAccountId({ accountId: selectedAccount.id, signature: true })
-            await deleteAccount(accessToken, accountId)
-          }
-      
-      console.log('되긴 됨')
+      if (selectedAccount.id !== '') {
+        setAccountId({ accountId: selectedAccount.id, signature: true })
+        await deleteAccount(accessToken, { accountId: selectedAccount.id, signature: true })
+      }
+      console.log('계좌가 정상적으로 해지되었습니다!')
       alert('계좌가 정상적으로 해지되었습니다!')
+      setIsModalOpen(false)
     } catch (error) {
       console.error('계좌 해지 요청 중 오류가 발생했습니다:', error)
     }

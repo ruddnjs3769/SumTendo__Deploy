@@ -74,7 +74,7 @@ export default function OrderComplete() {
       )}
       <div className={styles.btnContainer}>
         <Btn text="계속 쇼핑하기" targetURL="/" />
-        <Btn text="주문내역 확인하기" targetURL="/user/:username" />
+        <Btn text="주문내역 확인하기" targetURL={`/user/${userInfo.displayName}/getItemAll`} />
       </div>
     </>
   )

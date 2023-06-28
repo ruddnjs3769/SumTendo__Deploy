@@ -21,7 +21,7 @@ export interface Product {
 
 export type TransactionDetails = TransactionDetail[] // 모든 거래 내역의 목록
 
-interface TransactionDetail {
+export interface TransactionDetail {
   // 거래 내역 정보
   detailId: string // 거래 내역 ID
   user: {

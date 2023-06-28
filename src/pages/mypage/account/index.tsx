@@ -8,9 +8,6 @@ import { getConnectedAccounts, deleteAccount } from '@/apis/payment/account'
 import Modal from '@/components/common/Modal'
 import getBankLogo from '@/utils/getBankLogo'
 
-
-
-
 //사용되는 api 계좌 목록 및 잔액 조회
 // curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account
 //  \ -X 'GET'
@@ -38,13 +35,13 @@ export default function Account() {
   const [accounts, setAccounts] = useState<Bank[]>([])
   const [totalBalance, setTotalBalance] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
-    const [selectedAccount, setSelectedAccount] = useState<Bank>({
-      id: '', // 계좌 ID
-      bankName: '', // 은행 이름
-      bankCode: '', // 은행 코드
-      accountNumber: '', // 계좌 번호
-      balance: 0 // 계좌 잔액
-    })
+  const [selectedAccount, setSelectedAccount] = useState<Bank>({
+    id: '', // 계좌 ID
+    bankName: '', // 은행 이름
+    bankCode: '', // 은행 코드
+    accountNumber: '', // 계좌 번호
+    balance: 0 // 계좌 잔액
+  })
   const bankLogo = getBankLogo(selectedAccount.bankName)
 
   const [accountId, setAccountId] = useState<AccountClouserRequest>({

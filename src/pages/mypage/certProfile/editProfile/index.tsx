@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, useEffect } from 'react'
 import styles from './index.module.scss'
 import Nav from '@/components/mypage/nav/Nav'
 import { editedUserInfo } from '@/apis/user/editedUserInfo'
@@ -46,13 +46,21 @@ export default function EditProfile() {
   const [nicknameInputValue, setNicknameInputValue] = useState<EditedUserInfoRequest['displayName']>('')
   const [displayNameCheckedMsg, setDisplayNameCheckedMsg] = useState<string>('')
 
-  const [oldPasswordInputValue, setOldPasswordInputValue] = useState<EditedUserInfoRequest['oldPassword']>('')
+  const [originalPassword, setOriginalPassword] = useState<EditedUserInfoRequest['oldPassword']>('')
   const [newPasswordInputValue, setNewPasswordInputValue] = useState<EditedUserInfoRequest['newPassword']>('')
   const [passwordCheckedMsg, setPasswordCheckedMsg] = useState<string>('')
 
   const navigate = useNavigate()
   //===========================================================================//
-  //
+
+  useEffect(() => {
+    setUpdatedInfo((prev) => ({
+      ...prev,
+      displayName: nicknameInputValue,
+      oldPassword: originalPassword,
+      newPassword: newPasswordInputValue
+    }))
+  }, [originalPassword, newPasswordInputValue, nicknameInputValue])
 
   // 유저 목록을 조회하여 유저의 닉네임과 같은 값이 있으면 중복
   async function checkDuplicateDisplayName(displayName: string): Promise<boolean> {
@@ -104,48 +112,22 @@ export default function EditProfile() {
   }
   //===========================================================================//
   // 비밀번호 유효성 체크 : 입력 양식 체크
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setOldPasswordInputValue(e.target.value)
-    if (!passwordRegex.test(oldPasswordInputValue ? oldPasswordInputValue : '')) {
-      setPasswordCheckedMsg('비밀번호 양식을 지켜주세요.')
-    } else {
-      console.log('비밀번호 양식 :', '통과')
-      setPasswordCheckedMsg('비밀번호 입력 확인')
-      return true
-    }
-  }
-
-  // 새 비밀번호 체크
-  const handlePasswordCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setNewPasswordInputValue(e.target.value)
-
-    if (!passwordRegex.test(newPasswordInputValue ? newPasswordInputValue : '')) {
-      setPasswordCheckedMsg('비밀번호 양식을 지켜주세요.')
-    } else {
-      console.log('비밀번호 양식 :', '통과')
-      setPasswordCheckedMsg('비밀번호 입력 확인')
+  const handleOriginalPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setOriginalPassword(e.target.value)
+    if (!passwordRegex.test(originalPassword ? originalPassword : '')) {
+      setPasswordCheckedMsg('영문자 숫자 포함 8~20자로 입력해주세요.')
       return
     }
+    setPasswordCheckedMsg('비밀번호 입력 확인')
   }
 
   // 이름 입력값 상태 업데이트
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
+    setNicknameInputValue(value)
     setUpdatedInfo((prevInfo) => ({
       ...prevInfo,
       displayName: value
-    }))
-  }
-
-  // 비밀번호 입력값 상태 업데이트
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setUpdatedInfo((prevInfo) => ({
-      ...prevInfo,
-      oldPassword: oldPasswordInputValue,
-      newPassword: newPasswordInputValue
     }))
   }
 
@@ -156,13 +138,21 @@ export default function EditProfile() {
   }
   //  비밀번호 함수들 호출
   const handleNewPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (newPasswordInputValue === '') {
-      console.log('이건 동작하면 안돼')
+    // 기본 비번호 입력 확인
+    if (!passwordRegex.test(originalPassword ? originalPassword : '')) {
+      console.log('입력 불가 처리하기')
       return
-    } else {
-      handlePasswordCheckChange(e)
-      handleEmailChange(e)
     }
+    setNewPasswordInputValue(e.target.value)
+
+    // 새 비밀번호 입력 확인
+    if (!passwordRegex.test(newPasswordInputValue ? newPasswordInputValue : '')) {
+      setPasswordCheckedMsg('비밀번호 양식을 지켜주세요.')
+      return
+    }
+
+    setPasswordCheckedMsg('비밀번호 입력 확인')
+    return
   }
   //===========================================================================//
   // 프로필 이미지 [미리보기]상태값
@@ -196,14 +186,13 @@ export default function EditProfile() {
 
   // API 호출 <= updatedInfo 수정데이터들 보내버림
   const handleSubmit = async () => {
-    try {
-      await editedUserInfo(updatedInfo, accessToken)
-      console.log('PUT 실행 성공')
+    const isEdited = await editedUserInfo(updatedInfo, accessToken)
+    if (isEdited) {
       alert('정상적으로 변경 되었습니다.')
-      navigate(`/user/${userInfo.displayName}`)
-    } catch (error) {
-      console.error('API 호출 실패 또는 오류:', error)
+    } else {
+      alert('변경에 실패했습니다. 고객센터에 문의해주세요')
     }
+    navigate(`/user/${userInfo.displayName}`)
   }
 
   return (
@@ -269,8 +258,8 @@ export default function EditProfile() {
                       className={`${styles.inputTag} ${styles.password}`}
                       type="password"
                       name="oldPassword"
-                      value={oldPasswordInputValue}
-                      onChange={handlePasswordChange}
+                      value={originalPassword}
+                      onChange={handleOriginalPasswordChange}
                       placeholder="기존 비밀번호"
                       required
                     />

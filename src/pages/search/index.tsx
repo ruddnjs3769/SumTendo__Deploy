@@ -17,7 +17,6 @@ export default function Search() {
   const setQuery = useSetRecoilState(searchQueryState)
 
   // * url이 변경되면 새로운 쿼리 스트링을 생성하여 recoil에 저장합니다.
-  // * 쿼리 스트링이란 https://sumtendo.com? 뒤에 오는 url의 파라미터를 의미합니다.
   useEffect(() => {
     setQuery(() => {
       const params = new URLSearchParams(location.search)

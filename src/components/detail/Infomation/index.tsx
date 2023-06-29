@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './index.module.scss'
-import { Product, ProductDetail } from '@/types/product'
+import { ProductDetail } from '@/types/product'
 import { useNavigate } from 'react-router-dom'
 
 import useUserInfo from '@/hooks/useUserInfo'
@@ -13,6 +13,7 @@ export default function Infomation({ product }: Props) {
   const navigate = useNavigate()
   const [checked, setChecked] = useState(false)
   const [userInfo, isLoggedIn] = useUserInfo()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_cartItems, addCartItems, _remoteCartItemsByUser] = useCartItems(userInfo)
   const price = product.price?.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })
 
@@ -20,6 +21,7 @@ export default function Infomation({ product }: Props) {
     setChecked(!checked)
   }
 
+  // * 제품을 구매합니다.
   async function buyProduct() {
     if (!isLoggedIn) {
       alert('로그인이 필요합니다.')
@@ -33,6 +35,7 @@ export default function Infomation({ product }: Props) {
       return
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { reservations, ...restPropduct } = product
     addCartItems([
       {

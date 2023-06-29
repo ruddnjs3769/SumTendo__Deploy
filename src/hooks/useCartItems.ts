@@ -10,11 +10,12 @@ type CartItemsHook = [
 ]
 type Nullable<T extends object> = { [K in keyof T]: T[K] | null }
 
+// * cart item을 관리하는 hooks입니다.
 const useCartItems = (userInfo: Nullable<User>) => {
   const [cartItems, setCartItems] = useState([] as UserCart)
 
+  // * 유저 정보가 변경될 때마다 로컬스토리지에서 해당 유저의 카트 아이템을 가져옵니다.
   useEffect(() => {
-    if (!userInfo) return
     if (!userInfo.email || !userInfo.displayName) {
       setCartItems([] as UserCart)
       return
@@ -34,6 +35,7 @@ const useCartItems = (userInfo: Nullable<User>) => {
     localStorage.setItem('cart', JSON.stringify([...freshCartItems, ...cartItems]))
     setCartItems([...freshCartItems, ...cartItems])
   }
+
   const removeCartItemsByUser = (user: User) => {
     const carts: UserCart = JSON.parse(localStorage.getItem('cart') || '[]')
     carts.forEach((cart) => {
@@ -45,6 +47,7 @@ const useCartItems = (userInfo: Nullable<User>) => {
     localStorage.setItem('cart', JSON.stringify(carts))
     setCartItems(carts)
   }
+
   const removeOneCartItemByUser = (user: User, index: number) => {
     const carts: UserCart = JSON.parse(localStorage.getItem('cart') || '[]')
     if (carts[index].email === user.email && carts[index].displayName === user.displayName) {

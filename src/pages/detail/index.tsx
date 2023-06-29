@@ -20,7 +20,6 @@ export default function Detail() {
     })
   }, [])
 
-  // todo : not found, loading 컴포넌트 추가하기
   if (!product.id) {
     return <div>Loading ...</div>
   }

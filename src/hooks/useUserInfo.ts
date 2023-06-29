@@ -8,6 +8,7 @@ import { signOut } from '@/apis/access/signOut'
 
 type UserInfoHooks = [UserInfoHooks: User, isLoggedIn: boolean, logout: () => Promise<boolean>]
 
+// * 유저 정보를 관리하는 hooks입니다.
 const useUserInfo = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useRecoilState(userState)
@@ -23,6 +24,7 @@ const useUserInfo = () => {
     return isLoggedOut
   }
 
+  // * 주소가 변경될 때 마다 로그인 상태를 확인합니다.
   useEffect(() => {
     const accessToken = localStorage.getItem('token')
     if (!accessToken) {

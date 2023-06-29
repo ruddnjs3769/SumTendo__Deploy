@@ -83,16 +83,9 @@ export default function SignUpForm() {
         alert('회원가입 성공')
         navigate('/')
       } catch (error) {
-        console.log('폼 제출 실패')
         alert('회원가입에 실패했습니다.')
       }
     } else {
-      console.log('폼 제출 실패', {
-        email,
-        password,
-        displayName,
-        profileImgBase64: profileImage
-      })
       alert('회원가입에 실패했습니다.')
     }
   }

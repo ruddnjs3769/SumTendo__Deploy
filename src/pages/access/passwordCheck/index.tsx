@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.scss'
 import { SignInRequest } from '@/types/auth'
 import { signIn } from '@/apis/access/signIn'

@@ -21,13 +21,13 @@ export default function MyPage() {
                 계좌
                 <div className={styles.listText}>
                   <Link className={`${styles.aTag} ${styles.listLink}`} to={`/user/${userInfo.displayName}/account`}>
-                    계좌조회
+                    💎 계좌조회
                   </Link>
                   <Link
                     className={`${styles.aTag} ${styles.listLink}`}
                     to={`/user/${userInfo.displayName}/account/addAccount`}
                   >
-                    계좌추가
+                    💰 계좌추가
                   </Link>
                 </div>
               </li>
@@ -47,7 +47,7 @@ export default function MyPage() {
                       className={`${styles.aTag} ${styles.listLink}`}
                       to={`/user/${userInfo.displayName}/getItemAll`}
                     >
-                      💰 구매 내역
+                      💳 구매 내역
                     </Link>
                   </button>
                 </div>

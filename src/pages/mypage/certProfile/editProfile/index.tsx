@@ -2,12 +2,31 @@ import React, { useState, ChangeEvent } from 'react'
 import styles from './index.module.scss'
 import Nav from '@/components/mypage/nav/Nav'
 import { editedUserInfo } from '@/apis/user/editedUserInfo'
+import { userList } from '@/apis/user/userList'
 import { useRecoilState } from 'recoil'
 import { userState } from '@/recoil/common/userState'
 import { useNavigate } from 'react-router-dom'
-import { EditedUserInfoRequest } from '@/types/user'
+import { EditedUserInfoRequest, User } from '@/types/user'
 import { displayNameRegex, passwordRegex } from '@/utils/constants'
 import useUserInfo from '@/hooks/useUserInfo'
+import { EditProductRequest } from '@/types/product'
+
+// interface ValidateProps {
+//   // onChangeDisplayName: (e: ChangeEvent<HTMLInputElement>) => void
+//   // onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
+//   // onChangeConfirmPassword: (e: ChangeEvent<HTMLInputElement>) => void
+//   handleDisplayNameSubmitValid: (isDisplayNameValid: boolean) => void
+// }
+
+// export default function Validate(props: ValidateProps) {
+//   const {
+//     // onChangeEmail,
+//     // onChangeDisplayName,
+//     // onChangePassword,
+//     // onChangeConfirmPassword,
+//     // handleEmailSubmitValid,
+//     handleDisplayNameSubmitValid
+//   } = props
 
 export default function EditProfile() {
   const [curUser, setCurUser] = useRecoilState(userState)
@@ -20,86 +39,94 @@ export default function EditProfile() {
     newPassword: ''
   })
   const accessToken = localStorage.getItem('token') || ''
+
   const [disabled, setDisabled] = useState(true)
-  const [InputDisabled, setInputDisabled] = useState(true)
-  const [submitDisabled, setSubmitDisabled] = useState(true)
-  const [nicknameInputValue, setNicknameInputValue] = useState('')
-  const [DisplayNameCheckedMsg, setDisplayNameCheckedMsg] = useState('')
-  const [passwordInputValue, setPasswordInputValue] = useState('')
-  const [passwordInputCheckValue, setPasswordInputCheckValue] = useState('')
-  const [passwordCheckedMsg, setPasswordCheckedMsg] = useState('')
-  const [passwordDoubleCheckedMsg, setPasswordDoubleCheckedMsg] = useState('')
+  const [submitDisabled, setSubmitDisabled] = useState(false)
+
+  const [nicknameInputValue, setNicknameInputValue] = useState<EditedUserInfoRequest['displayName']>('')
+  const [displayNameCheckedMsg, setDisplayNameCheckedMsg] = useState<string>('')
+
+  const [oldPasswordInputValue, setOldPasswordInputValue] = useState<EditedUserInfoRequest['oldPassword']>('')
+  const [newPasswordInputValue, setNewPasswordInputValue] = useState<EditedUserInfoRequest['newPassword']>('')
+  const [passwordCheckedMsg, setPasswordCheckedMsg] = useState<string>('')
+
   const navigate = useNavigate()
   //===========================================================================//
-  // 닉네임 유효성 체크 : 입력 양식 체크
-  const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setNicknameInputValue(e.target.value)
+  //
 
-    if (nicknameInputValue === null) {
-      console.log('닉네임 재설정 중')
-      return setDisplayNameCheckedMsg('')
-    } else if (!displayNameRegex.test(nicknameInputValue)) {
-      setDisplayNameCheckedMsg('닉네임 양식을 지켜주세요.')
-      setDisabled(true)
-      setSubmitDisabled(true)
-      return
-    } else {
-      setDisabled(false)
-      console.log('닉네임 양식 :', '통과')
-      setDisplayNameCheckedMsg('...')
+  // 유저 목록을 조회하여 유저의 닉네임과 같은 값이 있으면 중복
+  async function checkDuplicateDisplayName(displayName: string): Promise<boolean> {
+    try {
+      const users: User[] = await userList([{ email: '', displayName, profileImg: '' }])
+      const isDuplicate = users.some((user: User) => user.displayName === displayName)
+      return isDuplicate
+    } catch (error) {
+      return true
     }
   }
 
-  // 중복체크 : 사용중인 닉네임 체크
-  const onIsDisplayNameChecked = (e: React.MouseEvent<HTMLButtonElement>) => {
+  // 닉네임 유효성 체크 : 입력 양식 체크
+  const checkNickNameValidation = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    // 중복체크 메세지
-    if (nicknameInputValue === curUser.displayName) {
-      alert('이미 사용 중인 닉네임입니다.')
+
+    if (!displayNameRegex.test(nicknameInputValue ? nicknameInputValue : '')) {
+      setDisplayNameCheckedMsg('닉네임 양식을 지켜주세요.')
       setDisabled(true)
+      return
+    } else if (nicknameInputValue === '') {
+      setDisplayNameCheckedMsg('.')
     } else {
-      alert('사용 가능한 닉네임입니다.')
       setDisabled(false)
+      console.log('닉네임 양식 :', '통과')
+      setDisplayNameCheckedMsg('닉네임 입력 확인')
+    }
+
+    setNicknameInputValue(e.target.value)
+  }
+
+  // 중복 닉네임 체크
+  const onIsDisplayNameDuplicate = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (displayNameCheckedMsg === '닉네임 입력 확인') {
+      const isDuplicate = await checkDuplicateDisplayName(curUser.displayName)
+      // 중복체크 메세지
+      if (isDuplicate) {
+        alert('이미 사용 중인 닉네임입니다.')
+        setDisplayNameCheckedMsg('아미 사용중인 닉네임입니다.')
+        setDisabled(true)
+      } else {
+        alert('사용 가능한 닉네임입니다.')
+        setDisplayNameCheckedMsg('닉네임 입력 확인')
+        setDisabled(false)
+        // handleDisplayNameSubmitValid(true)
+      }
     }
   }
   //===========================================================================//
   // 비밀번호 유효성 체크 : 입력 양식 체크
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    setPasswordInputValue(e.target.value)
-
-    if (passwordInputValue == null) {
-      console.log('비밀번호 재설정 중')
-      setPasswordCheckedMsg('')
-      return
-    } else if (!passwordRegex.test(passwordInputValue)) {
+    setOldPasswordInputValue(e.target.value)
+    if (!passwordRegex.test(oldPasswordInputValue ? oldPasswordInputValue : '')) {
       setPasswordCheckedMsg('비밀번호 양식을 지켜주세요.')
-      return setInputDisabled(true)
     } else {
       console.log('비밀번호 양식 :', '통과')
-      setPasswordCheckedMsg('비밀번호를 한 번더 입력해 주세요.')
-      return setInputDisabled(false)
+      setPasswordCheckedMsg('비밀번호 입력 확인')
+      return true
     }
   }
 
-  // 중복체크 : 변경될 비밀번호 체크
+  // 새 비밀번호 체크
   const handlePasswordCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    setPasswordInputCheckValue(e.target.value)
-    // 중복 체크 메세지
-    if (passwordInputCheckValue == null) {
-      console.log('비밀번호 확인 중')
-      setPasswordDoubleCheckedMsg('')
-      return
-    } else if (passwordInputValue !== e.target.value) {
-      setPasswordDoubleCheckedMsg('비밀번호가 동일하지 않습니다.')
-      setSubmitDisabled(true)
+    setNewPasswordInputValue(e.target.value)
 
-      return passwordInputCheckValue === null
-    } else if (passwordInputValue === e.target.value) {
-      setPasswordDoubleCheckedMsg('비밀번호 확인 완료 ✅')
-      setSubmitDisabled(false)
+    if (!passwordRegex.test(newPasswordInputValue ? newPasswordInputValue : '')) {
+      setPasswordCheckedMsg('비밀번호 양식을 지켜주세요.')
+    } else {
+      console.log('비밀번호 양식 :', '통과')
+      setPasswordCheckedMsg('비밀번호 입력 확인')
+      return
     }
   }
 
@@ -117,20 +144,21 @@ export default function EditProfile() {
     const { value } = e.target
     setUpdatedInfo((prevInfo) => ({
       ...prevInfo,
-      newPassword: value
+      oldPassword: oldPasswordInputValue,
+      newPassword: newPasswordInputValue
     }))
   }
 
   // 닉네임 함수들 호출
   const handleNameChangeData = (e: ChangeEvent<HTMLInputElement>) => {
-    handleNicknameChange(e)
+    checkNickNameValidation(e)
     handleNameChange(e)
   }
   //  비밀번호 함수들 호출
-  const handlePasswordChangeData = (e: ChangeEvent<HTMLInputElement>) => {
-    if (passwordInputCheckValue === null) {
+  const handleNewPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (newPasswordInputValue === '') {
       console.log('이건 동작하면 안돼')
-      return false
+      return
     } else {
       handlePasswordCheckChange(e)
       handleEmailChange(e)
@@ -206,12 +234,14 @@ export default function EditProfile() {
                       required
                     />
                   </form>
-                  <button className={styles.btnTag} onClick={onIsDisplayNameChecked} disabled={disabled}>
+                  <button className={styles.btnTag} onClick={onIsDisplayNameDuplicate} disabled={disabled}>
                     중복확인
                   </button>
                 </li>
-                {DisplayNameCheckedMsg && (
-                  <p className={DisplayNameCheckedMsg === '...' ? styles.msg : styles.error}>{DisplayNameCheckedMsg}</p>
+                {displayNameCheckedMsg && (
+                  <p className={displayNameCheckedMsg === '닉네임 입력 확인' ? styles.msg : styles.error}>
+                    {displayNameCheckedMsg}
+                  </p>
                 )}
                 <li className={styles.list}>
                   <label className={styles.label} htmlFor="email">
@@ -230,18 +260,18 @@ export default function EditProfile() {
                   </form>
                 </li>
                 <li className={styles.list}>
-                  <label className={styles.label} htmlFor="password">
+                  <label className={styles.label} htmlFor="oldPassword">
                     비밀 번호
                   </label>
                   <form className={styles.inputForm}>
                     <input
-                      id="password"
+                      id="oldPassword"
                       className={`${styles.inputTag} ${styles.password}`}
                       type="password"
-                      name="password"
-                      value={passwordInputValue}
+                      name="oldPassword"
+                      value={oldPasswordInputValue}
                       onChange={handlePasswordChange}
-                      placeholder="새 비밀번호"
+                      placeholder="기존 비밀번호"
                       required
                     />
                     <input
@@ -249,30 +279,16 @@ export default function EditProfile() {
                       className={`${styles.inputTag} ${styles.passwordCheck}`}
                       type="password"
                       name="newPassword"
-                      value={passwordInputCheckValue}
-                      onChange={handlePasswordChangeData}
-                      placeholder="새 비밀번호 확인"
-                      disabled={InputDisabled}
+                      value={newPasswordInputValue}
+                      onChange={handleNewPasswordChange}
+                      placeholder="새 비밀번호"
                       required
                     />
                   </form>
                 </li>
                 {passwordCheckedMsg && (
-                  <span
-                    className={
-                      passwordCheckedMsg === '비밀번호를 한 번더 입력해 주세요.' ? styles.ps_msg : styles.ps_error
-                    }
-                  >
+                  <span className={passwordCheckedMsg === '비밀번호 입력 확인' ? styles.ps_msg : styles.ps_error}>
                     {passwordCheckedMsg}
-                  </span>
-                )}
-                {passwordDoubleCheckedMsg && (
-                  <span
-                    className={
-                      passwordDoubleCheckedMsg === '비밀번호 확인 완료 ✅' ? styles.psCheck_msg : styles.psCheck_error
-                    }
-                  >
-                    {passwordDoubleCheckedMsg}
                   </span>
                 )}
                 <li className={`${styles.list} ${styles.uploade}`}>

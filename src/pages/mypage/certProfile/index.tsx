@@ -11,8 +11,8 @@ export default function CertProfile() {
   // 이메일 주소가 일치하는지 여부를 추적하는 상태값
   const [email, setEmail] = useState('')
   const [confirmMsg, setConfirmMsg] = useState('')
-  const navigate = useNavigate()
   const user = useRecoilValue(userState)
+  const navigate = useNavigate()
   const [userInfo] = useUserInfo()
   
   // 현재 입력값에 따른 이메일 주소 일치 여부 / 유효성 확인 메세지

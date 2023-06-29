@@ -1,12 +1,25 @@
 # SumTendo 게임판매 웹서비스
 + Sumtendo 는 닌텐도 게임을 판매하는 웹서비스 입니다.
+<img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/209aada5-b918-4b83-8059-bd8ce80e491d" style="width: 50px"></img>
 
++ [SUMTENDO](sum-tendo-deploy.vercel.app)
 ## Description
 
 ### Stack
-React
-typescript
-### Feature
+<div style="display: flex">
+<img src="https://img.shields.io/badge/REACT-61DAFB?style=flat&logo=React&logoColor=white"/>
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/CRA-09D3AC?style=flat&logo=createreactapp&logoColor=white"/>
+<img src="https://img.shields.io/badge/Recoil-0075EB?style=flat&logo=&logoColor=white"/>
+<img src="https://img.shields.io/badge/Antd-0170FE?style=flat&logo=antdesign&logoColor=white"/>
+<img src="https://img.shields.io/badge/Puppeteer-40B5A4?style=flat&logo=puppeteer&logoColor=white"/>
+<img src="https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white"/>
+<img src="https://img.shields.io/badge/Swiper-6332F6?style=flat&logo=swiper&logoColor=white"/>
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white"/>
+</div>
+
+###  Feature
+
 #### Main
 
 #### Access
@@ -15,17 +28,15 @@ typescript
 
 #### Payment
 
-## Environment
-CRA
-Craco
-SASS
+#### Admin
 
-## Library
-axios
-swiper
-uuid
-recoil
-loadable
+## Team
+
+|  팀원  |                 김경원                  |                      김성은                      |                    이창휘                    |                      정태욱                      |  
+| :----: | :-------------------------------------: | :----------------------------------------------: | :------------------------------------------: | :----------------------------------------------: | 
+|  역할  | 결제 |     마이페이지     |     회원가입 /로그인     |         메인 / 검색 / 어드민          | 
+
+<br>
 
 ## Files
 ```

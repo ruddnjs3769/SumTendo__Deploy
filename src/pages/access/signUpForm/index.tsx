@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import styles from './index.module.scss'
 import { signUp } from '@/apis/access/signUp'
-import Validate, { ValidateProps } from '@/components/access/validate'
+import Validate from '@/components/access/validate'
 import { displayNameRegex, passwordRegex, emailRegex } from '@/utils/constants'
 import { SignUpRequest } from '@/types/auth'
 import { useNavigate } from 'react-router-dom'
@@ -154,21 +154,22 @@ export default function SignUpForm() {
           />
           <div className={styles['image-form']}>
             <div className={styles['image-input']}>
-              <div>
+              <span className={styles['image-title']}>프로필 이미지</span>
+              <div className={styles['image-box']}>
+                <div className={styles['image-upload']}>
+                  {profileImage ? (
+                    <img className={styles['preview-image']} src={profileImage} alt="" />
+                  ) : (
+                    <img className={styles['preview-image']} src="/images/search/image-not-found.png" />
+                  )}
+                </div>
                 <input
+                  className={styles['image-img']}
                   type="file"
                   onChange={handleChangeFile}
                   accept="image/jpeg, image/png, image/gif, image/svg+xml"
                 />
               </div>
-              <div className={styles['image-upload']}>
-                {profileImage ? (
-                  <img className={styles['preview-image']} src={profileImage} alt="" />
-                ) : (
-                  <img className={styles['preview-image']} src="/images/search/image-not-found.png" />
-                )}
-              </div>
-              <span className={styles['image-title']}>프로필 이미지</span>
             </div>
             <div className={styles['image-info']}>
               <span>

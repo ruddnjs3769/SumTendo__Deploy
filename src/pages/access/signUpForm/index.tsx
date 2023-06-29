@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import styles from './index.module.scss'
 import { signUp } from '@/apis/access/signUp'
-import Validate, { ValidateProps } from '@/components/access/validate'
+import Validate from '@/components/access/validate'
 import { displayNameRegex, passwordRegex, emailRegex } from '@/utils/constants'
 import { SignUpRequest } from '@/types/auth'
 import { useNavigate } from 'react-router-dom'
@@ -20,7 +20,8 @@ export default function SignUpForm() {
   //체크박스 눌러야 화원가입버튼 활성화
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('체크박스 확인')
-    setIsChecked(e.target.checked)
+    const value = e.target.checked
+    setIsChecked(value)
   }
 
   // 유효성 검사기능 및 중복체크 전부 통과해야 폼 제출성공
@@ -82,34 +83,31 @@ export default function SignUpForm() {
         alert('회원가입 성공')
         navigate('/')
       } catch (error) {
-        console.log('폼 제출 실패')
         alert('회원가입에 실패했습니다.')
       }
     } else {
-      console.log('폼 제출 실패', {
-        email,
-        password,
-        displayName,
-        profileImgBase64: profileImage
-      })
       alert('회원가입에 실패했습니다.')
     }
   }
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+    const value = e.target.value
+    setEmail(value)
   }
 
   const handleDisplayNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDisplayName(e.target.value)
+    const value = e.target.value
+    setDisplayName(value)
   }
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    const value = e.target.value
+    setPassword(value)
   }
 
   const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value)
+    const value = e.target.value
+    setConfirmPassword(value)
   }
 
   //이미지 미리보기
@@ -149,21 +147,22 @@ export default function SignUpForm() {
           />
           <div className={styles['image-form']}>
             <div className={styles['image-input']}>
-              <div>
+              <span className={styles['image-title']}>프로필 이미지</span>
+              <div className={styles['image-box']}>
+                <div className={styles['image-upload']}>
+                  {profileImage ? (
+                    <img className={styles['preview-image']} src={profileImage} alt="" />
+                  ) : (
+                    <img className={styles['preview-image']} src="/images/search/image-not-found.png" />
+                  )}
+                </div>
                 <input
+                  className={styles['image-img']}
                   type="file"
                   onChange={handleChangeFile}
                   accept="image/jpeg, image/png, image/gif, image/svg+xml"
                 />
               </div>
-              <div className={styles['image-upload']}>
-                {profileImage ? (
-                  <img className={styles['preview-image']} src={profileImage} alt="" />
-                ) : (
-                  <img className={styles['preview-image']} src="/images/search/image-not-found.png" />
-                )}
-              </div>
-              <span className={styles['image-title']}>프로필 이미지</span>
             </div>
             <div className={styles['image-info']}>
               <span>

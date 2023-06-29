@@ -18,23 +18,24 @@ export default function PasswordChangeForm() {
   }, [])
 
   const handleOldPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setOldPassword(event.target.value)
+    const value = event.target.value
+    setOldPassword(value)
   }
 
   const handleNewPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewPassword(event.target.value)
+    const value = event.target.value
+    setNewPassword(value)
   }
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
-    try {
-      // API 호출
-      await editedUserInfo({ oldPassword, newPassword }, accessToken)
-
+    // API 호출
+    const isEdited = await editedUserInfo({ oldPassword, newPassword }, accessToken)
+    if (isEdited) {
       alert('비밀번호가 변경되었습니다.')
       navigate('/')
-    } catch (error) {
+    } else {
       // 비밀번호 변경 실패 시 처리
       alert('비밀번호 변경에 실패했습니다. 확인 후 다시 시도해주세요.')
     }

@@ -1,6 +1,7 @@
 type Params = {
   [key: string]: unknown
 }
+// * 쿼리스트링을 생성합니다.
 export function generateQueryString<T extends Params>(params: T): string {
   const ParamsOnlyStringValue: {
     // * URLSearchParams의 value는 string만 허용합니다.

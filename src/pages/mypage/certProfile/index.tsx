@@ -5,14 +5,16 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/recoil/common/userState'
 import { emailRegex } from '@/utils/constants'
+import useUserInfo from '@/hooks/useUserInfo'
 
 export default function CertProfile() {
   // 이메일 주소가 일치하는지 여부를 추적하는 상태값
   const [email, setEmail] = useState('')
   const [confirmMsg, setConfirmMsg] = useState('')
-  const navigate = useNavigate()
   const user = useRecoilValue(userState)
-
+  const navigate = useNavigate()
+  const [userInfo] = useUserInfo()
+  
   // 현재 입력값에 따른 이메일 주소 일치 여부 / 유효성 확인 메세지
   const confirmEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputEmail = event.target.value
@@ -38,14 +40,12 @@ export default function CertProfile() {
 
   // 본인인증 확인 폼제출
   const handleSubmit = (event: React.FormEvent) => {
-    console.log('폼 제출 성공:', email)
     if (email !== user.email) {
       setConfirmMsg('이메일 주소가 일치하지 않습니다.')
       return false
     }
     event.preventDefault()
-    console.log('이메일 주소 확인:', email)
-    navigate('/user/${user.username}/certProfile/editProfile')
+    navigate(`/user/${userInfo.displayName}/certProfile/editProfile`)
   }
 
   return (
@@ -60,7 +60,6 @@ export default function CertProfile() {
               <label className={styles.label} htmlFor="email">
                 이메일 주소 재확인
               </label>
-
               <div className={styles.text}>본인 확인을 위해 이메일 주소를 입력해 주세요.</div>
             </div>
             <form className={styles.inputForm} onSubmit={(event) => handleSubmit(event)}>

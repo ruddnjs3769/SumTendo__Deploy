@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './GetList.module.scss'
 import GetItem from '@/components/mypage/productList/GetItem'
-// import dummyGoods1 from '@/pages/payment/dummyGoods1.json'
-// import dummyGoods2 from '@/pages/payment/dummyGoods2.json'
 import { TransactionDetails, TransactionDetail } from '@/types/product'
 import { Link } from 'react-router-dom'
 import useUserInfo from '@/hooks/useUserInfo'
@@ -14,32 +12,40 @@ export default function GetList() {
   const accessToken = localStorage.getItem('token') || ''
 
   useEffect(() => {
-    getPurchaseHistory().then((res) => setPurchasedProducts(res))
-    console.log(purchasedProducts)
+    const getPurchaseHistory = async () => {
+      try {
+        const purchasedProducts = await getTransactionDetails(accessToken)
+        setPurchasedProducts(purchasedProducts)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    getPurchaseHistory()
   }, [])
 
-  const getPurchaseHistory = async () => {
-    try {
-      const purchasedProducts = await getTransactionDetails(accessToken)
-      return purchasedProducts
-    } catch (e) {
-      console.error(e)
-    }
+  // 시간순으로 배열된 purchasedProducts를 반환하는 함수
+  const sortPurchasedProductsByTime = () => {
+    return purchasedProducts.sort((a, b) => {
+      const timeA = new Date(a.timePaid).getTime()
+      const timeB = new Date(b.timePaid).getTime()
+      return timeB - timeA
+    })
   }
 
   return (
     <div className={styles.section}>
-      <span className={styles.getList}>구매 내역</span>
+      <span className={styles.getList}>최근 구매 내역</span>
       <button className={`${styles.btn} ${styles.getMore}`}>
-        {/* 내일 Navigate으로 바꾸기 */}
         <Link className={styles.aTag} to={`/user/${userInfo.displayName}/getItemAll`}>
           구매 내역 조회
         </Link>
       </button>
-      <ul className={styles.getItem}>
-        {purchasedProducts.map((item: TransactionDetail, index: number) => (
-          <GetItem key={index} item={item} />
-        ))}
+      <ul className={styles.getItems}>
+        {sortPurchasedProductsByTime()
+          .slice(0, 4)
+          .map((item: TransactionDetail, index: number) => (
+            <GetItem key={index} item={item} />
+          ))}
       </ul>
     </div>
   )

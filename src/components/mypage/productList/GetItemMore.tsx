@@ -15,7 +15,7 @@ export default function GetItemMore({ item }: Props) {
         </div>
         <div className={styles.itemInfo}>
           <div className={`${styles.spanTag} ${styles.itemTitle}`}>{product.title}</div>
-          <div className={`${styles.spanTag} ${styles.itemPrice}`}>{product.price} 원</div>
+          <div className={`${styles.spanTag} ${styles.itemPrice}`}>{product.price.toLocaleString()} 원</div>
         </div>
       </a>
     </li>

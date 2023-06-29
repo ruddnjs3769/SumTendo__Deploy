@@ -21,7 +21,7 @@ export default function GetItem({ item }: Props) {
         />
       </div>
       <span className={`${styles.spanTag} ${styles.itemTitle}`}>{product.title}</span>
-      <span className={`${styles.spanTag} ${styles.itemPrice}`}>{product.price} 원</span>
+      <span className={`${styles.spanTag} ${styles.itemPrice}`}>{product.price.toLocaleString()} 원</span>
     </a>
   )
 }

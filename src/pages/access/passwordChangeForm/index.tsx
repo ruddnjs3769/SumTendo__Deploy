@@ -18,11 +18,13 @@ export default function PasswordChangeForm() {
   }, [])
 
   const handleOldPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setOldPassword(event.target.value)
+    const value = event.target.value
+    setOldPassword(value)
   }
 
   const handleNewPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewPassword(event.target.value)
+    const value = event.target.value
+    setNewPassword(value)
   }
 
   const handleSubmit = async (event: React.FormEvent) => {

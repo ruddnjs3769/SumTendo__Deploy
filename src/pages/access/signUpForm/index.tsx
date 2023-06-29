@@ -20,7 +20,8 @@ export default function SignUpForm() {
   //체크박스 눌러야 화원가입버튼 활성화
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('체크박스 확인')
-    setIsChecked(e.target.checked)
+    const value = e.target.checked
+    setIsChecked(value)
   }
 
   // 유효성 검사기능 및 중복체크 전부 통과해야 폼 제출성공
@@ -97,19 +98,23 @@ export default function SignUpForm() {
   }
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+    const value = e.target.value
+    setEmail(value)
   }
 
   const handleDisplayNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDisplayName(e.target.value)
+    const value = e.target.value
+    setDisplayName(value)
   }
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    const value = e.target.value
+    setPassword(value)
   }
 
   const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value)
+    const value = e.target.value
+    setConfirmPassword(value)
   }
 
   //이미지 미리보기

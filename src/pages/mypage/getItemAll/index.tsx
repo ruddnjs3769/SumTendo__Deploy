@@ -22,6 +22,15 @@ export default function GetItemAll() {
     }
   }
 
+  // 시간순으로 배열된 purchasedProducts를 반환하는 함수
+  const sortPurchasedProductsByTime = () => {
+    return purchasedProducts.sort((a, b) => {
+      const timeA = new Date(a.timePaid).getTime()
+      const timeB = new Date(b.timePaid).getTime()
+      return timeB - timeA
+    })
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -32,7 +41,7 @@ export default function GetItemAll() {
           <div className={styles.getItems}>
             <ul className={styles.getItem}>
               {purchasedProducts
-                ? purchasedProducts.map((item: TransactionDetail, index: number) => (
+                ? sortPurchasedProductsByTime().map((item: TransactionDetail, index: number) => (
                     <GetItemMore key={index} item={item} />
                   ))
                 : null}

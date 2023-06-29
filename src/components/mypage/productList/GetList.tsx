@@ -20,9 +20,17 @@ export default function GetList() {
         console.error(e)
       }
     }
-
     getPurchaseHistory()
   }, [])
+
+  // 시간순으로 배열된 purchasedProducts를 반환하는 함수
+  const sortPurchasedProductsByTime = () => {
+    return purchasedProducts.sort((a, b) => {
+      const timeA = new Date(a.timePaid).getTime()
+      const timeB = new Date(b.timePaid).getTime()
+      return timeB - timeA
+    })
+  }
 
   return (
     <div className={styles.section}>
@@ -33,9 +41,11 @@ export default function GetList() {
         </Link>
       </button>
       <ul className={styles.getItems}>
-        {purchasedProducts.slice(0, 4).map((item: TransactionDetail, index: number) => (
-          <GetItem key={index} item={item} />
-        ))}
+        {sortPurchasedProductsByTime()
+          .slice(0, 4)
+          .map((item: TransactionDetail, index: number) => (
+            <GetItem key={index} item={item} />
+          ))}
       </ul>
     </div>
   )

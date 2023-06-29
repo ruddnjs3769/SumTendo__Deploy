@@ -1,8 +1,11 @@
 # SumTendo 게임판매 웹서비스
 + Sumtendo 는 닌텐도 게임을 판매하는 웹서비스 입니다.
-<img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/209aada5-b918-4b83-8059-bd8ce80e491d" style="width: 50px"></img>
+<img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/c8faf8da-82e5-4f17-b4d1-ffc7ba7458f3" style="width:100px"/>
 
 + [SUMTENDO](sum-tendo-deploy.vercel.app)
+  
++ [SUMTENDO_ADMIN](https://sumtendo-admin-deploy.vercel.app/)
+  
 ## Description
 
 ### Stack

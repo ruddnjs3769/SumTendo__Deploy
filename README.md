@@ -2,10 +2,38 @@
 + Sumtendo 는 닌텐도 게임을 판매하는 웹서비스 입니다.
 <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/c8faf8da-82e5-4f17-b4d1-ffc7ba7458f3" style="width:100px"/>
 
-+ [SUMTENDO](sum-tendo-deploy.vercel.app)
+<br/>
+<br/>
+
+➡️배포 - 숨텐도
+<div style="display:flex">
   
-+ [SUMTENDO_ADMIN](https://sumtendo-admin-deploy.vercel.app/)
+<a href="https://sum-tendo-deploy.vercel.app">
+<img src="https://img.shields.io/badge/SUMTENDO-000000?style=flat&logo=vercel&logoColor=white"/>
+</a>
   
+<a href="https://github.com/ruddnjs3769/SumTendo__Deploy">
+<img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/>
+</a>
+
+</div>
+
+<br/>
+
+➡️배포 - 숨텐도 관리자
+
+<div style="display:flex">
+  
+<a href="https://sumtendo-admin-deploy.vercel.app/">
+<img src="https://img.shields.io/badge/SUMTENDO_ADMIN-000000?style=flat&logo=vercel&logoColor=white"/>
+</a>
+
+<a href="(https://github.com/ruddnjs3769/Sumtendo_Admin_Deploy">
+<img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/>
+</a>
+
+</div>
+
 ## Description
 
 ### Stack
@@ -51,12 +79,15 @@ typescript
 
 |  팀원  |                 김경원                  |                      김성은                      |                    이창휘                    |                      정태욱                      |  
 | :----: | :-------------------------------------: | :----------------------------------------------: | :------------------------------------------: | :----------------------------------------------: | 
-|  역할  | 결제 |     마이페이지     |     회원가입 /로그인     |         메인 / 검색 / 어드민          | 
+|  역할  | 장바구니 / 결제 동의 / 구매 정보 / 결제 / 결제 완료 |     마이페이지 / 계좌 조회 / 계좌 추가 / 구매 내역 / 정보 수정    |     회원가입 / 로그인 / 로그아웃 / 비밀번호 변경   |         메인 / 검색 / 어드민 / 제품 상세정보 / 장르별 검색      | 
 
 <br>
 <br>
 
 ## Files
+<details>
+<summary>자료구조</summary>
+  
 ```
 📦ToyProject__Nintendo
  ┣ 📂.vscode
@@ -331,4 +362,6 @@ typescript
  ┣ 📜SETUP_GUIDE.md
  ┗ 📜tsconfig.json
 ```
+  
+</details>
 

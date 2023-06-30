@@ -37,20 +37,9 @@
 ## Description
 
 ### Stack
-<div style="display: flex">
-<img src="https://img.shields.io/badge/REACT-61DAFB?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=typescript&logoColor=white"/>
-<img src="https://img.shields.io/badge/CRA-09D3AC?style=flat&logo=createreactapp&logoColor=white"/>
-<img src="https://img.shields.io/badge/Recoil-0075EB?style=flat&logo=&logoColor=white"/>
-<img src="https://img.shields.io/badge/Antd-0170FE?style=flat&logo=antdesign&logoColor=white"/>
-<img src="https://img.shields.io/badge/Puppeteer-40B5A4?style=flat&logo=puppeteer&logoColor=white"/>
-<img src="https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white"/>
-<img src="https://img.shields.io/badge/Swiper-6332F6?style=flat&logo=swiper&logoColor=white"/>
-<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white"/>
-</div>
-
-###  Feature
-
+React
+typescript
+### Feature
 #### Main
 |                                                                                      메인페이지                                                                                       |                                                                                       제품 보기/검색                                                                                        |
 | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -92,6 +81,7 @@
 | :----: | :-------------------------------------: | :----------------------------------------------: | :------------------------------------------: | :----------------------------------------------: | 
 |  역할  | 장바구니 / 결제 동의 / 구매 정보 / 결제 / 결제 완료 |     마이페이지 / 계좌 조회 / 계좌 추가 / 구매 내역 / 정보 수정    |     회원가입 / 로그인 / 로그아웃 / 비밀번호 변경   |         메인 / 검색 / 어드민 / 제품 상세정보 / 장르별 검색      | 
 
+<br>
 <br>
 
 ## Files
@@ -372,5 +362,6 @@
  ┣ 📜SETUP_GUIDE.md
  ┗ 📜tsconfig.json
 ```
-
+  
 </details>
+
